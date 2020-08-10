@@ -11,9 +11,6 @@ namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
-        string path = Environment.CurrentDirectory;
-        string newPath = Path.GetFullPath(Path.Combine(path, @"wwwroot\cereal.csv"));
-        string[] myFile = File.ReadAllLines(newPath);
         public IActionResult Index()
         {
             return View();
@@ -48,6 +45,9 @@ namespace ECommerce.Controllers
         [HttpPost]
         public IActionResult GetProducts()
         {
+            string path = Environment.CurrentDirectory;
+            string newPath = Path.GetFullPath(Path.Combine(path, @"wwwroot\cereal.csv"));
+            string[] myFile = File.ReadAllLines(newPath);
             return RedirectToAction()
         }
 
