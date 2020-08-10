@@ -6,9 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="wwwroot\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Products\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\cereal.csv" />
   </ItemGroup>
 
 </Project>
