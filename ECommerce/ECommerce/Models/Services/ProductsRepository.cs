@@ -29,6 +29,7 @@ namespace ECommerce.Models.Services
             throw new NotImplementedException();
         }
 
+        // TODO: not working
         /// <summary>
         /// Get a specific character in the database by product name
         /// </summary>
