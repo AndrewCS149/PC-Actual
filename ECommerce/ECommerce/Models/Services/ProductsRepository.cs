@@ -72,15 +72,24 @@ namespace ECommerce.Models.Services
                     line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    Products product = new Products()
+                    allProducts.Add(new Cereal
                     {
                         Name = values[0],
                         Calories = values[3],
                         Protein = values[4],
                         Fat = values[5],
                         Carbo = values[8]
-                    };
-                    allProducts.Add(product);
+                    });
+
+                    //Products product = new Products()
+                    //{
+                    //    Name = values[0],
+                    //    Calories = values[3],
+                    //    Protein = values[4],
+                    //    Fat = values[5],
+                    //    Carbo = values[8]
+                    //};
+                    //allProducts.Add(product);
                 }
             }
             return allProducts;
