@@ -45,23 +45,34 @@ namespace ECommerce.Models.Services
         /// <returns>Successful result with list of products</returns>
         public List<Products> GetProducts()
         {
+            // declare empty list filled with dictionaries that will hold the
+            // CSV data
             List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
+
+            // read in data
             using (var reader = new StreamReader(@"wwwroot\cereal.csv"))
             {
+                // skip first line (column header names)
+                var line = reader.ReadLine();
+
                 while (!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine();
+                    line = reader.ReadLine();
                     var values = line.Split(',');
+
+                    // store key / value pairs with columns names / values
                     Dictionary<string, string> dataList = new Dictionary<string, string>();
                     dataList.Add("name", values[0]);
                     dataList.Add("calories", values[3]);
                     dataList.Add("protein", values[4]);
                     dataList.Add("fat", values[5]);
                     dataList.Add("carbo", values[8]);
+
                     data.Add(dataList);
                 }
             }
 
+            // turn values into product objects and store in list
             List<Products> allProducts = new List<Products>();
             foreach (var item in data)
             {
