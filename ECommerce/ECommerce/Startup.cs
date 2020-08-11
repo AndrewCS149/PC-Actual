@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ECommerce.Models.Interfaces;
+using ECommerce.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +19,8 @@ namespace ECommerce
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddTransient<IProducts, ProductsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,6 +32,7 @@ namespace ECommerce
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

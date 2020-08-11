@@ -1,23 +1,79 @@
 ﻿@model List<ECommerce.Models.Products>
 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="/Styles/StyleSheet.css" rel="stylesheet" type="text/css" />
     <title>Ecommerce</title>
 </head>
 <body>
     <header>
-        <h1>This Page Also Exists</h1>
-        @foreach (var item in Model)
-        {
-            <p>@item.Name</p>
-            <p>@item.Calories</p>
-            <p>@item.Protein</p>
-            <p>@item.Fat</p>
-            <p>@item.Carbo</p>
-        }
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">LOGO</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Products</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
+
     <main>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Calories</th>
+                    <th scope="col">Protein</th>
+                    <th scope="col">Fat</th>
+                    <th scope="col">Carbohydrates</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int count = 1; }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Calories);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Protein);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fat);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Carbo);
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
+                        </td>
+                    </tr>
+                    count++;
+                }
+            </tbody>
+        </table>
     </main>
 </body>
 </html>
