@@ -6,28 +6,30 @@ using System.Threading.Tasks;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
+using ECommerce.Models.Interfaces;
 
 namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
-        public IActionResult Index()
+        private readonly IProducts _products;
+
+        public ProductsController(IProducts products)
         {
-            return View();
+            _products = products;
         }
 
-        public IActionResult Details(string name, int calories, int protein, int fat, int carbo )
+        public IActionResult Index()
         {
-            Products products = new Products()
-            {
-                Name = name,
-                Calories = calories,
-                Protein = protein,
-                Fat = fat,
-                Carbo = carbo
+            var allProducts = _products.GetProducts();
+            return View(allProducts);
+        }
 
-            };
-            return View(products);
+        // TODO: not working
+        public IActionResult Details(string name)
+        {
+            Products product = _products.GetProduct(name);
+            return View(product);
         }
 
         [HttpGet]
@@ -45,16 +47,13 @@ namespace ECommerce.Controllers
         [HttpPost]
         public IActionResult GetProducts()
         {
-            string path = Environment.CurrentDirectory;
-            string newPath = Path.GetFullPath(Path.Combine(path, @"wwwroot\cereal.csv"));
-            string[] myFile = File.ReadAllLines(newPath);
-            return RedirectToAction()
+            return View();
         }
 
         [HttpPost]
         public IActionResult GetProduct()
         {
-            return CriticalHandleMinusOneIsInvalid;
+            return View();
         }
     }
 }

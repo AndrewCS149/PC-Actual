@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Models
 {
-    public class Products
+    public class Cereal
     {
         public string Name { get; set; }
         public string MFR { get; set; }
