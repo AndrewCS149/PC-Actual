@@ -80,16 +80,6 @@ namespace ECommerce.Models.Services
                         Fat = values[5],
                         Carbo = values[8]
                     });
-
-                    //Products product = new Products()
-                    //{
-                    //    Name = values[0],
-                    //    Calories = values[3],
-                    //    Protein = values[4],
-                    //    Fat = values[5],
-                    //    Carbo = values[8]
-                    //};
-                    //allProducts.Add(product);
                 }
             }
             return allProducts;

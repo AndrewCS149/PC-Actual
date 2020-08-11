@@ -38,7 +38,7 @@ namespace ECommerce.Controllers
         public IActionResult Index(string term)
         {
             List<Cereal> products = _products.GetProducts().Cast<Cereal>().ToList();
-            var results = products.Where(x => x.Name.Contains(term));
+            var results = products.Where(x => x.Name.ToUpper().Contains(term.ToUpper()));
 
             ProductsVM vm = new ProductsVM
             {
