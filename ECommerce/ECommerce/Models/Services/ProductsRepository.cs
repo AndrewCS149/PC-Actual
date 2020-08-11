@@ -41,13 +41,13 @@ namespace ECommerce.Models.Services
             Products product = new Products();
             foreach (var item in allProducts)
             {
-                if (item.Name == name)
+                if (item.Name.ToLower() == name.ToLower())
                 {
-                    product.Name = item.Name;
-                    product.Calories = item.Calories;
-                    product.Protein = item.Protein;
-                    product.Fat = item.Fat;
-                    product.Carbo = item.Carbo;
+                    product.Name = "Andrew";
+                    //product.Calories = item.Calories;
+                    //product.Protein = item.Protein;
+                    //product.Fat = item.Fat;
+                    //product.Carbo = item.Carbo;
                 }
             }
             return product;
