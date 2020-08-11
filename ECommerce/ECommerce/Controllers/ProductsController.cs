@@ -36,24 +36,17 @@ namespace ECommerce.Controllers
             List<Products> allProducts = new List<Products>();
             foreach (var item in Data)
             {
-                try
-                {
+
                     Products product = new Products()
                     {
                         Name = item["name"],
-                        Calories = Int32.Parse(item["calories"]),
-                        Protein = Int32.Parse(item["protein"]),
-                        Fat = Int32.Parse(item["fat"]),
-                        Carbo = Int32.Parse(item["carbo"])
+                        Calories = item["calories"],
+                        Protein = item["protein"],
+                        Fat = item["fat"],
+                        Carbo = item["carbo"]
                     };
                     allProducts.Add(product);
-                }
-                catch
-                {
-                    throw new Exception();
-                }
             }
-
             return View(allProducts);
         }
         public IActionResult Details()
