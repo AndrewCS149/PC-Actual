@@ -29,14 +29,29 @@ namespace ECommerce.Models.Services
             throw new NotImplementedException();
         }
 
+        // TODO: not working
         /// <summary>
         /// Get a specific character in the database by product name
         /// </summary>
         /// <param name="product">Name of product to search for</param>
         /// <returns>Successful result of specified product</returns>
-        public Task<Products> GetProduct(Products product)
+        public Products GetProduct(string name)
         {
-            throw new NotImplementedException();
+            List<Products> allProducts = GetProducts();
+
+            Products product = new Products();
+            foreach (var item in allProducts)
+            {
+                if (item.Name.ToLower() == name.ToLower())
+                {
+                    product.Name = "Andrew";
+                    //product.Calories = item.Calories;
+                    //product.Protein = item.Protein;
+                    //product.Fat = item.Fat;
+                    //product.Carbo = item.Carbo;
+                }
+            }
+            return product;
         }
 
         /// <summary>
@@ -45,9 +60,7 @@ namespace ECommerce.Models.Services
         /// <returns>Successful result with list of products</returns>
         public List<Products> GetProducts()
         {
-            // declare empty list filled with dictionaries that will hold the
-            // CSV data
-            List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
+            List<Products> allProducts = new List<Products>();
 
             // read in data
             using (var reader = new StreamReader(@"wwwroot\cereal.csv"))
@@ -60,33 +73,16 @@ namespace ECommerce.Models.Services
                     line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    // store key / value pairs with columns names / values
-                    Dictionary<string, string> dataList = new Dictionary<string, string>();
-                    dataList.Add("name", values[0]);
-                    dataList.Add("calories", values[3]);
-                    dataList.Add("protein", values[4]);
-                    dataList.Add("fat", values[5]);
-                    dataList.Add("carbo", values[8]);
-
-                    data.Add(dataList);
+                    allProducts.Add(new Cereal
+                    {
+                        Name = values[0],
+                        Calories = values[3],
+                        Protein = values[4],
+                        Fat = values[5],
+                        Carbo = values[8]
+                    });
                 }
             }
-
-            // turn values into product objects and store in list
-            List<Products> allProducts = new List<Products>();
-            foreach (var item in data)
-            {
-                Products product = new Products()
-                {
-                    Name = item["name"],
-                    Calories = item["calories"],
-                    Protein = item["protein"],
-                    Fat = item["fat"],
-                    Carbo = item["carbo"]
-                };
-                allProducts.Add(product);
-            }
-
             return allProducts;
         }
     }
