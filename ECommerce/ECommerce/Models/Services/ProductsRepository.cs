@@ -29,6 +29,7 @@ namespace ECommerce.Models.Services
             throw new NotImplementedException();
         }
 
+        // TODO: not working
         /// <summary>
         /// Get a specific character in the database by product name
         /// </summary>
@@ -72,15 +73,14 @@ namespace ECommerce.Models.Services
                     line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    Products product = new Products()
+                    allProducts.Add(new Cereal
                     {
                         Name = values[0],
                         Calories = values[3],
                         Protein = values[4],
                         Fat = values[5],
                         Carbo = values[8]
-                    };
-                    allProducts.Add(product);
+                    });
                 }
             }
             return allProducts;
