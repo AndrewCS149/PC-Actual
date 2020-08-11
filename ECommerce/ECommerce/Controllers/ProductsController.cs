@@ -14,25 +14,41 @@ namespace ECommerce.Controllers
         public IActionResult Index()
         {
             List<string> list = new List<string>();
-            string[] strArr = new string[5];
+            //string[] strArr = new string[5];
+            List<Dictionary<string, string>> Data = new List<Dictionary<string, string>>();
             using (var reader = new StreamReader(@"wwwroot\cereal.csv"))
             {
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    list.Add(line);
-                    strArr[0] = line;
+                    var values = line.Split(',');
+                    //strArr[0] = values[0];
+                    Dictionary<string, string> DataList = new Dictionary<string, string>();
+                    DataList.Add("name", values[0]);
+                    DataList.Add("calories", values[3]);
+                    DataList.Add("protein", values[4]);
+                    DataList.Add("fat", values[5]);
+                    DataList.Add("carbo", values[8]);
+                    Data.Add(DataList);
                 }
             }
 
-            Products products = new Products()
+            List<Products> allProducts = new List<Products>();
+            foreach (var item in Data)
             {
-                Name = strArr[0]
-            };
 
-            return View(products);
+                    Products product = new Products()
+                    {
+                        Name = item["name"],
+                        Calories = item["calories"],
+                        Protein = item["protein"],
+                        Fat = item["fat"],
+                        Carbo = item["carbo"]
+                    };
+                    allProducts.Add(product);
+            }
+            return View(allProducts);
         }
-
         public IActionResult Details()
         {
             return View();

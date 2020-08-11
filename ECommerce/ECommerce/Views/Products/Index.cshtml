@@ -1,4 +1,4 @@
-﻿@model ECommerce.Models.Products
+﻿@model List<ECommerce.Models.Products>
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,14 @@
 <body>
     <header>
         <h1>This Page Also Exists</h1>
-        <p>@Model.Name</p>
+        @foreach (var item in Model)
+        {
+            <p>@item.Name</p>
+            <p>@item.Calories</p>
+            <p>@item.Protein</p>
+            <p>@item.Fat</p>
+            <p>@item.Carbo</p>
+        }
     </header>
     <main>
     </main>
