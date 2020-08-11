@@ -12,6 +12,7 @@ namespace ECommerce.Data
     {
         public UserDBContext(DbContextOptions<UserDBContext> options) : base(options)
         {
+            
         }
     }
 }

@@ -7,16 +7,19 @@ using ECommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 
 namespace ECommerce.Pages.Account
 {
     public class RegisterModel : PageModel
     {
         private UserManager<AppUsers> _userManager;
+        private readonly IConfiguration _config;
 
-        public RegisterModel(UserManager<AppUsers> userManager)
+        public RegisterModel(UserManager<AppUsers> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
+            _config = configuration;
         }
 
         [BindProperty]
@@ -28,8 +31,21 @@ namespace ECommerce.Pages.Account
         }
 
         // another reserved method name for the post of the page
-        public void OnPost()
+        public async Task<IActionResult> OnPost(RegisterViewModel input)
         {
+            AppUsers user = new AppUsers()
+            { 
+                UserName = input.Email,
+                FirstName = input.FirstName,
+                LastName = input.LastName,
+                Email = input.Email
+            };
+
+            var result = await _userManager.CreateAsync(user, input.Password);
+
+            return RedirectToAction("Index", "Home");
+
+
         }
 
         public class RegisterViewModel
