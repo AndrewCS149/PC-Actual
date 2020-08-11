@@ -50,7 +50,7 @@ namespace ECommerce
             services.AddTransient<IProducts, ProductsRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This metho1d gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -64,6 +64,7 @@ namespace ECommerce
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapDefaultControllerRoute();
             });
         }
