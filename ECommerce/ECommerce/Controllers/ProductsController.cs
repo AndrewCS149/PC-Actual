@@ -6,31 +6,23 @@ using System.Threading.Tasks;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
+using ECommerce.Models.Interfaces;
 
 namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly IProducts _products;
+
+        public ProductsController(IProducts products)
+        {
+            _products = products;
+        }
+
         public IActionResult Index()
         {
-            List<string> list = new List<string>();
-            string[] strArr = new string[5];
-            using (var reader = new StreamReader(@"wwwroot\cereal.csv"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    list.Add(line);
-                    strArr[0] = line;
-                }
-            }
-
-            Products products = new Products()
-            {
-                Name = strArr[0]
-            };
-
-            return View(products);
+            var allProducts = _products.GetProducts();
+            return View(allProducts);
         }
 
         public IActionResult Details()
