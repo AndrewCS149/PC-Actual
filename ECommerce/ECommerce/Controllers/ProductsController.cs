@@ -13,21 +13,29 @@ namespace ECommerce.Controllers
     {
         public IActionResult Index()
         {
-            return View();
-        }
+            List<string> list = new List<string>();
+            string[] strArr = new string[5];
+            using (var reader = new StreamReader(@"wwwroot\cereal.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    list.Add(line);
+                    strArr[0] = line;
+                }
+            }
 
-        public IActionResult Details(string name, int calories, int protein, int fat, int carbo )
-        {
             Products products = new Products()
             {
-                Name = name,
-                Calories = calories,
-                Protein = protein,
-                Fat = fat,
-                Carbo = carbo
-
+                Name = strArr[0]
             };
+
             return View(products);
+        }
+
+        public IActionResult Details()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -45,16 +53,13 @@ namespace ECommerce.Controllers
         [HttpPost]
         public IActionResult GetProducts()
         {
-            string path = Environment.CurrentDirectory;
-            string newPath = Path.GetFullPath(Path.Combine(path, @"wwwroot\cereal.csv"));
-            string[] myFile = File.ReadAllLines(newPath);
-            return RedirectToAction()
+            return View();
         }
 
         [HttpPost]
         public IActionResult GetProduct()
         {
-            return CriticalHandleMinusOneIsInvalid;
+            return View();
         }
     }
 }
