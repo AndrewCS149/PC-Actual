@@ -1,5 +1,10 @@
 ﻿@model List<ECommerce.Models.Products>
 
+@{
+    ViewData["Title"] = "Index";
+    @*Layout = "_Layout";*@
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,17 +12,46 @@
 </head>
 <body>
     <header>
-        <h1>This Page Also Exists</h1>
-        @foreach (var item in Model)
-        {
-            <p>@item.Name</p>
-            <p>@item.Calories</p>
-            <p>@item.Protein</p>
-            <p>@item.Fat</p>
-            <p>@item.Carbo</p>
-        }
     </header>
+
     <main>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Fat</th>
+                    <th>Carbohydrates</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Calories);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Protein);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fat);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Carbo);
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </main>
 </body>
 </html>
