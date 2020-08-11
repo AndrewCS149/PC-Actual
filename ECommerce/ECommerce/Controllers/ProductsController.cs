@@ -25,9 +25,11 @@ namespace ECommerce.Controllers
             return View(allProducts);
         }
 
-        public IActionResult Details()
+        // TODO: not working
+        public IActionResult Details(string name)
         {
-            return View();
+            Products product = _products.GetProduct(name);
+            return View(product);
         }
 
         [HttpGet]

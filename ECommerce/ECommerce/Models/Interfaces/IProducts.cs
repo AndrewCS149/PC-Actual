@@ -25,7 +25,7 @@ namespace ECommerce.Models.Interfaces
         /// </summary>
         /// <param name="product">Name of product to search for</param>
         /// <returns>Successful result of specified product</returns>
-        Task<Products> GetProduct(Products product);
+        Products GetProduct(string name);
 
         /// <summary>
         /// Delete a product
