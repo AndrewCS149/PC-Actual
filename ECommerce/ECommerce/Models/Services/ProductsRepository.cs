@@ -9,21 +9,40 @@ namespace ECommerce.Models.Services
 {
     public class ProductsRepository : IProducts
     {
+        /// <summary>
+        /// Creates a new product
+        /// </summary>
+        /// <param name="product">Product information for creation </param>
+        /// <returns>Successful result of product creation</returns>
         public Task<Products> Create(Products product)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Delete a product
+        /// </summary>
+        /// <param name="product">Product to be deleted</param>
+        /// <returns>Task of completion for product deletion</returns>
         public Task<Products> Delete(Products product)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Get a specific character in the database by product name
+        /// </summary>
+        /// <param name="product">Name of product to search for</param>
+        /// <returns>Successful result of specified product</returns>
         public Task<Products> GetProduct(Products product)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Get a list of all products
+        /// </summary>
+        /// <returns>Successful result with list of products</returns>
         public List<Products> GetProducts()
         {
             List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();

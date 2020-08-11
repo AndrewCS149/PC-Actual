@@ -15,7 +15,7 @@ namespace ECommerce.Models.Interfaces
         Task<Products> Create(Products product);
 
         /// <summary>
-        /// Get a list of all products in the database
+        /// Get a list of all products
         /// </summary>
         /// <returns>Successful result with list of products</returns>
         List<Products> GetProducts();
