@@ -7,6 +7,7 @@
 
 <h1>Login</h1>
 <form method="post">
+    <div asp-validation-summary="All" class="error-message"></div>
     <div class="form-group">
         <label asp-for="@Model.Input.Email">Email Address</label>
         <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" asp-for="@Model.Input.Email" />
@@ -15,5 +16,5 @@
         <label asp-for="@Model.Input.Password">Password</label>
         <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Enter password" asp-for="@Model.Input.Password" />
     </div>
-    <button type="submit" class="btn btn-primary">SUBMIT</button>
+    <button type="submit" class="btn btn-primary">Login</button>
 </form>

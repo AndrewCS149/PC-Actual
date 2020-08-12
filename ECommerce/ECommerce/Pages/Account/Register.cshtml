@@ -5,12 +5,14 @@
     Layout = "_Layout";
 }
 
-<h1>Register</h1>d
+<h1>Register</h1>
 
 <form method="post">
     <div class="form-group">
+        <div asp-validation-summary="All" class="error-message"></div>
         <label asp-for="@Model.Input.FirstName">First Name</label>
         <input class="form-control" id="exampleInputFirstName1" aria-describedby="firstNameHelp" placeholder="Enter firstname" asp-for="@Model.Input.FirstName" />
+        <span asp-validation-for="@Model.Input.FirstName"></span>
     </div>
     <div class="form-group">
         <label asp-for="@Model.Input.LastName">Last Name</label>
@@ -24,15 +26,9 @@
         <label asp-for="@Model.Input.Password">Password</label>
         <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Enter password" asp-for="@Model.Input.Password" />
     </div>
-    >
-    @*<label asp-for="@Model.Input.FirstName"></label>
-        <input asp-for="@Model.Input.FirstName" />
-        <label asp-for="@Model.Input.LastName"></label>
-        <input asp-for="@Model.Input.LastName" />
-        <label asp-for="@Model.Input.Email"></label>
-        <input asp-for="@Model.Input.Email" />
-        <label asp-for="@Model.Input.Password"></label>
-        <input asp-for="@Model.Input.Password" type="password" />
-        <input asp-for="@Model.Input.ConfirmPassword" type="password" />*@
-    <button type="submit" class="btn btn-primary">SUBMIT</button>
+    <div class="form-group">
+        <label asp-for="@Model.Input.ConfirmPassword">Confirm Password</label>
+        <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Confirm password" asp-for="@Model.Input.ConfirmPassword" />
+    </div>
+    <button type="submit" class="btn btn-primary">Sign up</button>
 </form>
