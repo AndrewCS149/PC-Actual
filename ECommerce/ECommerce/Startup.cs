@@ -47,7 +47,7 @@ namespace ECommerce
                     .AddEntityFrameworkStores<UserDBContext>()
                     .AddDefaultTokenProviders();
 
-            services.AddTransient<IProducts, ProductsRepository>();
+            services.AddTransient<IProducts, InventoryManagement>();
         }
 
         // This metho1d gets called by the runtime. Use this method to configure the HTTP request pipeline.

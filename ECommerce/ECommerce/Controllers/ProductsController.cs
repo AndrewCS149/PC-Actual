@@ -21,9 +21,9 @@ namespace ECommerce.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            List<Cereal> products = _products.GetProducts().Cast<Cereal>().ToList();
+            var products = await _products.GetProducts();
 
             ProductsVM vm = new ProductsVM
             {
@@ -35,14 +35,14 @@ namespace ECommerce.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string term)
+        public async Task<IActionResult> IndexAsync(string term)
         {
-            List<Cereal> products = _products.GetProducts().Cast<Cereal>().ToList();
+            List<Products> products = await _products.GetProducts();
             var results = products.Where(x => x.Name.ToUpper().Contains(term.ToUpper()));
 
             ProductsVM vm = new ProductsVM
             {
-                Products = results.Cast<Cereal>().ToList(),
+                Products = results.Cast<Products>().ToList(),
                 Term = term
             };
 
@@ -50,9 +50,9 @@ namespace ECommerce.Controllers
         }
 
         // TODO: not working
-        public IActionResult Details(string name)
+        public async Task<IActionResult> DetailsAsync(int id)
         {
-            Products product = _products.GetProduct(name);
+            Products product = await _products.GetProduct(id);
             return View(product);
         }
 

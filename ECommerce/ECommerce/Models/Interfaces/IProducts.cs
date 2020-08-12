@@ -18,14 +18,14 @@ namespace ECommerce.Models.Interfaces
         /// Get a list of all products
         /// </summary>
         /// <returns>Successful result with list of products</returns>
-        List<Products> GetProducts();
+        Task<List<Products>> GetProducts();
 
         /// <summary>
         /// Get a specific character in the database by product name
         /// </summary>
-        /// <param name="product">Name of product to search for</param>
+        /// <param name="id">Specified Id of product</param>
         /// <returns>Successful result of specified product</returns>
-        Products GetProduct(string name);
+        Task<Products> GetProduct(int id);
 
         /// <summary>
         /// Delete a product
