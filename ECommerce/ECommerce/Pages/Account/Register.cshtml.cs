@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace ECommerce.Pages.Account
         public async Task<IActionResult> OnPost(RegisterViewModel input)
         {
             AppUsers user = new AppUsers()
-            { 
+            {
                 UserName = input.Email,
                 FirstName = input.FirstName,
                 LastName = input.LastName,
@@ -44,16 +45,27 @@ namespace ECommerce.Pages.Account
             var result = await _userManager.CreateAsync(user, input.Password);
 
             return RedirectToAction("Index", "Home");
-
-
         }
 
         public class RegisterViewModel
         {
+            [Required]
+            [EmailAddress]
             public string Email { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]
             public string Password { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]
+            [Compare("Password")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
             public string FirstName { get; set; }
+
+            [Required]
             public string LastName { get; set; }
         }
     }
