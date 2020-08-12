@@ -17,13 +17,11 @@ namespace ECommerce.Pages.Account
     {
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
-        private readonly IConfiguration _config;
 
-        public RegisterModel(UserManager<AppUsers> userManager, IConfiguration configuration, SignInManager<AppUsers> signInManager)
+        public RegisterModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            _config = configuration;
         }
 
         [BindProperty]

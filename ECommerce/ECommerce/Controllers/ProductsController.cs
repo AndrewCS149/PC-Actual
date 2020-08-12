@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
 using ECommerce.Models.Interfaces;
 using ECommerce.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ECommerce.Controllers
 {
@@ -45,6 +46,14 @@ namespace ECommerce.Controllers
                 Products = results.Cast<Products>().ToList(),
                 Term = term
             };
+
+            //var currentPage = RouteData.Values["controller"].ToString();
+
+            //if (currentPage != "Products")
+            //{
+            //    // TODO: not working;
+            //    return RedirectToAction("Index", "Products");
+            //}
 
             return View(vm);
         }

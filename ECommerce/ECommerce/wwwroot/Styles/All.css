@@ -6,3 +6,16 @@
 .error-message {
     color: red;
 }
+
+.register > * {
+    display: inline-flex;
+    margin: 2px;
+}
+
+#logout-button {
+    color: inherit;
+    font: inherit;
+    border: none;
+    background: none;
+    outline: inherit;
+}

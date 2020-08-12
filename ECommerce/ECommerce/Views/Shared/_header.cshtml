@@ -39,11 +39,13 @@
                     </form>
                 </div>
             </div>
-            <div id="register">
+            <div class="register bg-light">
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <span id="welcome-user">Welcome @User.Claims.First(x => x.Type == "Fullname").Value </span>
-                    <a asp-page="/Account/Logout">Logout</a>
+                    <form asp-page="/Account/Logout" method="post">
+                        <button id="logout-button" class="nav-link" type="submit">Logout</button>
+                    </form>
                 }
                 else
                 {
