@@ -2,12 +2,37 @@
 @model ECommerce.Pages.Account.RegisterModel
 @{
     ViewData["Title"] = "Register";
+    Layout = "_Layout";
 }
 
 <h1>Register</h1>
 
 <form method="post">
-    <label asp-for="@Model.Input.FirstName"></label>
-    <input asp-for="@Model.Input.FirstName" />
-    <button type="submit">SUBMIT</button>
+    <div class="form-group">
+        <label asp-for="@Model.Input.FirstName">First Name</label>
+        <input class="form-control" id="exampleInputFirstName1" aria-describedby="firstNameHelp" placeholder="Enter firstname" asp-for="@Model.Input.FirstName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Input.LastName">Last Name</label>
+        <input class="form-control" id="exampleInputLastName1" aria-describedby="lastNameHelp" placeholder="Enter lastname" asp-for="@Model.Input.LastName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Input.Email">Email Address</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" asp-for="@Model.Input.Email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Input.Password">Password</label>
+        <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Enter password" asp-for="@Model.Input.Password" />
+    </div>
+    >
+    @*<label asp-for="@Model.Input.FirstName"></label>
+        <input asp-for="@Model.Input.FirstName" />
+        <label asp-for="@Model.Input.LastName"></label>
+        <input asp-for="@Model.Input.LastName" />
+        <label asp-for="@Model.Input.Email"></label>
+        <input asp-for="@Model.Input.Email" />
+        <label asp-for="@Model.Input.Password"></label>
+        <input asp-for="@Model.Input.Password" type="password" />
+        <input asp-for="@Model.Input.ConfirmPassword" type="password" />*@
+    <button type="submit" class="btn btn-primary">SUBMIT</button>
 </form>

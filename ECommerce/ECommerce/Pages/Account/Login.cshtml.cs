@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerce.Pages.Account
+namespace ECommerce.Pages.Account.Login
 {
     public class LoginModel : PageModel
     {
