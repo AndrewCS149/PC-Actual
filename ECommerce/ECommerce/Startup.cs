@@ -33,7 +33,7 @@ namespace ECommerce
             services.AddMvc();
 
             // register dbcontext
-            services.AddDbContext<ProductsDbContext>(options =>
+            services.AddDbContext<StoreDbContext>(options =>
            {
                options.UseSqlServer(Configuartion.GetConnectionString("DefaultConnection"));
            });

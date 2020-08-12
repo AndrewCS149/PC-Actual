@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Data
 {
-    public class ProductsDbContext : DbContext
+    public class StoreDbContext : DbContext
     {
-        public ProductsDbContext(DbContextOptions<ProductsDbContext> options) : base(options)
+        public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
         }
 
