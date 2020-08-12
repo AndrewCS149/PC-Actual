@@ -7,6 +7,7 @@ using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
 using ECommerce.Models.Interfaces;
+using ECommerce.Models.ViewModels;
 
 namespace ECommerce.Controllers
 {
@@ -19,29 +20,40 @@ namespace ECommerce.Controllers
             _products = products;
         }
 
-        public IActionResult Index()
-        {
-            var allProducts = _products.GetProducts();
-            return View(allProducts);
-        }
-
-        // TODO: not working
-        public IActionResult Details(string name)
-        {
-            Products product = _products.GetProduct(name);
-            return View(product);
-        }
-
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var products = await _products.GetProducts();
+
+            ProductsVM vm = new ProductsVM
+            {
+                Products = products,
+                Term = ""
+            };
+
+            return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Create(Products products)
+        public async Task<IActionResult> IndexAsync(string term)
         {
-            return RedirectToAction("Products", new { products.Name, products.Calories, products.Protein, products.Fat, products.Carbo });
+            List<Products> products = await _products.GetProducts();
+            var results = products.Where(x => x.Name.ToUpper().Contains(term.ToUpper()));
+
+            ProductsVM vm = new ProductsVM
+            {
+                Products = results.Cast<Products>().ToList(),
+                Term = term
+            };
+
+            return View(vm);
+        }
+
+        // TODO: not working
+        public async Task<IActionResult> DetailsAsync(int id)
+        {
+            Products product = await _products.GetProduct(id);
+            return View(product);
         }
 
         [HttpPost]
