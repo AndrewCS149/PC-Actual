@@ -30,11 +30,16 @@ namespace ECommerce.Models.Services
         /// <summary>
         /// Delete a product
         /// </summary>
-        /// <param name="product">Product to be deleted</param>
+        /// <param name="id">Id of Product to be deleted</param>
         /// <returns>Task of completion for product deletion</returns>
-        public Task<Products> Delete(Products product)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            Products product = await _context.Products.FindAsync(id);
+            if (product != null)
+            {
+                _context.Entry(product).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
         }
 
         /// <summary>
@@ -42,12 +47,13 @@ namespace ECommerce.Models.Services
         /// </summary>
         /// <param name="product">Product to be updated</param>
         /// <returns>Successful result of product update</returns>
-        public Task<Products> Update(Products product)
+        public async Task<Products> Update(Products product)
         {
-            throw new NotImplementedException();
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return product;
         }
 
-        // TODO: not working
         /// <summary>
         /// Get a specific character in the database by product name
         /// </summary>
@@ -58,19 +64,6 @@ namespace ECommerce.Models.Services
             var result = await _context.Products
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
-
-            //Products product = new Products();
-            //foreach (var item in allProducts)
-            //{
-            //    if (item.Id == id)
-            //    {
-            //        product.Name = "Andrew";
-            //        //product.Calories = item.Calories;
-            //        //product.Protein = item.Protein;
-            //        //product.Fat = item.Fat;
-            //        //product.Carbo = item.Carbo;
-            //    }
-            //}
             return result;
         }
 

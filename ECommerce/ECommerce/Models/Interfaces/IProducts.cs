@@ -28,10 +28,17 @@ namespace ECommerce.Models.Interfaces
         Task<Products> GetProduct(int id);
 
         /// <summary>
+        /// Update a given product in the database
+        /// </summary>
+        /// <param name="products">product information for update</param>
+        /// <returns>Successful result of specified updated product</returns>
+        Task<Products> Update(Products products);
+
+        /// <summary>
         /// Delete a product
         /// </summary>
-        /// <param name="product">Product to be deleted</param>
+        /// <param name="id">Id of product to be deleted</param>
         /// <returns>Task of completion for product deletion</returns>
-        Task<Products> Delete(Products product);
+        Task Delete(int id);
     }
 }
