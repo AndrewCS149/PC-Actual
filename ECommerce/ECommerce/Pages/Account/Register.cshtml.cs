@@ -14,11 +14,13 @@ namespace ECommerce.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
         private readonly IConfiguration _config;
 
-        public RegisterModel(UserManager<AppUsers> userManager, IConfiguration configuration)
+        public RegisterModel(UserManager<AppUsers> userManager, IConfiguration configuration, SignInManager<AppUsers> signInManager)
         {
+            _signInManager = signInManager;
             _userManager = userManager;
             _config = configuration;
         }
@@ -31,20 +33,30 @@ namespace ECommerce.Pages.Account
         {
         }
 
-        // another reserved method name for the post of the page
+        // On registration submission
         public async Task<IActionResult> OnPost(RegisterViewModel input)
         {
-            AppUsers user = new AppUsers()
+            if (ModelState.IsValid)
             {
-                UserName = input.Email,
-                FirstName = input.FirstName,
-                LastName = input.LastName,
-                Email = input.Email
-            };
+                AppUsers user = new AppUsers()
+                {
+                    UserName = input.Email,
+                    FirstName = input.FirstName,
+                    LastName = input.LastName,
+                    Email = input.Email
+                };
 
-            var result = await _userManager.CreateAsync(user, input.Password);
+                var result = await _userManager.CreateAsync(user, input.Password);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                // TODO: Thank you for registering if success?
+            }
+
+            return Page();
         }
 
         public class RegisterViewModel
