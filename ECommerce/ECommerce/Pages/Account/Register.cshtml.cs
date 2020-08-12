@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models;
+using ECommerce.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,10 +14,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace ECommerce.Pages.Account
 {
-    public class RegisterModel : PageModel
+    public class RegisterModel : PageModel, ISearchTerm
     {
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
+        public string Term { get; set; }
 
         public RegisterModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {

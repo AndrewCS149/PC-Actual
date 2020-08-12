@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Models;
+using ECommerce.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -13,10 +14,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace ECommerce.Pages.Account.Login
 {
-    public class LoginModel : PageModel
+    public class LoginModel : PageModel, ISearchTerm
     {
         [BindProperty]
         public LoginViewModel Input { get; set; }
+
+        public string Term { get; set; }
 
         private readonly SignInManager<AppUsers> _signInManager;
 

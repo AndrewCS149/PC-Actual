@@ -47,14 +47,6 @@ namespace ECommerce.Controllers
                 Term = term
             };
 
-            //var currentPage = RouteData.Values["controller"].ToString();
-
-            //if (currentPage != "Products")
-            //{
-            //    // TODO: not working;
-            //    return RedirectToAction("Index", "Products");
-            //}
-
             return View(vm);
         }
 
