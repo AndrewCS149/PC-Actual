@@ -48,6 +48,7 @@ namespace ECommerce
                     .AddDefaultTokenProviders();
 
             services.AddTransient<IProducts, InventoryManagement>();
+            services.AddTransient<IImage, Blob>();
         }
 
         // This metho1d gets called by the runtime. Use this method to configure the HTTP request pipeline.
