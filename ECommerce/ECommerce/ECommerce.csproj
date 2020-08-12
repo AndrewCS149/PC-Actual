@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\Interfaces\NewFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\cereal.csv" />
   </ItemGroup>
 

@@ -23,7 +23,7 @@ namespace ECommerce.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Cereal> products = _products.GetProducts().Cast<Cereal>().ToList();
+            List<GraphicsCards> products = _products.GetProducts().Cast<GraphicsCards>().ToList();
 
             ProductsVM vm = new ProductsVM
             {
@@ -37,12 +37,12 @@ namespace ECommerce.Controllers
         [HttpPost]
         public IActionResult Index(string term)
         {
-            List<Cereal> products = _products.GetProducts().Cast<Cereal>().ToList();
+            List<GraphicsCards> products = _products.GetProducts().Cast<GraphicsCards>().ToList();
             var results = products.Where(x => x.Name.ToUpper().Contains(term.ToUpper()));
 
             ProductsVM vm = new ProductsVM
             {
-                Products = results.Cast<Cereal>().ToList(),
+                Products = results.Cast<GraphicsCards>().ToList(),
                 Term = term
             };
 

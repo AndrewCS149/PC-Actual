@@ -25,7 +25,7 @@ namespace ECommerce.Pages.Account
         [BindProperty]
         public RegisterViewModel Input { get; set; }
 
-        // reserved method name for the loading of the page
+        // reserved method name for the loading of this page
         public void OnGet()
         {
         }
