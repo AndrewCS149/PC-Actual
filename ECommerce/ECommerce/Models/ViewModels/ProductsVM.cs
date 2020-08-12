@@ -7,7 +7,7 @@ namespace ECommerce.Models.ViewModels
 {
     public class ProductsVM
     {
-        public List<GraphicsCards> Products { get; set; }
+        public List<Products> Products { get; set; }
         public string Term { get; set; }
         public string Order { get; set; }
     }
