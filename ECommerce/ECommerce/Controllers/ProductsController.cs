@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
 using ECommerce.Models.Interfaces;
 using ECommerce.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ECommerce.Controllers
 {
