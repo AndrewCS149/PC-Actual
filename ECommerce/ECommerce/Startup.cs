@@ -77,9 +77,6 @@ namespace ECommerce
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-
-                // TODO: remove this
-                //endpoints.MapDefaultControllerRoute();
             });
         }
     }

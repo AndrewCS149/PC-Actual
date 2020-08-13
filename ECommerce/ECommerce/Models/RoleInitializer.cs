@@ -48,8 +48,7 @@ namespace ECommerce.Models
                     Email = _config["AdminEmail"],
                     UserName = _config["AdminEmail"]
                 };
-                //user.Email = _config["AdminEmail"];
-                //user.UserName = user.Email;
+
                 IdentityResult result = userManager.CreateAsync(user, _config["AdminPassword"]).Result;
                 if (result.Succeeded)
                 {
