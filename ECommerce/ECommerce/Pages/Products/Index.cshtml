@@ -1,7 +1,7 @@
-﻿@model ECommerce.Models.ViewModels.ProductsVM
-
+﻿@page
+@model ECommerce.Pages.ProductsModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Products";
     Layout = "_Layout";
 }
 
@@ -26,18 +26,18 @@
                 @{int count = 1; }
                 @foreach (var item in Model.Products)
                 {
-                <tr>
-                    <td scope="row">@count</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name);
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price);
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Name">Details</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name);
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price);
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Name">Details</a>
+                        </td>
+                    </tr>
                     count++;
                 }
             </tbody>
