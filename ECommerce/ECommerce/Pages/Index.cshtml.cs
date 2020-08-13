@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ECommerce.Models;
 using ECommerce.Models.Interfaces;
-using ECommerce.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerce.Controllers
+namespace ECommerce.Pages.Home
 {
-    public class HomeController : Controller
+    public class HomeModel : PageModel, ISearchTerm
     {
-        public IActionResult Index()
+        public string Term { get; set; }
+
+        public void OnGet()
         {
-            return View();
         }
     }
 }

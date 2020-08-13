@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Storage.Blob;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +10,12 @@ namespace ECommerce.Models.Interfaces
 {
     public interface IImage
     {
-        Task UploadImg();
+        public Task Upload(IFormFile image, string name);
+
+        public Task<CloudBlobContainer> GetContainer(string name);
+
+        public Task<CloudBlob> GetBlob(string imageName, string containerName);
+
+        public Task UploadFile(string containerName, string fileName, Stream image);
     }
 }

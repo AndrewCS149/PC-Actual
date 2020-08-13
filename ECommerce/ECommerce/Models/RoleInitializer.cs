@@ -18,6 +18,7 @@ namespace ECommerce.Models
             new IdentityRole{Name = AppRoles.Admin, NormalizedName = AppRoles.Admin.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()},
             new IdentityRole{Name = AppRoles.User, NormalizedName = AppRoles.User.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()},
         };
+
         public static void SeedData(IServiceProvider serviceProvider, UserManager<AppUsers> userManager, IConfiguration _config)
         {
             using (var dbContext = new UserDBContext(serviceProvider.GetRequiredService<DbContextOptions<UserDBContext>>()))
@@ -27,6 +28,7 @@ namespace ECommerce.Models
                 SeedUsers(userManager, _config);
             }
         }
+
         public static void AddRoles(UserDBContext dbContext)
         {
             if (dbContext.Roles.Any()) return;
@@ -36,12 +38,18 @@ namespace ECommerce.Models
                 dbContext.SaveChanges();
             }
         }
+
         public static void SeedUsers(UserManager<AppUsers> userManager, IConfiguration _config)
         {
             if (userManager.FindByNameAsync(_config["AdminEmail"]).Result == null)
             {
-                AppUsers user = new AppUsers();
-                user.Email = _config["AdminEmail"];
+                AppUsers user = new AppUsers()
+                {
+                    Email = _config["AdminEmail"],
+                    UserName = _config["AdminEmail"]
+                };
+                //user.Email = _config["AdminEmail"];
+                //user.UserName = user.Email;
                 IdentityResult result = userManager.CreateAsync(user, _config["AdminPassword"]).Result;
                 if (result.Succeeded)
                 {

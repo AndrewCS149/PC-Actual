@@ -51,8 +51,12 @@ namespace ECommerce
                 options.AddPolicy("Admin", policy => policy.RequireRole(AppRoles.Admin));
                 options.AddPolicy("Users", policy => policy.RequireRole(AppRoles.Admin, AppRoles.User));
             });
+
+            services.AddScoped<IImage, ImageRepository>();
             services.AddTransient<IProducts, InventoryManagement>();
-            services.AddTransient<IImage, Blob>();
+
+            // TODO: what is this doing here?
+            //services.AddTransient<IImage, Blob>();
         }
 
         // This metho1d gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +77,9 @@ namespace ECommerce
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapDefaultControllerRoute();
+
+                // TODO: remove this
+                //endpoints.MapDefaultControllerRoute();
             });
         }
     }
