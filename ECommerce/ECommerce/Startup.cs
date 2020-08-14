@@ -19,11 +19,11 @@ namespace ECommerce
 {
     public class Startup
     {
-        public IConfiguration Configuartion { get; }
+        public IConfiguration Configuration { get; set; }
 
         public Startup(IConfiguration configuration)
         {
-            Configuartion = configuration;
+            Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -35,24 +35,32 @@ namespace ECommerce
             // register dbcontext
             services.AddDbContext<StoreDbContext>(options =>
            {
-               options.UseSqlServer(Configuartion.GetConnectionString("DefaultConnection"));
+               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
            });
 
             services.AddDbContext<UserDBContext>(options =>
             {
-                options.UseSqlServer(Configuartion.GetConnectionString("UserConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
 
             services.AddIdentity<AppUsers, IdentityRole>()
                     .AddEntityFrameworkStores<UserDBContext>()
                     .AddDefaultTokenProviders();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireRole(AppRoles.Admin));
+                options.AddPolicy("Users", policy => policy.RequireRole(AppRoles.Admin, AppRoles.User));
+            });
 
+            services.AddScoped<IImage, ImageRepository>();
             services.AddTransient<IProducts, InventoryManagement>();
-            services.AddTransient<IImage, Blob>();
+
+            // TODO: what is this doing here?
+            //services.AddTransient<IImage, Blob>();
         }
 
         // This metho1d gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -63,10 +71,12 @@ namespace ECommerce
             app.UseAuthentication();
             app.UseStaticFiles();
 
+            var userManager = serviceProvider.GetRequiredService<UserManager<AppUsers>>();
+            RoleInitializer.SeedData(serviceProvider, userManager, Configuration);
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapDefaultControllerRoute();
             });
         }
     }
