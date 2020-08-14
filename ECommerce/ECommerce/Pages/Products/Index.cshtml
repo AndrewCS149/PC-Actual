@@ -29,10 +29,10 @@
                     <tr>
                         <td scope="row">@count</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name);
+                            @item.Name
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Price);
+                            @string.Format("{0:C}", item.Price)
                         </td>
                         <td>
                             <a asp-action="Details" asp-route-id="@item.Name">Details</a>
