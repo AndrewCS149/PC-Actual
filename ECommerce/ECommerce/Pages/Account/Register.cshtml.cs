@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ECommerce.Pages.Account
 {
+    [AllowAnonymous]
     public class RegisterModel : PageModel, ISearchTerm
     {
         private SignInManager<AppUsers> _signInManager;

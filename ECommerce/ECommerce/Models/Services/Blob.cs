@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Models.Services
 {
-    public class Blob : IImage
+    public class Blob
     {
         // logic to manage the uploading of blob (binary large object)
         public Task UploadImg()

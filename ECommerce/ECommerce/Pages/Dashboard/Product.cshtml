@@ -2,8 +2,13 @@
 @model ECommerce.Pages.Dashboard.ProductModel
 @{
     ViewData["Title"] = "Product";
+    Layout = "_Layout";
 }
 
 <form method="post" enctype="multipart/form-data">
-    <input type="file" />
+    <label asp-for="@Model.Name"></label>
+    <input asp-for="@Model.Name" />
+
+    <label asp-for="@Model.Image"></label>
+    <input type="file" asp-for="@Model.Image" />
 </form>
