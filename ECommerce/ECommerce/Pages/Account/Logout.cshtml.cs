@@ -27,7 +27,7 @@ namespace ECommerce.Pages.Account
             if (ModelState.IsValid)
             {
                 await _signInManager.SignOutAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToPage("/Index");
             }
             return Page();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
@@ -16,6 +17,7 @@ namespace ECommerce.Pages.Account.Login
 {
     public class LoginModel : PageModel, ISearchTerm
     {
+        private readonly UserManager<AppUsers>_userManager;
         [BindProperty]
         public LoginViewModel Input { get; set; }
 
@@ -23,9 +25,10 @@ namespace ECommerce.Pages.Account.Login
 
         private readonly SignInManager<AppUsers> _signInManager;
 
-        public LoginModel(SignInManager<AppUsers> signInManager)
+        public LoginModel(SignInManager<AppUsers> signInManager, UserManager<AppUsers> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public void OnGet()
@@ -37,13 +40,17 @@ namespace ECommerce.Pages.Account.Login
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, false);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByNameAsync(Input.Email);
+                Claim claim = new Claim("Fullname", $"{user.FirstName} {user.LastName}");
+                await _userManager.AddClaimAsync(user, claim);
+                return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", "Invalid username or password");
+            }
             return Page();
+
         }
 
         public class LoginViewModel
