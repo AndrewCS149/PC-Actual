@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ECommerce.Models
@@ -39,20 +40,24 @@ namespace ECommerce.Models
             }
         }
 
-        public static void SeedUsers(UserManager<AppUsers> userManager, IConfiguration _config)
+        public static async void SeedUsers(UserManager<AppUsers> userManager, IConfiguration _config)
         {
             if (userManager.FindByNameAsync(_config["AdminEmail"]).Result == null)
             {
                 AppUsers user = new AppUsers()
                 {
-                    Email = _config["AdminEmail"],
-                    UserName = _config["AdminEmail"]
+                    FirstName = "Admin",
+                    LastName = _config["AdminEmail"],
+                    UserName = _config["AdminEmail"],
+                    Email = _config["AdminEmail"]
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, _config["AdminPassword"]).Result;
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, AppRoles.Admin);
+                    Claim claim = new Claim("Fullname", $"{user.FirstName} {user.LastName}");
+                    var claimResult = userManager.AddClaimAsync(user, claim).Result;
+                    await userManager.AddToRoleAsync(user, AppRoles.Admin);
                 }
             }
         }
