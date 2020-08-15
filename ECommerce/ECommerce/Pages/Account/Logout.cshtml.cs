@@ -21,7 +21,10 @@ namespace ECommerce.Pages.Account
         public void OnGet()
         {
         }
-
+        /// <summary>
+        /// this signs the user out
+        /// </summary>
+        /// <returns>the home page after successful signout</returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
