@@ -3,14 +3,16 @@ using ECommerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class ProductsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200816202010_testimage")]
+    partial class testimage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,71 +44,71 @@ namespace ECommerce.Migrations
                         new
                         {
                             Id = 1,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/i9.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "Intel core i9",
                             Price = 430.00m
                         },
                         new
                         {
                             Id = 2,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/CPU.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "Ryzen 9",
                             Price = 650.00m
                         },
                         new
                         {
                             Id = 3,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/Ryzen7.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "Ryzen 7",
                             Price = 330.00m
                         },
                         new
                         {
                             Id = 4,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/CPU-3.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "Intel core i5",
                             Price = 200.00m
                         },
                         new
                         {
                             Id = 5,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/i7.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "Intel core i7",
                             Price = 320.00m
                         },
                         new
                         {
                             Id = 6,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/GTX1080.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "Nvidia 1080",
                             Price = 240.00m
                         },
                         new
                         {
                             Id = 7,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/Radeon.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "AMD Radeon 8940",
                             Price = 198.00m
                         },
                         new
                         {
                             Id = 8,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/GPU.jpg",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
                             Name = "MSI GTX 1660",
                             Price = 249.00m
                         },
                         new
                         {
                             Id = 9,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/RTX2080.jpg",
-                            Name = "RTX 2080",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
+                            Name = "Dell ATI",
                             Price = 250.00m
                         },
                         new
                         {
                             Id = 10,
-                            Image = "https://ecommerce17.blob.core.windows.net/pictures/Gigabyte.jpg",
-                            Name = "Gigabyte RTX 2060",
+                            Image = "https://ecommerce17.blob.core.windows.net/pictures/PC.jpg",
+                            Name = "Nvidia Quadro GT-100",
                             Price = 650.00m
                         });
                 });
