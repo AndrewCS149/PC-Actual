@@ -26,12 +26,6 @@ namespace ECommerce.Models.Services
             CloudBlobClient = CloudStorageAccount.CreateCloudBlobClient();
         }
 
-        public async Task Upload(IFormFile image, string name)
-        {
-            // send the incoming data into azure
-            await GetContainer("products");
-        }
-
         public async Task<CloudBlobContainer> GetContainer(string name)
         {
             CloudBlobContainer cbc = CloudBlobClient.GetContainerReference(name);
@@ -51,18 +45,12 @@ namespace ECommerce.Models.Services
             return cb;
         }
 
-        public async Task UploadFile(string containerName, string fileName, Stream image)
+        public async Task UploadFile(string containerName, string fileName, byte[] image, string contentType)
         {
             var container = await GetContainer(containerName);
             var blobReference = container.GetBlockBlobReference(fileName);
-            await blobReference.UploadFromStreamAsync(image);
+            blobReference.Properties.ContentType = contentType;
+            await blobReference.UploadFromByteArrayAsync(image, 0, image.Length);
         }
-
-        /*
-         1. connect your account - done in the ctor
-         2. get/create the container
-         3. create the blob
-         4. push blob to container
-         */
     }
 }
