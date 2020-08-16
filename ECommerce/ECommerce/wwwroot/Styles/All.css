@@ -1,4 +1,17 @@
-﻿#search-box {
+﻿.row {
+    text-align: center;
+}
+
+#search-box {
     text-align: right;
     margin-left: 1vw;
+}
+
+.error-message {
+    color: red;
+}
+
+.register > * {
+    display: inline-flex;
+    margin: 2px;
 }

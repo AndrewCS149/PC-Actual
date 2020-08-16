@@ -1,0 +1,52 @@
+﻿@page
+@model ECommerce.Pages.ProductsModel
+@{
+    ViewData["Title"] = "Products";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        main {
+            margin-bottom: 150px;
+        }
+    </style>
+    <title>Products</title>
+</head>
+<body>
+    <main id="products-main">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int count = 1; }
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @string.Format("{0:C}", item.Price)
+                        </td>
+                        <td>
+                            <img width="200" height="150" src=@item.Image />
+                        </td>
+                    </tr>
+                    count++;
+                }
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

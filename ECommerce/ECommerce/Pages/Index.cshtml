@@ -1,0 +1,37 @@
+﻿@page
+@*@model ECommerce.Models.ViewModels.ProductsVM*@
+@model ECommerce.Pages.ProductsModel
+@{
+    ViewData["Title"] = "Home";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .featureProducts{
+            margin: 20% auto;
+            text-align: center;
+        }
+        .img-thumbnail{
+            margin: 0px 15px;
+        }
+    </style>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="~/Styles/Home.css" />
+</head>
+<body>
+    <main>
+        <div class="col-md-4 d-flex justify-content-center featureProducts">
+            @for (int i = 0; i < 2; i++)
+            {
+                <div class="img-thumbnail">
+                    <img width="200" height="100" src=@Model.Products[i].Image>
+                    <p>@Model.Products[i].Name</p>
+                </div>
+            }   
+        </div>
+    </main>
+</body>
+</html>
