@@ -57,9 +57,8 @@ namespace ECommerce.Pages.Account
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToPagePermanent("../Index");
                 }
-                // TODO: Thank you for registering if success?
             }
 
             return Page();

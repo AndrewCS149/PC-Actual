@@ -5,30 +5,44 @@
     Layout = "_Layout";
 }
 
-<h1>Register</h1>
-
-<form method="post">
-    <div class="form-group">
-        <div asp-validation-summary="All" class="error-message"></div>
-        <label asp-for="@Model.Input.FirstName">First Name</label>
-        <input class="form-control" id="exampleInputFirstName1" aria-describedby="firstNameHelp" placeholder="Enter firstname" asp-for="@Model.Input.FirstName" />
-        <span asp-validation-for="@Model.Input.FirstName"></span>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .register-form {
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center register-form">
+            <form method="post">
+                <div class="form-group">
+                    <div asp-validation-summary="All" class="error-message"></div>
+                    <label asp-for="@Model.Input.FirstName">First Name</label>
+                    <input class="form-control" id="exampleInputFirstName1" aria-describedby="firstNameHelp" placeholder="Enter firstname" asp-for="@Model.Input.FirstName" />
+                    @*<span asp-validation-for="@Model.Input.FirstName"></span>*@
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Input.LastName">Last Name</label>
+                    <input class="form-control" id="exampleInputLastName1" aria-describedby="lastNameHelp" placeholder="Enter lastname" asp-for="@Model.Input.LastName" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Input.Email">Email Address</label>
+                    <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" asp-for="@Model.Input.Email" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Input.Password">Password</label>
+                    <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Enter password" asp-for="@Model.Input.Password" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Input.ConfirmPassword">Confirm Password</label>
+                    <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Confirm password" asp-for="@Model.Input.ConfirmPassword" />
+                </div>
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="@Model.Input.LastName">Last Name</label>
-        <input class="form-control" id="exampleInputLastName1" aria-describedby="lastNameHelp" placeholder="Enter lastname" asp-for="@Model.Input.LastName" />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Input.Email">Email Address</label>
-        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" asp-for="@Model.Input.Email" />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Input.Password">Password</label>
-        <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Enter password" asp-for="@Model.Input.Password" />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Input.ConfirmPassword">Confirm Password</label>
-        <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Confirm password" asp-for="@Model.Input.ConfirmPassword" />
-    </div>
-    <button type="submit" class="btn btn-primary">Sign up</button>
-</form>
+</body>
+</html>

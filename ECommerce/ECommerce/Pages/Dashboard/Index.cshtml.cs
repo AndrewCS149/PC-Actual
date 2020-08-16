@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerce.Pages.Dashboard
 {
-    public class ProductModel : PageModel, ISearchTerm
+    public class DashboardModel : PageModel, ISearchTerm
     {
         public string Term { get; set; }
         private IImage _image;
@@ -21,7 +21,7 @@ namespace ECommerce.Pages.Dashboard
         [BindProperty]
         public IFormFile Image { get; set; }
 
-        public ProductModel(IImage image)
+        public DashboardModel(IImage image)
         {
             _image = image;
         }
@@ -32,6 +32,7 @@ namespace ECommerce.Pages.Dashboard
 
         public async Task OnPostAsync()
         {
+            string ext = Path.GetExtension(Image.FileName);
             // Goal: send the uploaded image to blob
             // convert image to a stream
             if (Image != null)
@@ -39,7 +40,8 @@ namespace ECommerce.Pages.Dashboard
                 using (var stream = new MemoryStream())
                 {
                     await Image.CopyToAsync(stream);
-                    await _image.UploadFile("products", Image.FileName, stream);
+                    var bytes = stream.ToArray();
+                    await _image.UploadFile("pictures", $"{Name}{ext}", bytes, Image.ContentType);
                 }
             }
         }

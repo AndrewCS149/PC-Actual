@@ -10,12 +10,10 @@ namespace ECommerce.Models.Interfaces
 {
     public interface IImage
     {
-        public Task Upload(IFormFile image, string name);
-
         public Task<CloudBlobContainer> GetContainer(string name);
 
         public Task<CloudBlob> GetBlob(string imageName, string containerName);
 
-        public Task UploadFile(string containerName, string fileName, Stream image);
+        public Task UploadFile(string containerName, string fileName, byte[] image, string contentType);
     }
 }

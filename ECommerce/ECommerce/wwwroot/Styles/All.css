@@ -1,4 +1,8 @@
-﻿#search-box {
+﻿.row {
+    text-align: center;
+}
+
+#search-box {
     text-align: right;
     margin-left: 1vw;
 }
@@ -10,12 +14,4 @@
 .register > * {
     display: inline-flex;
     margin: 2px;
-}
-
-#logout-button {
-    color: inherit;
-    font: inherit;
-    border: none;
-    background: none;
-    outline: inherit;
 }
