@@ -20,11 +20,9 @@
             <form method="post">
                 <div class="form-group">
                     <div asp-validation-summary="All" class="error-message"></div>
-                    <label asp-for="@Model.Input.Email">Email Address</label>
                     <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" asp-for="@Model.Input.Email" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="@Model.Input.Password">Password</label>
                     <input class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp" placeholder="Enter password" asp-for="@Model.Input.Password" />
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
