@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Azure.Storage.Blobs.Models;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace ECommerce.Pages.Account
 {
@@ -39,6 +42,26 @@ namespace ECommerce.Pages.Account
         // On registration submission
         public async Task<IActionResult> OnPost(RegisterViewModel input)
         {
+            //var msg = new SendGridMessage();
+            //msg.SetFrom(new EmailAddress("Admin@pcActual.com"));
+            //var recipient = new EmailAddress(input.Email);
+            //msg.AddTo(recipient);
+            //msg.SetSubject("Thank you");
+            //msg.AddContent(MimeType.Text, "Thank you for registering with us! We are excited to help" +
+            //"build your most powerful gaming PC yet.");
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("Admin@pcAcutal.com"),
+                Subject = "Thank you",
+                PlainTextContent = "Thank you for registering with us! We are excited to help" +
+                "build your most powerful gaming PC yet.",
+                HtmlContent = "<strong>Hello!!!!<strong>"
+            };
+            msg.AddTo(input.Email);
+            await client.SendEmailAsync(msg);
+
             if (ModelState.IsValid)
             {
                 AppUsers user = new AppUsers()
@@ -60,7 +83,6 @@ namespace ECommerce.Pages.Account
                     return RedirectToPagePermanent("../Index");
                 }
             }
-
             return Page();
         }
 
