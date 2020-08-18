@@ -1,7 +1,8 @@
 ﻿@page
-@model ECommerce.Pages.ProductsModel
+@model ECommerce.Pages.ProductDetailsModel
+@*@model ECommerce.Pages.ProductsModel*@
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "ProductDetails";
     Layout = "_Layout";
 }
 
@@ -13,7 +14,7 @@
             margin-bottom: 150px;
         }
     </style>
-    <title>Products</title>
+    <title>ProductDetails</title>
 </head>
 <body>
     <main id="products-main">
@@ -28,28 +29,30 @@
                 </tr>
             </thead>
             <tbody>
-                @{int count = 1; }
-                @foreach (var item in Model.Products)
-                {
                 <tr>
-                    <td scope="row">@count</td>
+                    @Model.Product.Id
                     <td>
-                        @item.Name
+                        @Model.Product.Name
                     </td>
                     <td>
-                        @string.Format("{0:C}", item.Price)
+                        @string.Format("{0:C}", Model.Product.Price)
                     </td>
                     <td>
-                        <img width="200" height="150" src=@item.Image />
+                        <img width="200" height="150" src=@Model.Product.Image />
                     </td>
                     <td>
-                        <a asp-page="ProductDetails" asp-route-id="@item.Id">Details</a>
+                        @Model.Product.Description
+                    </td>
+                    <td>
+                        @Model.Product.Stock
+                    </td>
+                    <td>
+                        @Model.Product.Recommendation
                     </td>
                 </tr>
-                    count++;
-                }
             </tbody>
         </table>
     </main>
 </body>
 </html>
+
