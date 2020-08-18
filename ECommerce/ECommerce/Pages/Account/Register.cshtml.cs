@@ -24,12 +24,10 @@ namespace ECommerce.Pages.Account
     {
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
-        private IConfiguration _config;
         public string Term { get; set; }
 
-        public RegisterModel(IConfiguration config, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+        public RegisterModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
-            _config = config;
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -46,17 +44,17 @@ namespace ECommerce.Pages.Account
         public async Task<IActionResult> OnPost(RegisterViewModel input)
         {
             // send email to new user
-            var apiKey = _config.GetSection("SENDGRID_APIKEY").Value;
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("Admin@pcAcutal.com"),
-                Subject = "Thank you",
-                HtmlContent = "<p>Thank you for registering with us! We are excited to help" +
-                " build your most powerful gaming PC yet.<p>",
-            };
-            msg.AddTo(input.Email);
-            await client.SendEmailAsync(msg);
+            //var apiKey = _config.GetSection("SENDGRID_APIKEY").Value;
+            //var client = new SendGridClient(apiKey);
+            //var msg = new SendGridMessage()
+            //{
+            //    From = new EmailAddress("Admin@pcAcutal.com"),
+            //    Subject = "Thank you",
+            //    HtmlContent = "<p>Thank you for registering with us! We are excited to help" +
+            //    " build your most powerful gaming PC yet.<p>",
+            //};
+            //msg.AddTo(input.Email);
+            //await client.SendEmailAsync(msg);
 
             if (ModelState.IsValid)
             {
