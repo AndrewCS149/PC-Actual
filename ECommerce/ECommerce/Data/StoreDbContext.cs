@@ -27,7 +27,7 @@ namespace ECommerce.Data
                     Price = 430.00M,
                     Image = "https://ecommerce17.blob.core.windows.net/pictures/i9.jpg",
                     Description = "This product came out in 2017 and features anywhere from 6-18 cores.",
-                    Stock = "There are currently 38 left in stock",
+                    Stock = "38",
                     Recommendation = "Use for desktop computers (heat issue with laptops)."
                 },
                 new Products
