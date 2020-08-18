@@ -5,13 +5,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Azure.Storage.Blobs.Models;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
+using ECommerce.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace ECommerce.Pages.Account
 {
@@ -20,12 +24,14 @@ namespace ECommerce.Pages.Account
     {
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
+        private IEmail _email;
         public string Term { get; set; }
 
-        public RegisterModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+        public RegisterModel(IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _email = email;
         }
 
         [BindProperty]
@@ -49,9 +55,11 @@ namespace ECommerce.Pages.Account
                     Email = input.Email
                 };
 
+                // if registration succeeds, add their full name to claim and redirect to home page
                 var result = await _userManager.CreateAsync(user, input.Password);
                 if (result.Succeeded)
                 {
+                    await _email.Email(input);
                     Claim claim = new Claim("Fullname", $"{Input.FirstName} {Input.LastName}");
                     await _userManager.AddClaimAsync(user, claim);
 
@@ -60,7 +68,6 @@ namespace ECommerce.Pages.Account
                     return RedirectToPagePermanent("../Index");
                 }
             }
-
             return Page();
         }
 

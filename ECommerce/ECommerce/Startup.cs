@@ -54,9 +54,7 @@ namespace ECommerce
 
             services.AddScoped<IImage, ImageRepository>();
             services.AddTransient<IProducts, InventoryManagement>();
-
-            // TODO: what is this doing here?
-            //services.AddTransient<IImage, Blob>();
+            services.AddTransient<IEmail, EmailRepository>();
         }
 
         // This metho1d gets called by the runtime. Use this method to configure the HTTP request pipeline.
