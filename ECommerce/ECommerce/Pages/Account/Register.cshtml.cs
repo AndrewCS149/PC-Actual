@@ -24,12 +24,14 @@ namespace ECommerce.Pages.Account
     {
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
+        private IEmail _email;
         public string Term { get; set; }
 
-        public RegisterModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+        public RegisterModel(IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _email = email;
         }
 
         [BindProperty]
@@ -43,19 +45,6 @@ namespace ECommerce.Pages.Account
         // On registration submission
         public async Task<IActionResult> OnPost(RegisterViewModel input)
         {
-            // send email to new user
-            //var apiKey = _config.GetSection("SENDGRID_APIKEY").Value;
-            //var client = new SendGridClient(apiKey);
-            //var msg = new SendGridMessage()
-            //{
-            //    From = new EmailAddress("Admin@pcAcutal.com"),
-            //    Subject = "Thank you",
-            //    HtmlContent = "<p>Thank you for registering with us! We are excited to help" +
-            //    " build your most powerful gaming PC yet.<p>",
-            //};
-            //msg.AddTo(input.Email);
-            //await client.SendEmailAsync(msg);
-
             if (ModelState.IsValid)
             {
                 AppUsers user = new AppUsers()
@@ -70,6 +59,7 @@ namespace ECommerce.Pages.Account
                 var result = await _userManager.CreateAsync(user, input.Password);
                 if (result.Succeeded)
                 {
+                    await _email.Email(input);
                     Claim claim = new Claim("Fullname", $"{Input.FirstName} {Input.LastName}");
                     await _userManager.AddClaimAsync(user, claim);
 
