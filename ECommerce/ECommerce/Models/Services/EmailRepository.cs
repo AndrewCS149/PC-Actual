@@ -26,7 +26,7 @@ namespace ECommerce.Models.Services
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("Admin@pcAcutal.com"),
-                Subject = "Thank you",
+                Subject = "Welcome",
                 HtmlContent = "<p>Thank you for registering with us! We are excited to help" +
                 " build your most powerful gaming PC yet.<p>",
             };
