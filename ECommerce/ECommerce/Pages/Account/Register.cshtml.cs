@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Azure.Storage.Blobs.Models;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
+using ECommerce.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,10 +24,12 @@ namespace ECommerce.Pages.Account
     {
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
+        private IConfiguration _config;
         public string Term { get; set; }
 
-        public RegisterModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+        public RegisterModel(IConfiguration config, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
+            _config = config;
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -42,22 +45,15 @@ namespace ECommerce.Pages.Account
         // On registration submission
         public async Task<IActionResult> OnPost(RegisterViewModel input)
         {
-            //var msg = new SendGridMessage();
-            //msg.SetFrom(new EmailAddress("Admin@pcActual.com"));
-            //var recipient = new EmailAddress(input.Email);
-            //msg.AddTo(recipient);
-            //msg.SetSubject("Thank you");
-            //msg.AddContent(MimeType.Text, "Thank you for registering with us! We are excited to help" +
-            //"build your most powerful gaming PC yet.");
-            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+            // send email to new user
+            var apiKey = _config.GetSection("SENDGRID_APIKEY").Value;
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("Admin@pcAcutal.com"),
                 Subject = "Thank you",
-                PlainTextContent = "Thank you for registering with us! We are excited to help" +
-                "build your most powerful gaming PC yet.",
-                HtmlContent = "<strong>Hello!!!!<strong>"
+                HtmlContent = "<p>Thank you for registering with us! We are excited to help" +
+                " build your most powerful gaming PC yet.<p>",
             };
             msg.AddTo(input.Email);
             await client.SendEmailAsync(msg);
@@ -72,6 +68,7 @@ namespace ECommerce.Pages.Account
                     Email = input.Email
                 };
 
+                // if registration succeeds, add their full name to claim and redirect to home page
                 var result = await _userManager.CreateAsync(user, input.Password);
                 if (result.Succeeded)
                 {
