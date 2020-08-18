@@ -1,6 +1,5 @@
 ﻿@page
 @model ECommerce.Pages.ProductDetailsModel
-@*@model ECommerce.Pages.ProductsModel*@
 @{
     ViewData["Title"] = "ProductDetails";
     Layout = "_Layout";
@@ -22,15 +21,16 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col"></th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col"></th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Number in Stock</th>
+                    <th scope="col">Recommendation</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    @Model.Product.Id
                     <td>
                         @Model.Product.Name
                     </td>
