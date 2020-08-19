@@ -10,6 +10,7 @@ namespace ECommerce.Data
     public class StoreDbContext : DbContext
     {
         public DbSet<Products> Products { get; set; }
+        public DbSet<Cart> ShoppingCart { get; set; }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
@@ -39,7 +40,6 @@ namespace ECommerce.Data
                     Description = "This product is a high end computer that specializes in heat management.",
                     Stock = "15",
                     Recommendation = "Use this with two 1080p monitors for optimal performance."
-
                 },
                 new Products
                 {
@@ -110,7 +110,6 @@ namespace ECommerce.Data
                     Description = "A last generation Nvidia graphics card, it still possessess solid performance stats.",
                     Stock = "11",
                     Recommendation = "Buy if you don't mind not playing on ultra graphics settings."
-
                 },
                 new Products
                 {
