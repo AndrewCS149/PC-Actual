@@ -11,6 +11,6 @@ namespace ECommerce.Models
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public DateTime DateAdded { get; set; }
-        public Products Product { get; set; }
+        public List<Products> Products { get; set; }
     }
 }

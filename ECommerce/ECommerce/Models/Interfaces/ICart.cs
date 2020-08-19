@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Models.Interfaces
 {
-    public class ICart
+    public interface ICart
     {
     }
 }
