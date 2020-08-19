@@ -125,5 +125,7 @@ namespace ECommerce.Data
                 }
             );
         }
+
+        public DbSet<ECommerce.Models.Cart> Cart { get; set; }
     }
 }

@@ -21,21 +21,27 @@ namespace ECommerce.Models.Services
             _products = products;
         }
 
-        public async Task AddToCart(int id)
+        public async Task<List<Products>> GetCartItems()
         {
-            var product = await _context.Products.SingleOrDefaultAsync(x => x.Id == id);
+            List<Products> result = await _context.Products.Include(x => x.CartItem)
+                .ThenInclude(x => x.Cart).ToListAsync();
+            return result;
+        }
 
-            //var product = await _context.
+        // TODO: summary comment
+        public async Task AddToCart(int cartId, int productId)
+        {
+            CartItem cartItem = new CartItem()
+            {
+                CartId = cartId,
+                ProductsId = productId
+            };
 
-            //if (product == null)
-            //{
-            //    product = new Cart
-            //    {
-            //        ProductId = id,
-            //        DateAdded = DateTime.Now,
-            //        Quantity = 1
-            //    }
-            //}
+            cartItem.Cart.DateAdded = DateTime.Now;
+            cartItem.Cart.Quantity++;
+
+            _context.Entry(cartItem).State = EntityState.Added;
+            await _context.SaveChangesAsync();
         }
     }
 }

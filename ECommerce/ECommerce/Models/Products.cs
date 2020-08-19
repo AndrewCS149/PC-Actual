@@ -14,5 +14,6 @@ namespace ECommerce.Models
         public string Description { get; set; }
         public string Stock { get; set; }
         public string Recommendation { get; set; }
+        public List<CartItem> CartItem { get; set; }
     }
 }
