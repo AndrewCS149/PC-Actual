@@ -44,5 +44,29 @@ namespace ECommerceTests
             Assert.NotNull(result);
             Assert.Equal(9, result.Count);
         }
+
+        [Fact]
+        public async void CanGetProduct()
+        {
+            var service = BuildService();
+
+            var expected = "Intel core i9";
+            var returnFromMethod = await service.GetProduct(1);
+
+            Assert.NotNull(returnFromMethod);
+            Assert.Equal(expected, returnFromMethod.Name);
+        }
+
+        [Fact]
+        public async Task CanGetProducts()
+        {
+            // arrange
+            var repo = BuildService();
+            // act
+            var result = await repo.GetProducts();
+            // assert
+            Assert.NotNull(result);
+            Assert.Equal(10, result.Count);
+        }
     }
 }

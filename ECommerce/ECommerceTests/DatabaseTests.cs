@@ -17,7 +17,7 @@ namespace ECommerceTests
 
         public DatabaseTests()
         {
-            _connection = new SqliteConnection("Filename=:memory");
+            _connection = new SqliteConnection("Filename=:memory:");
             _connection.Open();
 
             _db = new StoreDbContext(
