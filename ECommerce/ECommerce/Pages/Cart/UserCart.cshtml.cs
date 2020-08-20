@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Storage.Blobs.Models;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace ECommerce.Pages.Cart
         public Products Product { get; set; }
         public string Term { get; set; }
         public IProducts _products { get; set; }
+
         public UserCartModel(IProducts products)
         {
             _products = products;
@@ -24,14 +26,16 @@ namespace ECommerce.Pages.Cart
             Product = await _products.GetProduct(id);
             return Page();
         }
+
         public void OnGet()
         {
-
         }
-        
-        public void OnPost()
-        {
 
+        public async Task<IActionResult> OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+            }
         }
     }
 }

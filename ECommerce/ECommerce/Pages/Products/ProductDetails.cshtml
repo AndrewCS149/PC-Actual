@@ -49,9 +49,15 @@
                     <td>
                         @Model.Product.Recommendation
                     </td>
+                    @*<td>
+                            <a asp-page="AddToCart" asp-route-id="@Model.Product.Id">Add to Cart</a>
+                        </td>*@
                 </tr>
             </tbody>
         </table>
+        <form asp-page="/Account/UserCart" method="post">
+            <button type="submit">Add To Cart</button>
+        </form>
     </main>
 </body>
 </html>
