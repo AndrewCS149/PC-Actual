@@ -10,7 +10,6 @@ namespace ECommerce.Models
     {
         public int Id { get; set; }
         public string UserEmail { get; set; }
-        public DateTime DateAdded { get; set; }
         public List<CartItem> CartItem { get; set; }
     }
 }

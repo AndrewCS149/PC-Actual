@@ -10,6 +10,7 @@ namespace ECommerce.Models
         public int ProductId { get; set; }
         public int CartId { get; set; }
         public int Quantity { get; set; }
+        public DateTime DateAdded { get; set; }
         public Cart Cart { get; set; }
         public Products Product { get; set; }
     }

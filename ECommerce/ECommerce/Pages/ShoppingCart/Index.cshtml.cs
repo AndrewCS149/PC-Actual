@@ -67,7 +67,16 @@ namespace ECommerce.Pages.ShoppingCart
                     await _cart.Create(email);
                 }
 
-                await _cartItems.AddToCart(cart.Id, id);
+                // if the cartItem already exists in the user's cart
+                var cartItem = await _cartItems.GetCartItem(cart.Id, id);
+                if (cartItem != null)
+                {
+                    await _cartItems.UpdateQty(cart.Id, id);
+                }
+                else
+                {
+                    await _cartItems.AddToCart(cart.Id, id);
+                }
 
                 return RedirectToPagePermanent("../Products/Index");
             }
