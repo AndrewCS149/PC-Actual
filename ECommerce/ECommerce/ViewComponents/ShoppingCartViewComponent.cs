@@ -1,4 +1,6 @@
-﻿using ECommerce.Models.Interfaces;
+﻿using ECommerce.Models;
+using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,22 @@ namespace ECommerce.ViewComponents
     public class ShoppingCartViewComponent : ViewComponent
     {
         private readonly ICart _cart;
+        private readonly UserManager<AppUsers> _userManager;
 
-        public ShoppingCartViewComponent(ICart cart)
+        public ShoppingCartViewComponent(UserManager<AppUsers> userManager, ICart cart)
         {
+            _userManager = userManager;
             _cart = cart;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var result = await _cart.GetCartItems(4);
-            return View(result);
+            //  retrieve user's email
+            var user = User as ClaimsPrincipal;
+            var email = user.Claims.First(x => x.Type == "Email").ToString();
+            email = email.Substring(7);
+            var cart = await _cart.GetCart(email);
+            return View(cart);
         }
     }
 }
