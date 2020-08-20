@@ -34,7 +34,7 @@
                     <td>
                         @Model.Product.Name
                         <form method="post">
-                            <input type="hidden" value="@Model.Product.Id" name="Id" />
+                            <input type="hidden" value="@Model.Product.Id" name="productId" />
                             <button asp-page="/ShoppingCart/Index" type="submit">Add To Cart</button>
                         </form>
                     </td>
@@ -56,10 +56,10 @@
                 </tr>
             </tbody>
         </table>
-        @*<form method="post">
-                <input type="hidden" value="@Model.Product.Id" name="Id" />
-                <button asp-page="/ShoppingCart/Index" type="submit">Add To Cart</button>
-            </form>*@
+
+        <div class="col-sm-8">
+            @await Component.InvokeAsync("ShoppingCart")
+        </div>
     </main>
 </body>
 </html>

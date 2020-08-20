@@ -25,7 +25,7 @@ namespace ECommerce.Pages.ShoppingCart
             _cart = cart;
         }
 
-        public async Task<IActionResult> OnPost(int id)
+        public async Task<IActionResult> OnPost(int productId)
         {
             if (ModelState.IsValid)
             {
@@ -41,14 +41,14 @@ namespace ECommerce.Pages.ShoppingCart
                 }
 
                 // if the cartItem already exists in the user's cart
-                var cartItem = await _cartItems.GetCartItem(cart.Id, id);
+                var cartItem = await _cartItems.GetCartItem(cart.Id, productId);
                 if (cartItem != null)
                 {
-                    await _cartItems.UpdateQty(cart.Id, id);
+                    await _cartItems.UpdateQty(cart.Id, productId);
                 }
                 else
                 {
-                    await _cartItems.AddToCart(cart.Id, id);
+                    await _cartItems.AddToCart(cart.Id, productId);
                 }
 
                 // redirect to products page after adding item to cart
