@@ -17,6 +17,20 @@ namespace ECommerce.Models.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Retrieves all the items within a specified cart
+        /// </summary>
+        /// <param name="id">Id of cart</param>
+        /// <returns>All items within the specified cart</returns>
+        public async Task<List<CartItem>> GetCartItems(int id)
+        {
+            List<CartItem> result = await _context.CartItem.Where(x => x.CartId == id).ToListAsync();
+            //result.
+            //List<Products> products = await _context.Products.Where(x => x.Id == result.)
+
+            return result;
+        }
+
         // TODO: summary comment
         public async Task<Cart> Create(string email)
         {
@@ -30,7 +44,7 @@ namespace ECommerce.Models.Services
         // TODO: summary comment
         public async Task<Cart> GetCart(string email)
         {
-            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower()).Include(x => x.CartItem).FirstOrDefaultAsync();
+            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower()).Include(x => x.CartItem).ThenInclude(x => x.Product).FirstOrDefaultAsync();
             return result;
         }
     }
