@@ -19,7 +19,10 @@
         {
             <tr>
                 <td>
-                    @*@item.Product.Name*@
+                    @if(@item.Product.Name != null)
+                    {
+                        @item.Product.Name                        
+                    }
                 </td>
                 <td>
                     @item.Quantity

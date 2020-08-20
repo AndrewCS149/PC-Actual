@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace ECommerce.Models.Services
@@ -69,6 +70,9 @@ namespace ECommerce.Models.Services
                 DateAdded = DateTime.Now,
                 Quantity = 1
             };
+
+            Products product = await _context.Products.FirstOrDefaultAsync(x => x.Id == productId);
+            cartItem.Product = product;
 
             _context.Entry(cartItem).State = EntityState.Added;
             await _context.SaveChangesAsync();

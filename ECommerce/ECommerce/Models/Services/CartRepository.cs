@@ -22,9 +22,9 @@ namespace ECommerce.Models.Services
         /// </summary>
         /// <param name="id">Id of cart</param>
         /// <returns>All items within the specified cart</returns>
-        public async Task<List<CartItem>> GetCartItems(int id)
+        public async Task<List<CartItem>> GetCartItems(int cartId)
         {
-            List<CartItem> result = await _context.CartItem.Where(x => x.CartId == id).ToListAsync();
+            List<CartItem> result = await _context.CartItem.Where(x => x.CartId == cartId).ToListAsync();
             //result.
             //List<Products> products = await _context.Products.Where(x => x.Id == result.)
 
