@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ECommerce.Models.CartItem>
+﻿@model ECommerce.Models.Cart
 <h3>Shopping cart</h3>
 <table class="table table-striped">
     <thead>
@@ -15,11 +15,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.CartItem)
         {
             <tr>
                 <td>
-                    @*@item.Product.Name*@
+                    @if (@item.Product.Name != null)
+                    {
+                        @item.Product.Name
+                    }
                 </td>
                 <td>
                     @item.Quantity
