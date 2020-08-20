@@ -11,37 +11,27 @@ namespace ECommerce.Models.Services
     public class CartRepository : ICart
     {
         private StoreDbContext _context;
-        private IProducts _products;
 
-        public int CartId { get; set; }
-
-        public CartRepository(IProducts products, StoreDbContext context)
+        public CartRepository(StoreDbContext context)
         {
             _context = context;
-            _products = products;
-        }
-
-        public async Task<List<Products>> GetCartItems()
-        {
-            List<Products> result = await _context.Products.Include(x => x.CartItem)
-                .ThenInclude(x => x.Cart).ToListAsync();
-            return result;
         }
 
         // TODO: summary comment
-        public async Task AddToCart(int cartId, int productId)
+        public async Task<Cart> Create(string email)
         {
-            CartItem cartItem = new CartItem()
-            {
-                CartId = cartId,
-                ProductsId = productId
-            };
-
-            cartItem.Cart.DateAdded = DateTime.Now;
-            cartItem.Cart.Quantity++;
-
-            _context.Entry(cartItem).State = EntityState.Added;
+            Cart cart = new Cart();
+            cart.UserEmail = email;
+            _context.Entry(cart).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            return cart;
+        }
+
+        // TODO: summary comment
+        public async Task<Cart> GetCart(string email)
+        {
+            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower()).Include(x => x.CartItem).FirstOrDefaultAsync();
+            return result;
         }
     }
 }

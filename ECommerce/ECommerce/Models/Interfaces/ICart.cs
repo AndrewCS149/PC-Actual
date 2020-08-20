@@ -7,8 +7,11 @@ namespace ECommerce.Models.Interfaces
 {
     public interface ICart
     {
-        Task<List<Products>> GetCartItems();
+        //Task<List<Products>> GetCartItems();
 
-        Task AddToCart(int cartId, int productId);
+        //Task AddToCart(int cartId, int productId);
+        Task<Cart> GetCart(string email);
+
+        Task<Cart> Create(string email);
     }
 }

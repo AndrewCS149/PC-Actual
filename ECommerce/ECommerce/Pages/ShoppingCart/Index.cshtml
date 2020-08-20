@@ -1,0 +1,61 @@
+﻿@page
+@model ECommerce.Pages.ShoppingCart.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        main {
+            margin-bottom: 150px;
+        }
+    </style>
+    <title>ProductDetails</title>
+</head>
+<body>
+    <main id="products-main">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Number in Stock</th>
+                    <th scope="col">Recommendation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @*<td>
+                            @Model.
+                        </td>
+                        <td>
+                            @string.Format("{0:C}", Model.Product.Price)
+                        </td>
+                        <td>
+                            <img width="200" height="150" src=@Model.Product.Image />
+                        </td>
+                        <td>
+                            @Model.Product.Description
+                        </td>
+                        <td>
+                            @Model.Product.Stock
+                        </td>
+                        <td>
+                            @Model.Product.Recommendation
+                        </td>
+                        <td>
+                            <a asp-page="AddToCart" asp-route-id="@Model.Product.Id">Add to Cart</a>
+                        </td>*@
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
