@@ -13,23 +13,31 @@ namespace ECommerce.Pages.ShoppingCart
     public class IndexModel : PageModel
     {
         public IProducts _products { get; set; }
+        public ICartItems _cartItems { get; set; }
+        public ICart _cart { get; set; }
 
-        public IndexModel(IProducts products)
+        public IndexModel(ICart cart, IProducts products, ICartItems cartItems)
         {
+            _cartItems = cartItems;
             _products = products;
+            _cart = cart;
         }
 
         public void OnGet()
         {
         }
 
-        public async Task<IActionResult> AddToCart(int id)
+        // TODO: summary comment
+        public async Task<IActionResult> OnPost(int cartId, int productId)
         {
-            List<Products> cart = new List<Products>();
-            var product = await _products.GetProduct(id);
-            cart.Add(product);
+            if (ModelState.IsValid)
+            {
+                await _cart.
 
-            return RedirectToPagePermanent("../Products/Index");
+                return RedirectToPagePermanent("../Products/Index");
+            }
+
+            return Page();
         }
     }
 }

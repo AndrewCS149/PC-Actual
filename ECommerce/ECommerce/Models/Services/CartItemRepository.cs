@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ECommerce.Data;
+using ECommerce.Migrations;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,16 +10,22 @@ namespace ECommerce.Models.Services
 {
     public class CartItemRepository
     {
-        public int MyProperty { get; set; }
+        public StoreDbContext _context;
 
-        public CartItemRepository()
+        public CartItemRepository(StoreDbContext context)
         {
+            _context = context;
         }
 
-        public async Task GetCartItems()
+        // TODO: summary comment
+        public async Task<List<CartItem>> GetCartItems(int id)
         {
+            List<CartItem> result = await _context.CartItem.Where(x => x.CartId == id).ToListAsync();
+
+            return result;
         }
 
+        // TODO: summary comment
         public async Task AddToCart(int cartId, int productId)
         {
             CartItem cartItem = new CartItem()
@@ -26,6 +35,8 @@ namespace ECommerce.Models.Services
             };
 
             cartItem.Cart.DateAdded = DateTime.Now;
+            _context.Entry(cartItem).State = EntityState.Added;
+            await _context.SaveChangesAsync();
         }
     }
 }
