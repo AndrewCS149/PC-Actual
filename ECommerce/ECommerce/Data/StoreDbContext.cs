@@ -10,7 +10,7 @@ namespace ECommerce.Data
     public class StoreDbContext : DbContext
     {
         public DbSet<Products> Products { get; set; }
-        private DbSet<CartItem> CartItem { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
@@ -20,7 +20,7 @@ namespace ECommerce.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<CartItem>().HasKey(x => new { x.CartId, x.ProductsId });
+            modelBuilder.Entity<CartItem>().HasKey(x => new { x.CartId, x.ProductId });
 
             modelBuilder.Entity<Products>().HasData(
                 new Products

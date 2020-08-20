@@ -23,8 +23,9 @@ namespace ECommerce.Models.Services
 
         public async Task<List<Products>> GetCartItems()
         {
-            List<Products> result = await _context.Products.Include(x => x.CartItem)
-                .ThenInclude(x => x.Cart).ToListAsync();
+            //List<Products> result = await _context.Products.Include(x => x.CartItem)
+            //    .ThenInclude(x => x.Cart).ToListAsync();
+            List<Products> result = await _products.GetProducts();
             return result;
         }
 
@@ -34,14 +35,21 @@ namespace ECommerce.Models.Services
             CartItem cartItem = new CartItem()
             {
                 CartId = cartId,
-                ProductsId = productId
+                ProductId = productId
             };
 
             cartItem.Cart.DateAdded = DateTime.Now;
-            cartItem.Cart.Quantity++;
 
             _context.Entry(cartItem).State = EntityState.Added;
             await _context.SaveChangesAsync();
+        }
+
+        // TODO: summary comment
+        public async Task<Cart> GetCart(string email)
+        {
+            var result = await _context.Cart.Where(x => x.UserEmail.ToString() == email).Include(x => x.CartItem).FirstOrDefaultAsync();
+
+            return result;
         }
     }
 }
