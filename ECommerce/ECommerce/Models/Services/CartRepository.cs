@@ -11,14 +11,10 @@ namespace ECommerce.Models.Services
     public class CartRepository : ICart
     {
         private StoreDbContext _context;
-        private IProducts _products;
 
-        public int CartId { get; set; }
-
-        public CartRepository(IProducts products, StoreDbContext context)
+        public CartRepository(StoreDbContext context)
         {
             _context = context;
-            _products = products;
         }
 
         // TODO: summary comment
@@ -34,8 +30,7 @@ namespace ECommerce.Models.Services
         // TODO: summary comment
         public async Task<Cart> GetCart(string email)
         {
-            var result = await _context.Cart.Where(x => x.UserEmail.ToString() == email).Include(x => x.CartItem).FirstOrDefaultAsync();
-
+            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower()).Include(x => x.CartItem).FirstOrDefaultAsync();
             return result;
         }
     }

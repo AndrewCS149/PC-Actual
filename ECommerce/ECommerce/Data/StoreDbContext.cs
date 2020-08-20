@@ -11,6 +11,7 @@ namespace ECommerce.Data
     {
         public DbSet<Products> Products { get; set; }
         public DbSet<CartItem> CartItem { get; set; }
+        public DbSet<Cart> Cart { get; set; }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
@@ -125,7 +126,5 @@ namespace ECommerce.Data
                 }
             );
         }
-
-        public DbSet<ECommerce.Models.Cart> Cart { get; set; }
     }
 }

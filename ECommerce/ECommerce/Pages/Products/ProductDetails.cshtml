@@ -1,6 +1,5 @@
 ﻿@page
 @model ECommerce.Pages.ProductDetailsModel
-@*@model ECommerce.Pages.ProductsModel*@
 @{
     ViewData["Title"] = "ProductDetails";
     Layout = "_Layout";
@@ -22,16 +21,22 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col"></th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col"></th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Recommendation</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
                         @Model.Product.Name
+                        <form method="post">
+                            <input type="hidden" value="@Model.Product.Id" name="Id" />
+                            <button asp-page="/ShoppingCart/Index" type="submit">Add To Cart</button>
+                        </form>
                     </td>
                     <td>
                         @string.Format("{0:C}", Model.Product.Price)
@@ -51,9 +56,10 @@
                 </tr>
             </tbody>
         </table>
-        <form asp-page="/ShoppingCart/Index" method="post">
-            <button type="submit">Add To Cart</button>
-        </form>
+        @*<form method="post">
+                <input type="hidden" value="@Model.Product.Id" name="Id" />
+                <button asp-page="/ShoppingCart/Index" type="submit">Add To Cart</button>
+            </form>*@
     </main>
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data;
 using ECommerce.Migrations;
+using ECommerce.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Models.Services
 {
-    public class CartItemRepository
+    public class CartItemRepository : ICartItems
     {
         public StoreDbContext _context;
 
@@ -34,9 +35,23 @@ namespace ECommerce.Models.Services
                 ProductId = productId
             };
 
-            cartItem.Cart.DateAdded = DateTime.Now;
+            //cartItem.Cart.DateAdded = DateTime.Now;
             _context.Entry(cartItem).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
+
+        //public async Task AddToCart(Cart cart, Products product)
+        //{
+        //    CartItem cartItem = new CartItem()
+        //    {
+        //        CartId = cart.Id,
+        //        ProductId = product.Id,
+        //        Product = product
+        //    };
+
+        //    cartItem.Cart.DateAdded = DateTime.Now;
+        //    _context.Entry(cartItem).State = EntityState.Added;
+        //    await _context.SaveChangesAsync();
+        //}
     }
 }

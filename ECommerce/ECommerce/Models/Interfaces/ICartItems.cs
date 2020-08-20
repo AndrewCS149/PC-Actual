@@ -9,6 +9,8 @@ namespace ECommerce.Models.Interfaces
     {
         Task<List<CartItem>> GetCartItems(int id);
 
-        //Task AddToCart(int cartId, int productId);
+        Task AddToCart(int cartId, int productId);
+
+        //Task AddToCart(Cart cart, Products product);
     }
 }
