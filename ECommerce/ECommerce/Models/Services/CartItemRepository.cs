@@ -96,7 +96,7 @@ namespace ECommerce.Models.Services
         /// <summary>
         /// Delete a cart item
         /// </summary>
-        /// <param name="id">the item to be deleted</param>
+        /// <param name="cartItem">cartItem to be deleted</param>
         /// <returns>Successful completion of method</returns>
         public async Task Delete(CartItem cartItem)
         {

@@ -29,34 +29,50 @@ namespace ECommerce.Pages.ShoppingCart
             _cartItems = cartItems;
             _cart = cart;
         }
+
         public async Task<IActionResult> Create(int count, int cartId, int productId)
         {
             await _cartItems.UpdateCartQty(count, cartId, productId);
             return Page();
         }
 
-        public async Task<IActionResult> OnGet(int productId)
+        public async Task<IActionResult> OnGet()
         {
-            //  retrieve user's email
-            var email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
-
-            // if user does not have a cart, create one
-            var cart = await _cart.GetCart(email);
-            if (cart == null)
+            // get users email
+            string email;
+            if (User.Identity.IsAuthenticated)
             {
-                cart = await _cart.Create(email);
+                email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+            }
+            else
+            {
+                email = "Default@gmail.com";
             }
 
-            Cart = cart;
+            // if user does not have a cart, create one
+            Cart = await _cart.GetCart(email);
+            if (Cart == null)
+            {
+                Cart = await _cart.Create(email);
+            }
+
             return Page();
         }
+
         public async Task<IActionResult> OnPost(int productId)
         {
             if (ModelState.IsValid)
             {
-                //  retrieve user's email
-                var email = User.Claims.FirstOrDefault(x => x.Type == "Email").ToString();
-                email = email.Substring(7);
+                // get users email
+                string email;
+                if (User.Identity.IsAuthenticated)
+                {
+                    email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+                }
+                else
+                {
+                    email = "Default@gmail.com";
+                }
 
                 // if user does not have a cart, create one
                 var cart = await _cart.GetCart(email);

@@ -26,6 +26,11 @@ namespace ECommerce.Models.Services
             CloudBlobClient = CloudStorageAccount.CreateCloudBlobClient();
         }
 
+        /// <summary>
+        /// Gets a specified container from Azure storage
+        /// </summary>
+        /// <param name="name">Name of container to get</param>
+        /// <returns>container</returns>
         public async Task<CloudBlobContainer> GetContainer(string name)
         {
             CloudBlobContainer cbc = CloudBlobClient.GetContainerReference(name);
@@ -38,6 +43,12 @@ namespace ECommerce.Models.Services
             return cbc;
         }
 
+        /// <summary>
+        /// Gets a specified BLOB from an azure container
+        /// </summary>
+        /// <param name="imageName">Name of specified image</param>
+        /// <param name="containerName">Name of specified container</param>
+        /// <returns>BLOB</returns>
         public async Task<CloudBlob> GetBlob(string imageName, string containerName)
         {
             var container = await GetContainer(containerName);
@@ -45,6 +56,14 @@ namespace ECommerce.Models.Services
             return cb;
         }
 
+        /// <summary>
+        /// Uploads a BLOB to specified container in Azure storage
+        /// </summary>
+        /// <param name="containerName">Name of specified container</param>
+        /// <param name="fileName">Name of specified file</param>
+        /// <param name="image">Name of specified image</param>
+        /// <param name="contentType">Type of content being uploaded</param>
+        /// <returns>Successful completion of task</returns>
         public async Task UploadFile(string containerName, string fileName, byte[] image, string contentType)
         {
             var container = await GetContainer(containerName);

@@ -17,45 +17,40 @@
     <title>Shopping Cart</title>
 </head>
 <body>
-    <main id="products-main">    
+    <main id="products-main">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Quantity
-                    </th>
-                    <th>
-                        Total
-                    </th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                @if (Model.Cart != null)
+                @if (Model.Cart.CartItem != null)
                 {
+                    decimal total = 0.0M;
                     @foreach (var item in Model.Cart.CartItem)
                     {
+                        total += item.Product.Price * item.Quantity;
                         <tr>
-                            <td>                                
-                                @item.Product.Name
-                                
-                        </td>
-                        <td>
-                            @item.Quantity
-                        </td>
-                        <td>
-                            <form method="post">
-                                <input hidden asp-for="CartId" value="@item.CartId" />
-                                <input hidden asp-for="ProductId" value="@item.ProductId" />
-                                <input asp-for="Count" value="@item.Quantity" />
-                                <button asp-page="/ShoppingCart/Update" type="submit">Update Quantity</button>
-                                <input hidden value="@item" name="item" />
-                                <button asp-page="/ShoppingCart/Delete" type="submit">Delete Product</button>
-                            </form>
-                        </td>
-                    </tr>
+                            <td>@item.Product.Name</td>
+                            <td>@string.Format("{0:C}", item.Product.Price)</td>
+                            <td>@item.Quantity</td>
+                            <td>@string.Format("{0:C}", total)</td>
+                            <td>
+                                <form method="post">
+                                    <input hidden asp-for="CartId" value="@item.CartId" />
+                                    <input hidden asp-for="ProductId" value="@item.ProductId" />
+                                    <input asp-for="Count" value="@item.Quantity" />
+                                    <button asp-page="/ShoppingCart/Update" type="submit">Update Quantity</button>
+                                    <input hidden value="@item" name="item" />
+                                    <button asp-page="/ShoppingCart/Delete" type="submit">Delete Product</button>
+                                </form>
+                            </td>
+                        </tr>
                     }
                 }
             </tbody>
