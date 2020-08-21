@@ -29,27 +29,28 @@ namespace ECommerce.Pages.ShoppingCart
             _cartItems = cartItems;
             _cart = cart;
         }
+
         public async Task<IActionResult> Create(int count, int cartId, int productId)
         {
             await _cartItems.UpdateCartQty(count, cartId, productId);
             return Page();
         }
 
-        public async Task<IActionResult> OnGet(int productId)
+        public async Task<IActionResult> OnGet()
         {
             //  retrieve user's email
             var email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
 
             // if user does not have a cart, create one
-            var cart = await _cart.GetCart(email);
-            if (cart == null)
+            Cart = await _cart.GetCart(email);
+            if (Cart == null)
             {
-                cart = await _cart.Create(email);
+                Cart = await _cart.Create(email);
             }
 
-            Cart = cart;
             return Page();
         }
+
         public async Task<IActionResult> OnPost(int productId)
         {
             if (ModelState.IsValid)
