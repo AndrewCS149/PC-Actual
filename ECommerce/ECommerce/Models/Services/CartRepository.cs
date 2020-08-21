@@ -18,20 +18,10 @@ namespace ECommerce.Models.Services
         }
 
         /// <summary>
-        /// Retrieves all the items within a specified cart
+        /// Adds a new Cart to the database
         /// </summary>
-        /// <param name="id">Id of cart</param>
-        /// <returns>All items within the specified cart</returns>
-        public async Task<List<CartItem>> GetCartItems(int cartId)
-        {
-            List<CartItem> result = await _context.CartItem.Where(x => x.CartId == cartId).ToListAsync();
-            //result.
-            //List<Products> products = await _context.Products.Where(x => x.Id == result.)
-
-            return result;
-        }
-
-        // TODO: summary comment
+        /// <param name="email">The email to attach the cart to</param>
+        /// <returns>Newly created cart</returns>
         public async Task<Cart> Create(string email)
         {
             Cart cart = new Cart();
@@ -41,7 +31,11 @@ namespace ECommerce.Models.Services
             return cart;
         }
 
-        // TODO: summary comment
+        /// <summary>
+        /// Gets a specified cart from the database
+        /// </summary>
+        /// <param name="email">Email of the cart to get</param>
+        /// <returns>Specified cart</returns>
         public async Task<Cart> GetCart(string email)
         {
             var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower()).Include(x => x.CartItem).ThenInclude(x => x.Product).FirstOrDefaultAsync();

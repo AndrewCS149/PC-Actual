@@ -38,6 +38,8 @@ namespace ECommerce.Pages.ShoppingCart
 
         public async Task<IActionResult> OnGet()
         {
+            // TODO: create default email?
+
             //  retrieve user's email
             var email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
 

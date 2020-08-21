@@ -46,6 +46,11 @@ namespace ECommerce.Models.Interfaces
         /// <returns>Successful completion of task</returns>
         Task UpdateCartQty(int count, int cartId, int productId);
 
+        /// <summary>
+        /// Delete a cart item
+        /// </summary>
+        /// <param name="cartItem">cartItem to be deleted</param>
+        /// <returns>Successful completion of method</returns>
         Task Delete(CartItem cartItem);
     }
 }
