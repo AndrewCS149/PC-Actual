@@ -1,4 +1,8 @@
-﻿.row {
+﻿#logo-prefix {
+    color: #C15306;
+}
+
+.row {
     text-align: center;
 }
 
@@ -14,6 +18,10 @@
 .register > * {
     display: inline-flex;
     margin: 2px;
+}
+
+#bootstrap-override #update-field {
+    width: 50px;
 }
 
 #bootstrap-override form,
