@@ -1,0 +1,65 @@
+﻿@page
+@model ECommerce.Pages.ShoppingCart.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        main {
+            margin-bottom: 150px;
+        }
+    </style>
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <main id="products-main">    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Cart != null)
+                {
+                    @foreach (var item in Model.Cart.CartItem)
+                    {
+                        <tr>
+                            <td>                                
+                                @item.Product.Name
+                                
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            <form method="post">
+                                <input hidden asp-for="CartId" value="@item.CartId" />
+                                <input hidden asp-for="ProductId" value="@item.ProductId" />
+                                <input asp-for="Count" value="@item.Quantity" />
+                                <button asp-page="/ShoppingCart/Update" type="submit">Update Quantity</button>
+                                <input hidden value="@item" name="item" />
+                                <button asp-page="/ShoppingCart/Delete" type="submit">Delete Product</button>
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

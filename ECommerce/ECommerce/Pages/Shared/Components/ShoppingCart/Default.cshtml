@@ -1,0 +1,33 @@
+﻿@model ECommerce.Models.Cart
+<h3>Shopping cart</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartItem)
+        {
+            <tr>
+                <td>
+                    @if (@item.Product.Name != null)
+                    {
+                        @item.Product.Name
+                    }
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

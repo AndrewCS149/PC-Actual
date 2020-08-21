@@ -25,13 +25,15 @@ namespace ECommerce.Pages.Account
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
         private IEmail _email;
+        private ICart _cart;
         public string Term { get; set; }
 
-        public RegisterModel(IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+        public RegisterModel(ICart cart, IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _email = email;
+            _cart = cart;
         }
 
         [BindProperty]
@@ -61,7 +63,9 @@ namespace ECommerce.Pages.Account
                 {
                     await _email.Email(input);
                     Claim claim = new Claim("Fullname", $"{Input.FirstName} {Input.LastName}");
+                    Claim claim2 = new Claim("Email", Input.Email);
                     await _userManager.AddClaimAsync(user, claim);
+                    await _userManager.AddClaimAsync(user, claim2);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
