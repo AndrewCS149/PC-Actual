@@ -17,7 +17,7 @@
     <title>Shopping Cart</title>
 </head>
 <body>
-    <main id="products-main">    
+    <main id="products-main">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -33,29 +33,28 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.Cart != null)
+                @if (Model.Cart.CartItem != null)
                 {
                     @foreach (var item in Model.Cart.CartItem)
                     {
                         <tr>
-                            <td>                                
+                            <td>
                                 @item.Product.Name
-                                
-                        </td>
-                        <td>
-                            @item.Quantity
-                        </td>
-                        <td>
-                            <form method="post">
-                                <input hidden asp-for="CartId" value="@item.CartId" />
-                                <input hidden asp-for="ProductId" value="@item.ProductId" />
-                                <input asp-for="Count" value="@item.Quantity" />
-                                <button asp-page="/ShoppingCart/Update" type="submit">Update Quantity</button>
-                                <input hidden value="@item" name="item" />
-                                <button asp-page="/ShoppingCart/Delete" type="submit">Delete Product</button>
-                            </form>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                @item.Quantity
+                            </td>
+                            <td>
+                                <form method="post">
+                                    <input hidden asp-for="CartId" value="@item.CartId" />
+                                    <input hidden asp-for="ProductId" value="@item.ProductId" />
+                                    <input asp-for="Count" value="@item.Quantity" />
+                                    <button asp-page="/ShoppingCart/Update" type="submit">Update Quantity</button>
+                                    <input hidden value="@item" name="item" />
+                                    <button asp-page="/ShoppingCart/Delete" type="submit">Delete Product</button>
+                                </form>
+                            </td>
+                        </tr>
                     }
                 }
             </tbody>

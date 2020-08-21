@@ -7,6 +7,9 @@ namespace ECommerce.Models.Interfaces
 {
     public interface ISearchTerm
     {
+        /// <summary>
+        /// The term that is inputted into the search bar
+        /// </summary>
         public string Term { get; set; }
     }
 }

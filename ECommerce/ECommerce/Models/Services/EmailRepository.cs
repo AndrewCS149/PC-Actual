@@ -19,6 +19,11 @@ namespace ECommerce.Models.Services
             _config = config;
         }
 
+        /// <summary>
+        /// Emails a welcome message to a newly registered user
+        /// </summary>
+        /// <param name="input">Users information</param>
+        /// <returns>Successful completion of task</returns>
         public async Task Email(RegisterModel.RegisterViewModel input)
         {
             var apiKey = _config.GetSection("SENDGRID_APIKEY").Value;
