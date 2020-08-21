@@ -25,3 +25,11 @@
     border: none;
     background-color: inherit;
 }
+
+#bootstrap-override #search {
+    opacity: .5;
+}
+
+    #bootstrap-override #search:hover {
+        opacity: 1;
+    }
