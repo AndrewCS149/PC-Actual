@@ -1,32 +1,24 @@
 ﻿@model ECommerce.Models.Cart
-<h3>Shopping cart</h3>
+<h3>Cart</h3>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Quantity
-            </th>
-            <th>
-                Total
-            </th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
         </tr>
     </thead>
     <tbody>
+        @{ decimal total = 0.0M; }
         @foreach (var item in Model.CartItem)
         {
+            total += item.Product.Price * item.Quantity;
             <tr>
-                <td>
-                    @if (@item.Product.Name != null)
-                    {
-                        @item.Product.Name
-                    }
-                </td>
-                <td>
-                    @item.Quantity
-                </td>
+                <td>@item.Product.Name</td>
+                <td>@string.Format("{0:C}", item.Product.Price)</td>
+                <td>@item.Quantity</td>
+                <td>@string.Format("{0:C}", total)</td>
             </tr>
         }
     </tbody>
