@@ -57,6 +57,19 @@ namespace ECommerce.Models.Services
         }
 
         /// <summary>
+        /// Updates the quantity of specified item in the current cart
+        /// </summary>
+        /// <param name="cartId">Id of cart</param>
+        /// <param name="productId">Id of product</param>
+        /// <returns>Successful completion of task</returns>
+        public async Task UpdateCartQty(int count, int cartId, int productId)
+        {
+            var cartItem = await GetCartItem(cartId, productId);
+            cartItem.Quantity = count;
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Adds a specified item to a specified cart
         /// </summary>
         /// <param name="cartId">Id of cart</param>
@@ -80,6 +93,19 @@ namespace ECommerce.Models.Services
             await _context.SaveChangesAsync();
         }
 
-        // TODO: add delete method
+        /// <summary>
+        /// Delete a cart item
+        /// </summary>
+        /// <param name="id">the item to be deleted</param>
+        /// <returns>Successful completion of method</returns>
+        public async Task Delete(CartItem cartItem)
+        {
+            //CartItem cartItem = await _context.CartItem.FindAsync(id);
+            if (cartItem != null)
+            {
+                _context.Entry(cartItem).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

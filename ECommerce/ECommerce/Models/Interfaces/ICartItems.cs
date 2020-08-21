@@ -37,5 +37,15 @@ namespace ECommerce.Models.Interfaces
         /// <param name="productId">Id of product</param>
         /// <returns>Successful completion of task</returns>
         Task UpdateQty(int cartId, int productId);
+
+        /// <summary>
+        /// Adds a specified item to a populated cart
+        /// </summary>
+        /// <param name="cartId">Id of cart</param>
+        /// <param name="productId">Id of product</param>
+        /// <returns>Successful completion of task</returns>
+        Task UpdateCartQty(int count, int cartId, int productId);
+
+        Task Delete(CartItem cartItem);
     }
 }

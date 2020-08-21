@@ -14,46 +14,50 @@
             margin-bottom: 150px;
         }
     </style>
-    <title>ProductDetails</title>
+    <title>Shopping Cart</title>
 </head>
 <body>
-    <main id="products-main">
-
+    <main id="products-main">    
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col"></th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Number in Stock</th>
-                    <th scope="col">Recommendation</th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    @*<td>
-                            @Model.
+                @if (Model.Cart != null)
+                {
+                    @foreach (var item in Model.Cart.CartItem)
+                    {
+                        <tr>
+                            <td>                                
+                                @item.Product.Name
+                                
                         </td>
                         <td>
-                            @string.Format("{0:C}", Model.Product.Price)
+                            @item.Quantity
                         </td>
                         <td>
-                            <img width="200" height="150" src=@Model.Product.Image />
+                            <form method="post">
+                                <input hidden asp-for="CartId" value="@item.CartId" />
+                                <input hidden asp-for="ProductId" value="@item.ProductId" />
+                                <input asp-for="Count" value="@item.Quantity" />
+                                <button asp-page="/ShoppingCart/Update" type="submit">Update Quantity</button>
+                                <input hidden value="@item" name="item" />
+                                <button asp-page="/ShoppingCart/Delete" type="submit">Delete Product</button>
+                            </form>
                         </td>
-                        <td>
-                            @Model.Product.Description
-                        </td>
-                        <td>
-                            @Model.Product.Stock
-                        </td>
-                        <td>
-                            @Model.Product.Recommendation
-                        </td>
-                        <td>
-                            <a asp-page="AddToCart" asp-route-id="@Model.Product.Id">Add to Cart</a>
-                        </td>*@
-                </tr>
+                    </tr>
+                    }
+                }
             </tbody>
         </table>
     </main>
