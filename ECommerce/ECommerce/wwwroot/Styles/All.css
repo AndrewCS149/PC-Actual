@@ -16,20 +16,18 @@
     margin: 2px;
 }
 
-#bootstrap-override button {
+#bootstrap-override form,
+#bootstrap-override #logout-button,
+#bootstrap-override #search-button {
     border: none;
     background-color: inherit;
 }
 
-#bootstrap-override form {
-    border: none;
-    background-color: inherit;
-}
-
-#bootstrap-override #search {
+#bootstrap-override #search-button {
     opacity: .5;
+    border: none;
 }
 
-    #bootstrap-override #search:hover {
+    #bootstrap-override #search-button:hover {
         opacity: 1;
     }

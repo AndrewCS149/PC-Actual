@@ -45,9 +45,9 @@
                                     <input hidden asp-for="CartId" value="@item.CartId" />
                                     <input hidden asp-for="ProductId" value="@item.ProductId" />
                                     <input asp-for="Count" value="@item.Quantity" />
-                                    <button asp-page="/ShoppingCart/Update" type="submit">Update Quantity</button>
+                                    <button class="btn btn-primary" asp-page="/ShoppingCart/Update" type="submit">Update</button>
                                     <input hidden value="@item" name="item" />
-                                    <button asp-page="/ShoppingCart/Delete" type="submit">Delete Product</button>
+                                    <button class="btn btn-danger" asp-page="/ShoppingCart/Delete" type="submit">Delete</button>
                                 </form>
                             </td>
                         </tr>
