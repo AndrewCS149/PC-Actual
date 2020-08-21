@@ -15,3 +15,13 @@
     display: inline-flex;
     margin: 2px;
 }
+
+#bootstrap-override button {
+    border: none;
+    background-color: inherit;
+}
+
+#bootstrap-override form {
+    border: none;
+    background-color: inherit;
+}

@@ -10,16 +10,18 @@
 <html>
 <head>
     <style>
-        .featureProducts{
+        .featureProducts {
             margin: 20% auto;
             text-align: center;
         }
-        .img-thumbnail{
+
+        .img-thumbnail {
             margin: 0px 15px;
         }
     </style>
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="~/Styles/Home.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/All.css" />
 </head>
 <body>
     <main>
@@ -30,7 +32,7 @@
                     <img width="200" height="100" src=@Model.Products[i].Image>
                     <p>@Model.Products[i].Name</p>
                 </div>
-            }   
+            }
         </div>
     </main>
 </body>

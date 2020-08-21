@@ -38,10 +38,16 @@ namespace ECommerce.Pages.ShoppingCart
 
         public async Task<IActionResult> OnGet()
         {
-            // TODO: create default email?
-
-            //  retrieve user's email
-            var email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+            // get users email
+            string email;
+            if (User.Identity.IsAuthenticated)
+            {
+                email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+            }
+            else
+            {
+                email = "Default@gmail.com";
+            }
 
             // if user does not have a cart, create one
             Cart = await _cart.GetCart(email);
@@ -57,9 +63,16 @@ namespace ECommerce.Pages.ShoppingCart
         {
             if (ModelState.IsValid)
             {
-                //  retrieve user's email
-                var email = User.Claims.FirstOrDefault(x => x.Type == "Email").ToString();
-                email = email.Substring(7);
+                // get users email
+                string email;
+                if (User.Identity.IsAuthenticated)
+                {
+                    email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+                }
+                else
+                {
+                    email = "Default@gmail.com";
+                }
 
                 // if user does not have a cart, create one
                 var cart = await _cart.GetCart(email);
