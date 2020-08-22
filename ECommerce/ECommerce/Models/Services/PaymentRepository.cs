@@ -20,7 +20,10 @@ namespace ECommerce.Models.Services
             _config = config;
         }
 
-        // TODO: summary comment
+        /// <summary>
+        /// Runs the credit card transaction request
+        /// </summary>
+        /// <returns>Empty string</returns>
         public string Run()
         {
             // type of environment
@@ -65,7 +68,11 @@ namespace ECommerce.Models.Services
             return "";
         }
 
-        // TODO: summary comment
+        /// <summary>
+        /// Gets the billing address of the user
+        /// </summary>
+        /// <param name="orderId">The id of the current order</param>
+        /// <returns>Billing address</returns>
         private customerAddressType GetBillingAddress(int orderId)
         {
             customerAddressType address = new customerAddressType

@@ -7,7 +7,10 @@ namespace ECommerce.Models.Interfaces
 {
     public interface IPayment
     {
-        // TODO: summary comment
+        /// <summary>
+        /// Runs the credit card transaction request
+        /// </summary>
+        /// <returns>Empty string</returns>
         string Run();
     }
 }
