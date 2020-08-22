@@ -26,49 +26,52 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-page="/Products/Index">Products</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/ShoppingCart/Index">My Cart</a>
-                    </li>
                 </ul>
-                <div id="search-box">
-                    <form method="post">
-                        <input type="text" asp-for="@Model.Term" />
-                        <button id="search-button" asp-page="/Products/Index" type="submit">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="register bg-light">
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    if (User.Claims.FirstOrDefault(x => x.Type == "Fullname") != null)
-                    {
-                        <span id="welcome-user">Welcome @User.Claims.First(x => x.Type == "Fullname").Value </span>
-                    }
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <form asp-page="/Account/Logout" method="post">
-                                <button id="logout-button" class="nav-link" type="submit">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                }
-                else
-                {
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-page="/Account/Login">Login</a>
-                        </li>
-                        <li class="nav-item">
+                <form method="post">
+                    <input type="text" asp-for="@Model.Term" />
+                    <button id="search-button" asp-page="/Products/Index" type="submit">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                        </svg>
+                    </button>
+                </form>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 
-                            <a class="nav-link" asp-page="/Account/Register">Sign Up</a>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/ShoppingCart/Index">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                </svg>
+                            </a>
                         </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            if (User.Claims.FirstOrDefault(x => x.Type == "Fullname") != null)
+                            {
+                                <li class="nav-item" id="welcome-user">
+                                    <a class="nav-link disabled">Welcome @User.Claims.First(x => x.Type == "Fullname").Value </a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <form asp-page="/Account/Logout" method="post">
+                                    <button id="logout-button" class="nav-link" type="submit">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Account/Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" asp-page="/Account/Register">Sign Up</a>
+                            </li>
+                        }
                     </ul>
-                }
+                </div>
             </div>
         </nav>
     </header>
