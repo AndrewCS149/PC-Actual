@@ -22,6 +22,9 @@ namespace ECommerce.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel, ISearchTerm
     {
+        [BindProperty]
+        public RegisterViewModel Input { get; set; }
+
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
         private IEmail _email;
@@ -35,9 +38,6 @@ namespace ECommerce.Pages.Account
             _email = email;
             _cart = cart;
         }
-
-        [BindProperty]
-        public RegisterViewModel Input { get; set; }
 
         // reserved method name for the loading of this page
         public void OnGet()

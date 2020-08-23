@@ -30,7 +30,7 @@ namespace ECommerce.Models.Services
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
 
             // setup merchant account credentials
-            ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new AuthorizeNet.Api.Contracts.V1.merchantAuthenticationType()
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
             {
                 name = _config["AuthorizeLoginId"],
                 ItemElementName = ItemChoiceType.transactionKey,
