@@ -28,15 +28,13 @@ namespace ECommerce.Pages.Account
         private SignInManager<AppUsers> _signInManager;
         private UserManager<AppUsers> _userManager;
         private IEmail _email;
-        private ICart _cart;
         public string Term { get; set; }
 
-        public RegisterModel(ICart cart, IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+        public RegisterModel(IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _email = email;
-            _cart = cart;
         }
 
         // reserved method name for the loading of this page

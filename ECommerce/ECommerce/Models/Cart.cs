@@ -11,5 +11,6 @@ namespace ECommerce.Models
         public int Id { get; set; }
         public string UserEmail { get; set; }
         public List<CartItem> CartItem { get; set; }
+        public List<Order> Order { get; set; }
     }
 }
