@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,37 +10,46 @@ namespace ECommerce.Models
 {
     public class Order
     {
+        [BindProperty]
         public int Id { get; set; }
 
-        public int CartId { get; set; }
+        //public int CartId { get; set; }
 
         [Required]
+        [BindProperty]
         public string FirstName { get; set; }
 
         [Required]
+        [BindProperty]
         public string LastName { get; set; }
 
         [Required]
+        [BindProperty]
         public string Address { get; set; }
 
         [Required]
+        [BindProperty]
         public string City { get; set; }
 
         [Required]
+        [BindProperty]
         public string Zip { get; set; }
 
         [Required]
-        public Enum State { get; set; }
+        [BindProperty]
+        public string State { get; set; }
 
         [Required]
-        [EmailAddress]
+        [BindProperty]
         public string Email { get; set; }
 
         [Required]
-        [Phone]
-        public PhoneAttribute PhoneNumber { get; set; }
+        [BindProperty]
+        public string PhoneNumber { get; set; }
 
         public DateTime OrderDate { get; set; }
+
+        [BindProperty]
         public Cart Cart { get; set; }
     }
 }

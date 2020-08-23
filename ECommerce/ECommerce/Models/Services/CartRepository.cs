@@ -1,5 +1,4 @@
-﻿using AspNetCore;
-using ECommerce.Data;
+﻿using ECommerce.Data;
 using ECommerce.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -44,10 +43,18 @@ namespace ECommerce.Models.Services
             return result;
         }
 
+        /// <summary>
+        /// Updates a specified cart in the database
+        /// </summary>
+        /// <param name="cart">Specified cart</param>
+        /// <returns>The updated cart</returns>
         public async Task<Cart> Update(Cart cart)
         {
-            _context.Entry(cart).State = EntityState.Modified;
+            var result = _context.Cart.FindAsync(cart);
+            _context.Entry(result).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            return await _context.Cart.FindAsync(cart);
         }
     }
 }

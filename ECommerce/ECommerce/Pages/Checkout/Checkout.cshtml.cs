@@ -20,9 +20,11 @@ namespace ECommerce.Pages
 
         public IPayment _payment;
         public IOrder _order;
+        public ICart _cart;
 
-        public CheckoutModel(IOrder order, IPayment payment)
+        public CheckoutModel(ICart cart, IOrder order, IPayment payment)
         {
+            _cart = cart;
             _order = order;
             _payment = payment;
         }
@@ -34,8 +36,24 @@ namespace ECommerce.Pages
 
         public async Task<IActionResult> OnPost(Order input)
         {
-            await _order.Create(input);
-            input.Cart.IsActive = false;
+            Order order = new Order()
+            {
+                LastName = input.LastName,
+                FirstName = input.FirstName,
+                Address = input.Address,
+                City = input.City,
+                Zip = input.Zip,
+                State = input.State,
+                Email = input.Email,
+                PhoneNumber = input.PhoneNumber,
+                OrderDate = DateTime.Now,
+                Cart = input.Cart
+            };
+
+            await _order.Create(order);
+            order.Cart.IsActive = false;
+            await _cart.Update(order.Cart);
+
             _payment.Run();
 
             return Page();
