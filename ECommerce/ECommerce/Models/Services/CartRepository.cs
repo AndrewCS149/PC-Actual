@@ -1,4 +1,5 @@
-﻿using ECommerce.Data;
+﻿using AspNetCore;
+using ECommerce.Data;
 using ECommerce.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,6 +27,7 @@ namespace ECommerce.Models.Services
         {
             Cart cart = new Cart();
             cart.UserEmail = email;
+            cart.IsActive = true;
             _context.Entry(cart).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return cart;
@@ -38,8 +40,14 @@ namespace ECommerce.Models.Services
         /// <returns>Specified cart</returns>
         public async Task<Cart> GetCart(string email)
         {
-            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower()).Include(x => x.CartItem).ThenInclude(x => x.Product).FirstOrDefaultAsync();
+            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower() && x.IsActive == true).Include(x => x.CartItem).ThenInclude(x => x.Product).FirstOrDefaultAsync();
             return result;
+        }
+
+        public async Task<Cart> Update(Cart cart)
+        {
+            _context.Entry(cart).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }

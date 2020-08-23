@@ -35,7 +35,7 @@ namespace ECommerce.Pages
         public async Task<IActionResult> OnPost(Order input)
         {
             await _order.Create(input);
-
+            input.Cart.IsActive = false;
             _payment.Run();
 
             return Page();
