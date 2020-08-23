@@ -36,6 +36,7 @@ namespace ECommerce.Models
         [Phone]
         public PhoneAttribute PhoneNumber { get; set; }
 
+        public DateTime OrderDate { get; set; }
         public Cart Cart { get; set; }
     }
 }

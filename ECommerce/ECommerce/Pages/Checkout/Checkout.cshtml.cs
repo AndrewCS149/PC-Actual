@@ -19,10 +19,11 @@ namespace ECommerce.Pages
         public string Term { get; set; }
 
         public IPayment _payment;
+        public IOrder _order;
 
-        public CheckoutModel(IPayment payment)
-
+        public CheckoutModel(IOrder order, IPayment payment)
         {
+            _order = order;
             _payment = payment;
         }
 
@@ -31,8 +32,10 @@ namespace ECommerce.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(Order input)
         {
+            await _order.Create(input);
+
             _payment.Run();
 
             return Page();
