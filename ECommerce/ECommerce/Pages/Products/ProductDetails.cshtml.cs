@@ -14,6 +14,7 @@ namespace ECommerce.Pages
         public Products Product { get; set; }
         public string Term { get; set; }
         public IProducts _products { get; set; }
+
         public ProductDetailsModel(IProducts products)
         {
             _products = products;
@@ -27,7 +28,6 @@ namespace ECommerce.Pages
 
         public void OnPost()
         {
-            
         }
     }
 }

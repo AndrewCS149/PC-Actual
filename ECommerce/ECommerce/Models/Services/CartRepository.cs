@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace ECommerce.Models.Services
@@ -26,6 +27,7 @@ namespace ECommerce.Models.Services
         {
             Cart cart = new Cart();
             cart.UserEmail = email;
+            cart.IsActive = true;
             _context.Entry(cart).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return cart;
@@ -38,8 +40,23 @@ namespace ECommerce.Models.Services
         /// <returns>Specified cart</returns>
         public async Task<Cart> GetCart(string email)
         {
-            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower()).Include(x => x.CartItem).ThenInclude(x => x.Product).FirstOrDefaultAsync();
+            var result = await _context.Cart.Where(x => x.UserEmail.ToLower() == email.ToLower() && x.IsActive == true).Include(x => x.CartItem).ThenInclude(x => x.Product).FirstOrDefaultAsync();
             return result;
+        }
+
+        /// <summary>
+        /// Updates a specified cart in the database
+        /// </summary>
+        /// <param name="cart">Specified cart</param>
+        /// <returns>The updated cart</returns>
+        public async Task<Cart> Update(Cart cart)
+        {
+            var result = await _context.Cart.Where(x => x.UserEmail == cart.UserEmail).FirstOrDefaultAsync();
+            result = cart;
+            _context.Entry(result).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return await _context.Cart.FindAsync(cart.Id);
         }
     }
 }

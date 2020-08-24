@@ -78,7 +78,7 @@ namespace ECommerce.Pages.ShoppingCart
                 var cart = await _cart.GetCart(email);
                 if (cart == null)
                 {
-                    await _cart.Create(email);
+                    cart = await _cart.Create(email);
                 }
 
                 // if the cartItem already exists in the user's cart

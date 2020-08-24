@@ -1,10 +1,9 @@
-﻿.row {
-    text-align: center;
+﻿#logo-prefix {
+    color: #C15306;
 }
 
-#search-box {
-    text-align: right;
-    margin-left: 1vw;
+.row {
+    text-align: center;
 }
 
 .error-message {
@@ -16,12 +15,22 @@
     margin: 2px;
 }
 
-#bootstrap-override button {
+#bootstrap-override #update-field {
+    width: 50px;
+}
+
+#bootstrap-override form,
+#bootstrap-override #logout-button,
+#bootstrap-override #search-button {
     border: none;
     background-color: inherit;
 }
 
-#bootstrap-override form {
+#bootstrap-override #search-button {
+    opacity: .5;
     border: none;
-    background-color: inherit;
 }
+
+    #bootstrap-override #search-button:hover {
+        opacity: 1;
+    }
