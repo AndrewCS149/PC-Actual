@@ -30,7 +30,7 @@ namespace ECommerce.ViewComponents
             }
             else
             {
-                email = "Default@gmail.com";
+                email = Request.Cookies["AnonymousUser"];
             }
 
             var cart = await _cart.GetCart(email);

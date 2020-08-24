@@ -6,6 +6,7 @@ using ECommerce.Data;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using ECommerce.Models.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +32,13 @@ namespace ECommerce
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddRazorPages();
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options =>
+            //    {
+            //        options.LoginPath = "/Pages/Index";
+            //        options.Cookie.Name = "AnonymousUser";
+            //    });
 
             // register dbcontext
             services.AddDbContext<StoreDbContext>(options =>
@@ -71,6 +79,9 @@ namespace ECommerce
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseCookiePolicy();
+            // TODO: make authorized users only be able to access the admin page
+            //app.UseAuthorization();
             app.UseStaticFiles();
 
             var userManager = serviceProvider.GetRequiredService<UserManager<AppUsers>>();
@@ -79,6 +90,7 @@ namespace ECommerce
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

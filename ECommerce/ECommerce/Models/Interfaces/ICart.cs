@@ -27,5 +27,12 @@ namespace ECommerce.Models.Interfaces
         /// <param name="cart">Specified cart</param>
         /// <returns>The updated cart</returns>
         Task<Cart> Update(Cart cart);
+
+        /// <summary>
+        /// Checks to see if a cart exists in the database
+        /// </summary>
+        /// <param name="email">The email of the cart to check for</param>
+        /// <returns>A boolean determining if the cart exists or not</returns>
+        Task<bool> Exists(string email);
     }
 }

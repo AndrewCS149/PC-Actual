@@ -46,7 +46,7 @@ namespace ECommerce.Pages.ShoppingCart
             }
             else
             {
-                email = "Default@gmail.com";
+                email = Request.Cookies["AnonymousUser"];
             }
 
             // if user does not have a cart, create one
@@ -71,7 +71,7 @@ namespace ECommerce.Pages.ShoppingCart
                 }
                 else
                 {
-                    email = "Default@gmail.com";
+                    email = Request.Cookies["AnonymousUser"];
                 }
 
                 // if user does not have a cart, create one
