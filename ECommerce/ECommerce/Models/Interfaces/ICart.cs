@@ -20,5 +20,12 @@ namespace ECommerce.Models.Interfaces
         /// <param name="email">The email to attach the cart to</param>
         /// <returns>Newly created cart</returns>
         Task<Cart> Create(string email);
+
+        /// <summary>
+        /// Updates a specified cart in the database
+        /// </summary>
+        /// <param name="cart">Specified cart</param>
+        /// <returns>The updated cart</returns>
+        Task<Cart> Update(Cart cart);
     }
 }

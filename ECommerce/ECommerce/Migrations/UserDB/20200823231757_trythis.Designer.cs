@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Migrations.UserDB
 {
     [DbContext(typeof(UserDBContext))]
-    [Migration("20200813000353_trythis")]
+    [Migration("20200823231757_trythis")]
     partial class trythis
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

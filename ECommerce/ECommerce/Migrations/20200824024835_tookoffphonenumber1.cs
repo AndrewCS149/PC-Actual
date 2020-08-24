@@ -2,7 +2,7 @@
 
 namespace ECommerce.Migrations
 {
-    public partial class addCartDbSet : Migration
+    public partial class tookoffphonenumber1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

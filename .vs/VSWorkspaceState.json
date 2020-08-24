@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ECommerce"
+    "\\ECommerce",
+    "\\ECommerce\\ECommerce",
+    "\\ECommerce\\ECommerce\\Models",
+    "\\ECommerce\\ECommerce\\Models\\Interfaces",
+    "\\ECommerce\\ECommerce\\Properties"
   ],
-  "SelectedNode": "\\ECommerce\\README.md",
+  "SelectedNode": "\\ECommerce\\ECommerce\\Models\\Interfaces\\ICart.cs",
   "PreviewInSolutionExplorer": false
 }
