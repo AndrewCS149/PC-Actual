@@ -10,16 +10,19 @@
         </tr>
     </thead>
     <tbody>
-        @{ decimal total = 0.0M; }
-        @foreach (var item in Model.CartItem)
+        @if (Model != null)
         {
-            total += item.Product.Price * item.Quantity;
-            <tr>
-                <td>@item.Product.Name</td>
-                <td>@string.Format("{0:C}", item.Product.Price)</td>
-                <td>@item.Quantity</td>
-                <td>@string.Format("{0:C}", total)</td>
-            </tr>
+            decimal total = 0.0M;
+            @foreach (var item in Model.CartItem)
+            {
+                total += item.Product.Price * item.Quantity;
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@string.Format("{0:C}", item.Product.Price)</td>
+                    <td>@item.Quantity</td>
+                    <td>@string.Format("{0:C}", total)</td>
+                </tr>
+            }
         }
     </tbody>
 </table>

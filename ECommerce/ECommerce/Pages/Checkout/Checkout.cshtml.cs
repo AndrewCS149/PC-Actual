@@ -14,7 +14,7 @@ namespace ECommerce.Pages
     public class CheckoutModel : PageModel, ISearchTerm
     {
         [BindProperty]
-        public Order Input { get; set; }
+        public Order Order { get; set; }
 
         public string Term { get; set; }
 
@@ -34,25 +34,13 @@ namespace ECommerce.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(Order input)
+        public async Task<IActionResult> OnPost()
         {
-            Order order = new Order()
-            {
-                LastName = input.LastName,
-                FirstName = input.FirstName,
-                Address = input.Address,
-                City = input.City,
-                Zip = input.Zip,
-                State = input.State,
-                Email = input.Email,
-                PhoneNumber = input.PhoneNumber,
-                OrderDate = DateTime.Now,
-                Cart = input.Cart
-            };
+            await _order.Create(Order);
 
-            await _order.Create(order);
-            order.Cart.IsActive = false;
-            await _cart.Update(order.Cart);
+            Order.Cart.IsActive = false;
+
+            await _cart.Update(Order.Cart);
 
             _payment.Run();
 

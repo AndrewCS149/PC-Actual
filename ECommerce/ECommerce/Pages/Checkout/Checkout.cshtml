@@ -33,8 +33,8 @@
 
                                 <!--firstName-->
                                 <div class="md-form ">
-                                    <input type="text" id="firstName" class="form-control">
-                                    <label asp-for="@Model.Input.FirstName" class="">First name</label>
+                                    <input asp-for="@Model.Order.FirstName" type="text" id="firstName" class="form-control">
+                                    <label asp-for="@Model.Order.FirstName" class="">First name</label>
                                 </div>
                             </div>
                             <!--Grid column-->
@@ -43,8 +43,8 @@
 
                                 <!--lastName-->
                                 <div class="md-form">
-                                    <input type="text" id="lastName" class="form-control">
-                                    <label asp-for="@Model.Input.LastName" class="">Last name</label>
+                                    <input asp-for="@Model.Order.LastName" type="text" id="lastName" class="form-control">
+                                    <label asp-for="@Model.Order.LastName" class="">Last name</label>
                                 </div>
                             </div>
                             <!--Grid column-->
@@ -52,36 +52,47 @@
                         <!--Grid row-->
                         <!--email-->
                         <div class="md-form mb-5">
-                            <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
-                            <label asp-for="@Model.Input.Email" class="">Email</label>
+                            <input asp-for="@Model.Order.Email" type="text" id="email" class="form-control" placeholder="youremail@example.com">
+                            <label asp-for="@Model.Order.Email" class="">Email</label>
                         </div>
 
                         <!--address-->
                         <div class="md-form mb-5">
-                            <input type="text" id="address" class="form-control" placeholder="1234 Main St">
-                            <label asp-for="@Model.Input.Address" class="">Address</label>
+                            <input asp-for="@Model.Order.Address" type="text" id="address" class="form-control" placeholder="1234 Main St">
+                            <label asp-for="@Model.Order.Address" class="">Address</label>
                         </div>
+
+                        @*<div class="md-form mb-5">
+                                <input asp-for="@Model.Order.City" type="text" id="address" class="form-control" placeholder="1234 Main St">
+                                <label asp-for="@Model.Order.City" class="">City</label>
+                            </div>*@
 
                         <!--Grid row-->
                         <div class="row">
                             <!--Grid column-->
                             <div class="col-lg-4 col-md-6 mb-4">
-
-                                <label asp-for="@Model.Input.State">State</label>
-                                <select class="custom-select d-block w-100" id="state" required>
-                                    <option value="">Choose...</option>
-                                    <option>California</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please provide a valid state.
-                                </div>
+                                <input asp-for="@Model.Order.State" type="text" id="address" class="form-control" placeholder="1234 Main St">
+                                <label asp-for="@Model.Order.State" class="">State</label>
+                                @*<input hidden asp-for="@Model.Order.State" type="text" />
+                                    <label asp-for="@Model.Order.State">State</label>
+                                    <select asp-for="@Model.Order.State" class="custom-select d-block w-100" id="state" required>
+                                        <option value="">Choose...</option>
+                                        <option>California</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid state.
+                                    </div>*@
                             </div>
                             <!--Grid column-->
                             <!--Grid column-->
                             <div class="col-lg-4 col-md-6 mb-4">
+                                <input asp-for="@Model.Order.City" type="text" id="address" class="form-control" placeholder="1234 Main St">
+                                <label asp-for="@Model.Order.City" class="">City</label>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
 
-                                <label asp-for="@Model.Input.Zip">Zip</label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required>
+                                <input asp-for="@Model.Order.Zip" type="text" class="form-control" id="zip" placeholder="" required>
+                                <label asp-for="@Model.Order.Zip">Zip</label>
                                 <div class="invalid-feedback">
                                     Zip code required.
                                 </div>
@@ -89,17 +100,6 @@
                             <!--Grid column-->
                         </div>
                         <!--Grid row-->
-
-                        <hr>
-
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="same-address">
-                            <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="save-info">
-                            <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                        </div>
 
                         <hr>
                         <div class="row">

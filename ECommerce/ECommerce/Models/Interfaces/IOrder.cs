@@ -7,7 +7,11 @@ namespace ECommerce.Models.Interfaces
 {
     public interface IOrder
     {
-        // TODO: summary comment
-        Task<Order> Create(Order order);
+        /// <summary>
+        /// Adds a new order to the database
+        /// </summary>
+        /// <param name="input">The information for the new order</param>
+        /// <returns>The new order</returns>
+        Task<Order> Create(Order input);
     }
 }
