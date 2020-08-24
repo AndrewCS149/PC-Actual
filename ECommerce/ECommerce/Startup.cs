@@ -6,6 +6,7 @@ using ECommerce.Data;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using ECommerce.Models.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +32,13 @@ namespace ECommerce
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Pages/Index";
+                    options.Cookie.Name = "AnonymousUser";
+                });
 
             // register dbcontext
             services.AddDbContext<StoreDbContext>(options =>
