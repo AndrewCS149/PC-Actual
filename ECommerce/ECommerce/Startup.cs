@@ -32,13 +32,13 @@ namespace ECommerce
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = "/Pages/Index";
-                    options.Cookie.Name = "AnonymousUser";
-                });
+            services.AddRazorPages();
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options =>
+            //    {
+            //        options.LoginPath = "/Pages/Index";
+            //        options.Cookie.Name = "AnonymousUser";
+            //    });
 
             // register dbcontext
             services.AddDbContext<StoreDbContext>(options =>
@@ -90,6 +90,7 @@ namespace ECommerce
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AuthorizeNet.Api.Contracts.V1;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -37,15 +38,24 @@ namespace ECommerce.Pages
 
         public async Task<IActionResult> OnGet()
         {
-            if (User.Identity.IsAuthenticated)
+            if (await _cart.Exists(User.Identity.Name))
             {
                 Cart = await _cart.GetCart(User.Identity.Name);
             }
-            else
+            else if (await _cart.Exists(Request.Cookies["AnonymousUser"]))
             {
-                Cart = await _cart.GetCart("Default@gmail.com");
+                Cart = await _cart.GetCart(Request.Cookies["AnonymousUser"]);
             }
-            var cookie = Request.Cookies["AnonymousUser"];
+
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    Cart = await _cart.GetCart(User.Identity.Name);
+            //}
+            //else if (Request.Cookies["AnonymousUser"] != null)
+            //{
+            //    var cookie = Request.Cookies["AnonymousUser"];
+            //    Cart = await _cart.Create(cookie);
+            //}
 
             return Page();
         }
