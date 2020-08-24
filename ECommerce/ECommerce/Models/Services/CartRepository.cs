@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,18 @@ namespace ECommerce.Models.Services
             await _context.SaveChangesAsync();
 
             return await _context.Cart.FindAsync(cart.Id);
+        }
+
+        /// <summary>
+        /// Checks to see if a cart exists in the database
+        /// </summary>
+        /// <param name="email">The email of the cart to check for</param>
+        /// <returns>A boolean determining if the cart exists or not</returns>
+        public async Task<bool> Exists(string email)
+        {
+            var result = await _context.Cart.Where(x => x.UserEmail == email).FirstOrDefaultAsync();
+
+            return result != null ? true : false;
         }
     }
 }

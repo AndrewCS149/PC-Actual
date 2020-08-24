@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AuthorizeNet.Api.Contracts.V1;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,8 +16,10 @@ namespace ECommerce.Pages
     {
         [BindProperty]
         public Order Order { get; set; }
+
         [BindProperty]
         public Cart Cart { get; set; }
+
         [BindProperty]
         public CartItem CartItem { get; set; }
 
@@ -35,14 +38,25 @@ namespace ECommerce.Pages
 
         public async Task<IActionResult> OnGet()
         {
-            if(User.Identity.Name != null)
+            if (await _cart.Exists(User.Identity.Name))
             {
                 Cart = await _cart.GetCart(User.Identity.Name);
             }
-            else
+            else if (await _cart.Exists(Request.Cookies["AnonymousUser"]))
             {
-                Cart = await _cart.GetCart("Default@gmail.com");
-            }                
+                Cart = await _cart.GetCart(Request.Cookies["AnonymousUser"]);
+            }
+
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    Cart = await _cart.GetCart(User.Identity.Name);
+            //}
+            //else if (Request.Cookies["AnonymousUser"] != null)
+            //{
+            //    var cookie = Request.Cookies["AnonymousUser"];
+            //    Cart = await _cart.Create(cookie);
+            //}
+
             return Page();
         }
 
@@ -54,7 +68,6 @@ namespace ECommerce.Pages
             cart.IsActive = false;
             await _cart.Update(cart);
             Order.Cart = cart;
-
 
             _payment.Run(Order);
 
