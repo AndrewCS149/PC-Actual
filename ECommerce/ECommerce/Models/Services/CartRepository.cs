@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace ECommerce.Models.Services
@@ -50,11 +51,12 @@ namespace ECommerce.Models.Services
         /// <returns>The updated cart</returns>
         public async Task<Cart> Update(Cart cart)
         {
-            var result = _context.Cart.FindAsync(cart);
+            var result = await _context.Cart.Where(x => x.UserEmail == cart.UserEmail).FirstOrDefaultAsync();
+            result = cart;
             _context.Entry(result).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return await _context.Cart.FindAsync(cart);
+            return await _context.Cart.FindAsync(cart.Id);
         }
     }
 }

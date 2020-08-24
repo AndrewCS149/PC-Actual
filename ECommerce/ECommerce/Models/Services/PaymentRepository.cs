@@ -24,7 +24,7 @@ namespace ECommerce.Models.Services
         /// Runs the credit card transaction request
         /// </summary>
         /// <returns>Empty string</returns>
-        public string Run()
+        public string Run(Order input)
         {
             // type of environment
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
@@ -32,7 +32,7 @@ namespace ECommerce.Models.Services
             // setup merchant account credentials
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
             {
-                name = _config["AuthorizeLoginId"],
+                name = _config["ApiLoginId"],
                 ItemElementName = ItemChoiceType.transactionKey,
                 Item = _config["AuthorizeTransactionKey"]
             };
@@ -41,12 +41,12 @@ namespace ECommerce.Models.Services
             // create card we want on file
             var creditCard = new creditCardType
             {
-                cardNumber = "8675309867530900",
-                expirationDate = "0722",
+                cardNumber = "4007000000027",
+                expirationDate = "1222",
                 cardCode = "123"
             };
 
-            customerAddressType billingAddress = GetBillingAddress(3);
+            customerAddressType billingAddress = GetBillingAddress(input);
 
             var paymentType = new paymentType { Item = creditCard };
 
@@ -65,7 +65,7 @@ namespace ECommerce.Models.Services
 
             var response = controller.GetApiResponse();
 
-            return "";
+            return response.messages.message[0].text;
         }
 
         /// <summary>
@@ -73,15 +73,16 @@ namespace ECommerce.Models.Services
         /// </summary>
         /// <param name="orderId">The id of the current order</param>
         /// <returns>Billing address</returns>
-        private customerAddressType GetBillingAddress(int orderId)
+        private customerAddressType GetBillingAddress(Order input)
         {
             customerAddressType address = new customerAddressType
             {
-                firstName = "Mr",
-                lastName = "test",
-                address = "123 test street",
-                city = "Testville",
-                zip = "00000"
+                firstName = input.FirstName,
+                lastName = input.LastName,
+                address = input.Address,
+                city = input.City,
+                state = input.State,
+                zip = input.Zip
             };
 
             return address;

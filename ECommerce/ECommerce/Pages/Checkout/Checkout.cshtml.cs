@@ -15,6 +15,10 @@ namespace ECommerce.Pages
     {
         [BindProperty]
         public Order Order { get; set; }
+        [BindProperty]
+        public Cart Cart { get; set; }
+        [BindProperty]
+        public CartItem CartItem { get; set; }
 
         public string Term { get; set; }
 
@@ -31,18 +35,28 @@ namespace ECommerce.Pages
 
         public async Task<IActionResult> OnGet()
         {
+            if(User.Identity.Name != null)
+            {
+                Cart = await _cart.GetCart(User.Identity.Name);
+            }
+            else
+            {
+                Cart = await _cart.GetCart("Default@gmail.com");
+            }                
             return Page();
         }
 
         public async Task<IActionResult> OnPost()
         {
             await _order.Create(Order);
+            var cart = await _cart.GetCart(Cart.UserEmail);
 
-            Order.Cart.IsActive = false;
+            cart.IsActive = false;
+            await _cart.Update(cart);
+            Order.Cart = cart;
 
-            await _cart.Update(Order.Cart);
 
-            _payment.Run();
+            _payment.Run(Order);
 
             return Page();
         }
