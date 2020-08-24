@@ -79,6 +79,9 @@ namespace ECommerce
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseCookiePolicy();
+            // TODO: make authorized users only be able to access the admin page
+            //app.UseAuthorization();
             app.UseStaticFiles();
 
             var userManager = serviceProvider.GetRequiredService<UserManager<AppUsers>>();

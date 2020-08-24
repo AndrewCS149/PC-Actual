@@ -15,8 +15,10 @@ namespace ECommerce.Pages
     {
         [BindProperty]
         public Order Order { get; set; }
+
         [BindProperty]
         public Cart Cart { get; set; }
+
         [BindProperty]
         public CartItem CartItem { get; set; }
 
@@ -35,14 +37,16 @@ namespace ECommerce.Pages
 
         public async Task<IActionResult> OnGet()
         {
-            if(User.Identity.Name != null)
+            if (User.Identity.IsAuthenticated)
             {
                 Cart = await _cart.GetCart(User.Identity.Name);
             }
             else
             {
                 Cart = await _cart.GetCart("Default@gmail.com");
-            }                
+            }
+            var cookie = Request.Cookies["AnonymousUser"];
+
             return Page();
         }
 
@@ -54,7 +58,6 @@ namespace ECommerce.Pages
             cart.IsActive = false;
             await _cart.Update(cart);
             Order.Cart = cart;
-
 
             _payment.Run(Order);
 
