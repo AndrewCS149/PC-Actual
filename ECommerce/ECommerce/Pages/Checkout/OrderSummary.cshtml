@@ -1,0 +1,25 @@
+﻿@page
+@model ECommerce.Pages.Checkout.OrderSummaryModel
+@{
+    ViewData["Title"] = "OrderSummary";
+    Layout = "_Layout";
+}
+
+<h1>Order Summary</h1>
+<p>@Model.Order.FirstName</p>
+<p>@Model.Order.LastName</p>
+<p>@Model.Order.Address</p>
+<p>@Model.Order.City</p>
+<p>@Model.Order.State</p>
+<p>@Model.Order.Zip</p>
+
+@foreach (var item in Model.Order.Cart.CartItem)
+{
+
+    <p>@item.Product.Name</p>
+    <img height="150" width="150" src=@item.Product.Image />
+    <p>@item.Product.Price</p>
+    <p>@item.Product.Description</p>
+}
+
+<a asp-page="../Index">Return to Home Page</a>
