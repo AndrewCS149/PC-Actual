@@ -99,7 +99,6 @@ namespace ECommerce.Models.Services
         /// <returns>Successful completion of method</returns>
         public async Task Delete(CartItem cartItem)
         {
-            //CartItem cartItem = await _context.CartItem.FindAsync(id);
             if (cartItem != null)
             {
                 _context.Entry(cartItem).State = EntityState.Deleted;

@@ -34,5 +34,23 @@ namespace ECommerce.Models.Interfaces
         /// <param name="email">The email of the cart to check for</param>
         /// <returns>A boolean determining if the cart exists or not</returns>
         Task<bool> Exists(string email);
+
+        /// <summary>
+        /// Update the total price of the current cart
+        /// </summary>
+        /// <param name="productId">Specified Id of the product</param>
+        /// <param name="cart">Specified cart to update</param>
+        /// <param name="newCount">The new count of a cart item</param>
+        /// <param name="oldCount">The old count of a cart item</param>
+        /// <returns>A decimal of the cart total</returns>
+        Task<decimal> UpdateTotal(int productId, Cart cart, int newCount, int oldCount);
+
+        /// <summary>
+        /// Update the total price of the current cart
+        /// </summary>
+        /// <param name="productId">Specified Id of the product</param>
+        /// <param name="cart">Specified cart to update</param>
+        /// <returns>A decimal of the cart total</returns>
+        Task<decimal> UpdateTotal(int productId, Cart cart);
     }
 }

@@ -71,5 +71,37 @@ namespace ECommerce.Models.Services
 
             return result != null ? true : false;
         }
+
+        /// <summary>
+        /// Update the total price of the current cart
+        /// </summary>
+        /// <param name="productId">Specified Id of the product</param>
+        /// <param name="cart">Specified cart to update</param>
+        /// <param name="newQty">The count of a specified product</param>
+        /// <param name="oldQty">The old count of a cart item</param>
+        /// <returns>A decimal of the cart total</returns>
+        public async Task<decimal> UpdateTotal(int productId, Cart cart, int newQty, int oldQty)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            decimal oldTotal = oldQty * product.Price;
+            decimal newTotal = (newQty * product.Price) - oldTotal;
+            cart.Total += newTotal;
+            await _context.SaveChangesAsync();
+            return cart.Total;
+        }
+
+        /// <summary>
+        /// Update the total price of the current cart
+        /// </summary>
+        /// <param name="productId">Specified Id of the product</param>
+        /// <param name="cart">Specified cart to update</param>
+        /// <returns>A decimal of the cart total</returns>
+        public async Task<decimal> UpdateTotal(int productId, Cart cart)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            cart.Total += product.Price;
+            await _context.SaveChangesAsync();
+            return cart.Total;
+        }
     }
 }
