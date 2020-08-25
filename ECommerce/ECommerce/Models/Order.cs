@@ -12,7 +12,8 @@ namespace ECommerce.Models
     {
         public int Id { get; set; }
 
-        //public int CartId { get; set; }
+        public int CartId { get; set; }
+        public string AppUserId { get; set; }
 
         public string FirstName { get; set; }
 

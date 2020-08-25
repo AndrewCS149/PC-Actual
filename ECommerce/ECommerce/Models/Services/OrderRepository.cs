@@ -22,24 +22,29 @@ namespace ECommerce.Models.Services
         /// </summary>
         /// <param name="input">The information for the new order</param>
         /// <returns>The new order</returns>
-        public async Task<Order> Create(Order input)
-        {
-            Order order = new Order()
-            {
-                FirstName = input.FirstName,
-                LastName = input.LastName,
-                Email = input.Email,
-                Address = input.Address,
-                City = input.City,
-                Zip = input.Zip,
-                State = input.State,
-                OrderDate = DateTime.Now,
-                Cart = input.Cart
-            };
-
+        public async Task<Order> Create(Order order)
+        {            
             _context.Entry(order).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return order;
+        }
+
+        public async Task<Order> GetOrder(string userId)
+        {
+            var result = await _context.Order.Where(x => x.AppUserId == userId)
+                .Include(x => x.Cart)
+                .ThenInclude(x => x.CartItem)
+                .ThenInclude(x => x.Product)
+                .OrderBy(x => x.OrderDate)
+                .FirstOrDefaultAsync();
+            //var result2 = from item in _context.Order
+            //              where item.Email.ToLower() == email.ToLower()
+            //              orderby item.OrderDate
+            //              select item;
+
+            //var result3 = result2.FirstOrDefaultAsync();
+            //return await result3;
+            return result;
         }
     }
 }
