@@ -11,18 +11,39 @@ namespace ECommerce.Pages.ShoppingCart
 {
     public class DeleteModel : PageModel
     {
-        private readonly ICartItems _cartItems;
+        [BindProperty]
+        public int ProductId { get; set; }
 
-        public DeleteModel(ICartItems cartItems)
+        [BindProperty]
+        public int CartId { get; set; }
+
+        private readonly ICartItems _cartItems;
+        private readonly ICart _cart;
+
+        public DeleteModel(ICart cart, ICartItems cartItems)
         {
+            _cart = cart;
             _cartItems = cartItems;
         }
+
         public void OnGet()
         {
-
         }
+
         public async Task<IActionResult> OnPost(CartItem cartItem)
         {
+            string email;
+            if (User.Identity.IsAuthenticated)
+            {
+                email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+            }
+            else
+            {
+                email = Request.Cookies["AnonymousUser"];
+            }
+
+            Cart cart = await _cart.GetCart(email);
+            await _cart.UpdateTotal(ProductId, cart, cartItem.Quantity, cartItem.Quantity);
             await _cartItems.Delete(cartItem);
             return RedirectToPage("/ShoppingCart/Index");
         }
