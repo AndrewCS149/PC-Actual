@@ -69,6 +69,7 @@ namespace ECommerce.Pages
             Order.CartId = cart.Id;
             await _order.Create(Order);
 
+            // deactivate cart
             cart.IsActive = false;
             await _cart.Update(cart);
 

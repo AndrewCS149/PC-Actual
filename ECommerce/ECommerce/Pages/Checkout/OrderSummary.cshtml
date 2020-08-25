@@ -9,7 +9,7 @@
     <div class="card">
         <div class="card-header">
             Invoice
-            <strong>01/01/01/2018</strong>
+            <strong>@DateTime.Now.ToShortDateString();</strong>
             <span class="float-right"> <strong>Status:</strong> Pending</span>
         </div>
         <div class="card-body">
@@ -55,7 +55,9 @@
                                     <td class="left">@item.Product.Name</td>
                                     <td class="left">@item.Product.Description</td>
 
-                                    <td class="right">@item.Product.Price</td>
+                                    <td class="right">
+                                        @string.Format("{0:C}", item.Product.Price)
+                                    </td>
                                     <td class="right">@item.Quantity</td>
                                     <td>@string.Format("{0:C}", total)</td>
                                 </tr>
@@ -88,5 +90,3 @@
         </div>
     </div>
 </div>
-
-<a asp-page="../Index">Return to Home Page</a>

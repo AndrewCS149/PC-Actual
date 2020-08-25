@@ -12,7 +12,6 @@ namespace ECommerce.Models.Services
     public class OrderRepository : IOrder
     {
         private StoreDbContext _context;
-        
 
         public OrderRepository(StoreDbContext context)
         {
@@ -26,6 +25,7 @@ namespace ECommerce.Models.Services
         /// <returns>The new order</returns>
         public async Task<Order> Create(Order order)
         {
+            order.OrderDate = DateTime.Now;
             _context.Entry(order).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return order;
@@ -42,9 +42,8 @@ namespace ECommerce.Models.Services
                 .Include(x => x.Cart)
                 .ThenInclude(x => x.CartItem)
                 .ThenInclude(x => x.Product)
-                .OrderBy(x => x.OrderDate)
+                .OrderByDescending(x => x.OrderDate)
                 .FirstOrDefaultAsync();
-            
 
             return result;
         }
