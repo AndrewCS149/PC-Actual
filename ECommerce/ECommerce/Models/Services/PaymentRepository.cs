@@ -37,7 +37,6 @@ namespace ECommerce.Models.Services
                 Item = _config["AuthorizeTransactionKey"]
             };
 
-            // TODO: create list of pre defined credit card numbers
             // create card we want on file
             var creditCard = new creditCardType
             {

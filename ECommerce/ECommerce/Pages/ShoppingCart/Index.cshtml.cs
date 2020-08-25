@@ -92,6 +92,8 @@ namespace ECommerce.Pages.ShoppingCart
                     await _cartItems.AddToCart(cart.Id, productId);
                 }
 
+                await _cart.UpdateTotal(productId, cart);
+
                 // redirect to products page after adding item to cart
                 return RedirectToPagePermanent("../Products/Index");
             }

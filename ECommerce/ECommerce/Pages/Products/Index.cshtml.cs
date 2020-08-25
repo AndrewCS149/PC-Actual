@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AuthorizeNet.Api.Contracts.V1;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using ECommerce.Models.ViewModels;
@@ -12,7 +13,7 @@ namespace ECommerce.Pages
 {
     public class ProductsModel : PageModel, ISearchTerm
     {
-        private IProducts _products;
+        private readonly IProducts _products;
         public string Term { get; set; }
         public List<Products> Products { get; set; }
 
@@ -31,6 +32,12 @@ namespace ECommerce.Pages
         public async Task<IActionResult> OnPost(string term)
         {
             Products = await _products.GetProducts();
+
+            if (term == null)
+            {
+                return Page();
+            }
+
             Products = Products.Where(x => x.Name.ToUpper().Contains(term.ToUpper())).ToList();
 
             return Page();

@@ -13,7 +13,7 @@ namespace ECommerce.Pages
     {
         public Products Product { get; set; }
         public string Term { get; set; }
-        public IProducts _products { get; set; }
+        private readonly IProducts _products;
 
         public ProductDetailsModel(IProducts products)
         {
