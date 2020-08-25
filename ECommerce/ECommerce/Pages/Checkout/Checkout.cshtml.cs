@@ -73,7 +73,6 @@ namespace ECommerce.Pages
             await _cart.Update(cart);
 
             _payment.Run(Order);
-            //await _cart.Create(Request.Cookies["AnonymousUser"]);
 
             await _email.SummaryEmail(Order);
 
