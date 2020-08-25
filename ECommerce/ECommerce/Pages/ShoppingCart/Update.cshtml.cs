@@ -45,12 +45,10 @@ namespace ECommerce.Pages.ShoppingCart
                 email = Request.Cookies["AnonymousUser"];
             }
 
-            Cart cart = await _cart.GetCart(email);
-
             var cartItem = await _cartItems.GetCartItem(CartId, ProductId);
             var oldCount = cartItem.Quantity;
 
-            await _cart.UpdateTotal(ProductId, cart, Count, oldCount);
+            await _cart.UpdateTotal(ProductId, CartId, Count, oldCount);
             await _cartItems.UpdateCartQty(Count, CartId, ProductId);
 
             return RedirectToPage("/ShoppingCart/Index");

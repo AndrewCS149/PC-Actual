@@ -43,7 +43,7 @@ namespace ECommerce.Models.Interfaces
         /// <param name="newCount">The new count of a cart item</param>
         /// <param name="oldCount">The old count of a cart item</param>
         /// <returns>A decimal of the cart total</returns>
-        Task<decimal> UpdateTotal(int productId, Cart cart, int newCount, int oldCount);
+        Task<decimal> UpdateTotal(int productId, int cartId, int newCount, int oldCount);
 
         /// <summary>
         /// Update the total price of the current cart

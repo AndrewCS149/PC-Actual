@@ -80,8 +80,9 @@ namespace ECommerce.Models.Services
         /// <param name="newQty">The count of a specified product</param>
         /// <param name="oldQty">The old count of a cart item</param>
         /// <returns>A decimal of the cart total</returns>
-        public async Task<decimal> UpdateTotal(int productId, Cart cart, int newQty, int oldQty)
+        public async Task<decimal> UpdateTotal(int productId, int cartId, int newQty, int oldQty)
         {
+            var cart = await _context.Cart.FindAsync(cartId);
             var product = await _context.Products.FindAsync(productId);
             decimal oldTotal = oldQty * product.Price;
             decimal newTotal = (newQty * product.Price) - oldTotal;

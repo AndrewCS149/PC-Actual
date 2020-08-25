@@ -17,6 +17,9 @@ namespace ECommerce.Pages.ShoppingCart
         [BindProperty]
         public int CartId { get; set; }
 
+        [BindProperty]
+        public int Count { get; set; }
+
         private readonly ICartItems _cartItems;
         private readonly ICart _cart;
 
@@ -32,18 +35,7 @@ namespace ECommerce.Pages.ShoppingCart
 
         public async Task<IActionResult> OnPost(CartItem cartItem)
         {
-            string email;
-            if (User.Identity.IsAuthenticated)
-            {
-                email = User.Claims.FirstOrDefault(x => x.Type == "Email").Value;
-            }
-            else
-            {
-                email = Request.Cookies["AnonymousUser"];
-            }
-
-            Cart cart = await _cart.GetCart(email);
-            await _cart.UpdateTotal(ProductId, cart, cartItem.Quantity, cartItem.Quantity);
+            await _cart.UpdateTotal(ProductId, CartId, 0, Count);
             await _cartItems.Delete(cartItem);
             return RedirectToPage("/ShoppingCart/Index");
         }
