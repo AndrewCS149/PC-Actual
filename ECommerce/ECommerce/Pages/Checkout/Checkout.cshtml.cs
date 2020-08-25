@@ -7,6 +7,7 @@ using AuthorizeNet.Api.Contracts.V1;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -24,16 +25,17 @@ namespace ECommerce.Pages
         public CartItem CartItem { get; set; }
 
         public string Term { get; set; }
+        private readonly UserManager<AppUsers> _userManager; 
+        private readonly IPayment _payment;
+        private readonly IOrder _order;
+        private readonly ICart _cart;
 
-        public IPayment _payment;
-        public IOrder _order;
-        public ICart _cart;
-
-        public CheckoutModel(ICart cart, IOrder order, IPayment payment)
+        public CheckoutModel(ICart cart, IOrder order, IPayment payment, UserManager<AppUsers> userManager)
         {
             _cart = cart;
             _order = order;
             _payment = payment;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> OnGet()
@@ -47,31 +49,32 @@ namespace ECommerce.Pages
                 Cart = await _cart.GetCart(Request.Cookies["AnonymousUser"]);
             }
 
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    Cart = await _cart.GetCart(User.Identity.Name);
-            //}
-            //else if (Request.Cookies["AnonymousUser"] != null)
-            //{
-            //    var cookie = Request.Cookies["AnonymousUser"];
-            //    Cart = await _cart.Create(cookie);
-            //}
 
             return Page();
         }
 
         public async Task<IActionResult> OnPost()
         {
-            await _order.Create(Order);
             var cart = await _cart.GetCart(Cart.UserEmail);
+            Order.Cart = cart;
+            if(User.Identity.IsAuthenticated)
+            {
+                Order.AppUserId = _userManager.GetUserId(User);
+            }
+            else
+            {
+                Order.AppUserId = Request.Cookies["AnonymousUser"];
+            }
+            Order.CartId = cart.Id;
+            await _order.Create(Order);
 
             cart.IsActive = false;
             await _cart.Update(cart);
-            Order.Cart = cart;
 
             _payment.Run(Order);
+            await _cart.Create(Request.Cookies["AnonymousUser"]);
 
-            return Page();
+            return RedirectToPage("OrderSummary");
         }
     }
 }

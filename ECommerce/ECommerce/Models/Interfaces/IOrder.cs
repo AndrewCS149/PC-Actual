@@ -13,5 +13,7 @@ namespace ECommerce.Models.Interfaces
         /// <param name="input">The information for the new order</param>
         /// <returns>The new order</returns>
         Task<Order> Create(Order input);
+
+        Task<Order> GetOrder(string email);
     }
 }
