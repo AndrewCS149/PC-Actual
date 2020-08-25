@@ -23,12 +23,17 @@ namespace ECommerce.Models.Services
         /// <param name="input">The information for the new order</param>
         /// <returns>The new order</returns>
         public async Task<Order> Create(Order order)
-        {            
+        {
             _context.Entry(order).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return order;
         }
 
+        /// <summary>
+        /// Gets a specified order from the database
+        /// </summary>
+        /// <param name="userId">The GUID of the order to retrieve</param>
+        /// <returns>An order object</returns>
         public async Task<Order> GetOrder(string userId)
         {
             var result = await _context.Order.Where(x => x.AppUserId == userId)

@@ -14,6 +14,11 @@ namespace ECommerce.Models.Interfaces
         /// <returns>The new order</returns>
         Task<Order> Create(Order input);
 
-        Task<Order> GetOrder(string email);
+        /// <summary>
+        /// Gets a specified order from the database
+        /// </summary>
+        /// <param name="userId">The GUID of the order to retrieve</param>
+        /// <returns>An order object</returns>
+        Task<Order> GetOrder(string userId);
     }
 }
