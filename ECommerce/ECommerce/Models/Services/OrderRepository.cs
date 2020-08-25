@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Models.Services
 {
     public class OrderRepository : IOrder
     {
         private StoreDbContext _context;
+        
 
         public OrderRepository(StoreDbContext context)
         {
@@ -37,13 +39,8 @@ namespace ECommerce.Models.Services
                 .ThenInclude(x => x.Product)
                 .OrderBy(x => x.OrderDate)
                 .FirstOrDefaultAsync();
-            //var result2 = from item in _context.Order
-            //              where item.Email.ToLower() == email.ToLower()
-            //              orderby item.OrderDate
-            //              select item;
+            
 
-            //var result3 = result2.FirstOrDefaultAsync();
-            //return await result3;
             return result;
         }
     }
