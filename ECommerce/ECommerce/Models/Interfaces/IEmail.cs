@@ -16,7 +16,7 @@ namespace ECommerce.Models.Interfaces
         Task Email(RegisterViewModel input);
 
         /// <summary>
-        /// Emails a reciept to a customer
+        /// Emails a receipt to a customer
         /// </summary>
         /// <param name="input">Users information</param>
         /// <returns>Successful completion of task</returns>

@@ -40,6 +40,11 @@ namespace ECommerce.Models.Services
             await client.SendEmailAsync(msg);
         }
 
+        /// <summary>
+        /// Emails a receipt to a customer
+        /// </summary>
+        /// <param name="input">Users information</param>
+        /// <returns>Successful completion of task</returns>
         public async Task SummaryEmail(Order input)
         {
             var apiKey = _config.GetSection("SENDGRID_APIKEY").Value;
