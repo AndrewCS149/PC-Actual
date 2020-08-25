@@ -13,7 +13,7 @@ namespace ECommerce.Models.Services
 {
     public class EmailRepository : IEmail
     {
-        private IConfiguration _config;
+        private readonly IConfiguration _config;
 
         public EmailRepository(IConfiguration config)
         {

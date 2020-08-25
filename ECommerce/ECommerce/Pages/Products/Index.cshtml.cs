@@ -13,7 +13,7 @@ namespace ECommerce.Pages
 {
     public class ProductsModel : PageModel, ISearchTerm
     {
-        private IProducts _products;
+        private readonly IProducts _products;
         public string Term { get; set; }
         public List<Products> Products { get; set; }
 

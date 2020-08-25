@@ -25,9 +25,9 @@ namespace ECommerce.Pages.Account
         [BindProperty]
         public RegisterViewModel Input { get; set; }
 
-        private SignInManager<AppUsers> _signInManager;
-        private UserManager<AppUsers> _userManager;
-        private IEmail _email;
+        private readonly SignInManager<AppUsers> _signInManager;
+        private readonly UserManager<AppUsers> _userManager;
+        private readonly IEmail _email;
         public string Term { get; set; }
 
         public RegisterModel(IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)

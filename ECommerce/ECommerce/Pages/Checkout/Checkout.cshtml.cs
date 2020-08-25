@@ -25,8 +25,8 @@ namespace ECommerce.Pages
         public CartItem CartItem { get; set; }
 
         public string Term { get; set; }
-        private IEmail _email;
-        private readonly UserManager<AppUsers> _userManager; 
+        private readonly IEmail _email;
+        private readonly UserManager<AppUsers> _userManager;
         private readonly IPayment _payment;
         private readonly IOrder _order;
         private readonly ICart _cart;
@@ -51,7 +51,6 @@ namespace ECommerce.Pages
                 Cart = await _cart.GetCart(Request.Cookies["AnonymousUser"]);
             }
 
-
             return Page();
         }
 
@@ -59,7 +58,7 @@ namespace ECommerce.Pages
         {
             var cart = await _cart.GetCart(Cart.UserEmail);
             Order.Cart = cart;
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 Order.AppUserId = _userManager.GetUserId(User);
             }

@@ -14,7 +14,7 @@ namespace ECommerce.Models.Services
 {
     public class ImageRepository : IImage
     {
-        private IConfiguration _config;
+        private readonly IConfiguration _config;
         public CloudStorageAccount CloudStorageAccount { get; set; }
         public CloudBlobClient CloudBlobClient { get; set; }
 
