@@ -64,12 +64,6 @@
                             <input asp-for="@Model.Order.Address" type="text" id="address" class="form-control" placeholder="1234 Main St">
                             <label asp-for="@Model.Order.Address" class="">Address</label>
                         </div>
-
-                        @*<div class="md-form mb-5">
-                                <input asp-for="@Model.Order.City" type="text" id="address" class="form-control" placeholder="1234 Main St">
-                                <label asp-for="@Model.Order.City" class="">City</label>
-                            </div>*@
-
                         <!--Grid row-->
                         <div class="row">
                             <!--Grid column-->
@@ -130,16 +124,6 @@
                                     <!-- #endregion -->
                                 </select>
                                 <label asp-for="@Model.Order.State" class="">State</label>
-                                @*<input asp-for="@Model.Order.State" type="text" id="address" class="form-control" placeholder="1234 Main St">*@
-                                @*<input hidden asp-for="@Model.Order.State" type="text" />
-                                    <label asp-for="@Model.Order.State">State</label>
-                                    <select asp-for="@Model.Order.State" class="custom-select d-block w-100" id="state" required>
-                                        <option value="">Choose...</option>
-                                        <option>California</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>*@
                             </div>
                             <!--Grid column-->
                             <!--Grid column-->
@@ -158,7 +142,6 @@
                             <!--Grid column-->
                         </div>
                         <!--Grid row-->
-
                         <hr>
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -170,26 +153,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="cc-number">Credit card number</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <label for="cc-number" asp-for="@Model.Order.CardType">Credit card number</label>
+                                <select asp-for="@Model.Order.CardType" class="form-control">
+                                    <option value="MasterCard">MasterCard</option>
+                                    <option value="Visa">Visa</option>
+                                    <option value="Discover">Discover</option>
+                                </select>
                                 <div class="invalid-feedback">
                                     Credit card number is required
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-expiration">Expiration</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Expiration date required
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-expiration">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Security code required
                                 </div>
                             </div>
                         </div>

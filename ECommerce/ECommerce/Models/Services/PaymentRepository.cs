@@ -41,30 +41,9 @@ namespace ECommerce.Models.Services
             // visa
             var creditCard = new creditCardType
             {
-                cardNumber = "4007000000027",
-                expirationDate = "1222",
-                cardCode = "123"
-            };
-
-            var americanExpress = new creditCardType
-            {
-                cardNumber = "370000000000002",
-                expirationDate = "1222",
-                cardCode = "123"
-            };
-
-            var discover = new creditCardType
-            {
-                cardNumber = "6011000000000012",
-                expirationDate = "1222",
-                cardCode = "123"
-            };
-
-            var mastercard = new creditCardType
-            {
-                cardNumber = "5424000000000015",
-                expirationDate = "1222",
-                cardCode = "123"
+                cardNumber = _config[input.CardType],
+                expirationDate = _config["TestExpirationDate"],
+                cardCode = _config["TestCvv"]
             };
 
             customerAddressType billingAddress = GetBillingAddress(input);
@@ -74,7 +53,7 @@ namespace ECommerce.Models.Services
             var transRequest = new transactionRequestType
             {
                 transactionType = transactionTypeEnum.authCaptureTransaction.ToString(),
-                amount = 150.75M,
+                amount = input.Cart.Total,
                 payment = paymentType,
                 billTo = billingAddress
             };

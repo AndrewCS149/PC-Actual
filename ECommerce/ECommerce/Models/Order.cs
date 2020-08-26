@@ -29,6 +29,8 @@ namespace ECommerce.Models
 
         public string Email { get; set; }
 
+        public string CardType { get; set; }
+
         public DateTime OrderDate { get; set; }
 
         public Cart Cart { get; set; }
