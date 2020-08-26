@@ -38,11 +38,12 @@ namespace ECommerce.Models.Services
             };
 
             // create card we want on file
+            // visa
             var creditCard = new creditCardType
             {
-                cardNumber = "4007000000027",
-                expirationDate = "1222",
-                cardCode = "123"
+                cardNumber = _config[input.CardType],
+                expirationDate = _config["TestExpirationDate"],
+                cardCode = _config["TestCvv"]
             };
 
             customerAddressType billingAddress = GetBillingAddress(input);
@@ -52,7 +53,7 @@ namespace ECommerce.Models.Services
             var transRequest = new transactionRequestType
             {
                 transactionType = transactionTypeEnum.authCaptureTransaction.ToString(),
-                amount = 150.75M,
+                amount = input.Cart.Total,
                 payment = paymentType,
                 billTo = billingAddress
             };
