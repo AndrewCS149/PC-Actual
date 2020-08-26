@@ -13,7 +13,7 @@ namespace ECommerce.Pages.Dashboard
     public class DashboardModel : PageModel, ISearchTerm
     {
         public string Term { get; set; }
-        private IImage _image;
+        private readonly IImage _image;
 
         [BindProperty]
         public string Name { get; set; }

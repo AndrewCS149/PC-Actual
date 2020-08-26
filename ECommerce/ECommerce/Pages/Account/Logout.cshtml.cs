@@ -11,7 +11,7 @@ namespace ECommerce.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private SignInManager<AppUsers> _signInManager;
+        private readonly SignInManager<AppUsers> _signInManager;
 
         public LogoutModel(SignInManager<AppUsers> signInManager)
         {
@@ -21,6 +21,7 @@ namespace ECommerce.Pages.Account
         public void OnGet()
         {
         }
+
         /// <summary>
         /// this signs the user out
         /// </summary>
