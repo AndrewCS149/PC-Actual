@@ -10,7 +10,8 @@ An Ecommerce website that specializes in selling computer parts. Application use
 ability create accounts, login, add items to cart and checkout with a cart. We currently have 10 items in the store to sell, with
 two of those items being displayed on the home page (to entice potential buyers to check out the rest of our products).
 We are capturing several claims when a user registers and logs in. The user (or admin) email address as well as thier first name, last name, 
-and password are utilized to authenticate user identity. 
+and password are utilized to authenticate user identity. The user is also able to add items to a cart, update quantities and delete items within the cart,
+and purchase items via a checkout page. The user also recieves emails upon a successful checkout and when they register an account.
 
 ---
 
@@ -28,6 +29,9 @@ Link to Application: https://ecom17.azurewebsites.net/
 
 ### Change Log
 
+- 2.4 Both logged in and anonymous users get order summaries -25 Aug 2020
+- 2.3 Users can now check out and pay for items -20 Aug 2020
+- 2.2 Got the user cart working -18 Aug 2020
 - 2.1 Deployed website -17 Aug 2020
 - 2.0 Populate Home and Products with Blob images - 16 Aug 2020
 - 1.9 Created Blob and Linked to App - 15 Aug 2020
