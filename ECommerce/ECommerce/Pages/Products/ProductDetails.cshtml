@@ -16,50 +16,56 @@
     <title>ProductDetails</title>
 </head>
 <body>
-    <main id="products-main">
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container dark-grey-text mt-5">
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col"></th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Recommendation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        @Model.Product.Name
-                        <form method="post">
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <img src=@Model.Product.Image class="img-fluid" alt="">
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Content-->
+                    <div class="p-4">
+
+                        <div class="mb-3">
+                            <a href="">
+                                <span class="badge blue mr-1">@Model.Product.Name</span>
+                            </a>
+                        </div>
+                        <p class="badge mr-1">Stock: @Model.Product.Stock</p>
+
+                        <p class="lead">
+                            <span>@string.Format("{0:C}", Model.Product.Price)</span>
+                        </p>
+
+                        <p class="lead font-weight-bold">Description</p>
+                        <p>@Model.Product.Description</p>
+
+                        <p class="lead font-weight-bold">Recommendation</p>
+                        <p>@Model.Product.Recommendation</p>
+
+                        <form method="post" class="d-flex justify-content-center">
                             <input type="hidden" value="@Model.Product.Id" name="productId" />
-                            <button asp-page="/ShoppingCart/Index" type="submit">Add To Cart</button>
+                            <button asp-page="/ShoppingCart/Index" type="submit" class="btn btn-primary btn-md my-0 p">Add To Cart<i class="fas fa-shopping-cart ml-1"></i></button>
                         </form>
-                    </td>
-                    <td>
-                        @string.Format("{0:C}", Model.Product.Price)
-                    </td>
-                    <td>
-                        <img width="200" height="150" src=@Model.Product.Image />
-                    </td>
-                    <td>
-                        @Model.Product.Description
-                    </td>
-                    <td>
-                        @Model.Product.Stock
-                    </td>
-                    <td>
-                        @Model.Product.Recommendation
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="col-sm-8">
+                    </div>
+                    <!--Content-->
+                </div>
+                <!--Grid column-->
+            </div>
+            <hr>
+            <!--Grid row-->
             @await Component.InvokeAsync("ShoppingCart")
         </div>
     </main>
+    <!--Main layout-->
 </body>
 </html>

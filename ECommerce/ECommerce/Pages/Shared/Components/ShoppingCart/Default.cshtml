@@ -1,28 +1,66 @@
 ﻿@model ECommerce.Models.Cart
-<h3>Cart</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null)
-        {
-            decimal total = 0.0M;
-            @foreach (var item in Model.CartItem)
+@*<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
             {
-                total += item.Product.Price * item.Quantity;
-                <tr>
-                    <td>@item.Product.Name</td>
-                    <td>@string.Format("{0:C}", item.Product.Price)</td>
-                    <td>@item.Quantity</td>
-                    <td>@string.Format("{0:C}", total)</td>
-                </tr>
+                decimal total = 0.0M;
+                @foreach (var item in Model.CartItem)
+                {
+                    total += item.Product.Price * item.Quantity;
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@string.Format("{0:C}", item.Product.Price)</td>
+                        <td>@item.Quantity</td>
+                        <td>@string.Format("{0:C}", total)</td>
+                    </tr>
+                }
             }
+        </tbody>
+    </table>*@
+
+<!--Grid column-->
+<div class="col-md-4 mb-4">
+
+    <!-- Heading -->
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        @{
+            int qty = 0;
+            foreach (var item in Model.CartItem)
+                qty += item.Quantity;
         }
-    </tbody>
-</table>
+        <span class="badge badge-secondary badge-pill">@qty</span>
+    </h4>
+
+    <!-- Cart -->
+    <ul class="list-group mb-3 z-depth-1">
+        @foreach (var item in Model.CartItem)
+        {
+            decimal itemTotal = item.Quantity * item.Product.Price;
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                    <h6 class="my-0">
+                        @item.Product.Name
+                        <small class="text-muted">(@item.Quantity)</small>
+                    </h6>
+                </div>
+                <span class="text-muted">@string.Format("{0:C}", itemTotal)</span>
+            </li>
+
+        }
+        <li class="list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong>@string.Format("{0:C}", Model.Total)</strong>
+        </li>
+    </ul>
+    <!-- Cart -->
+</div>
+<!--Grid column-->

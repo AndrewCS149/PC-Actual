@@ -33,12 +33,6 @@ namespace ECommerce
         {
             services.AddMvc();
             services.AddRazorPages();
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie(options =>
-            //    {
-            //        options.LoginPath = "/Pages/Index";
-            //        options.Cookie.Name = "AnonymousUser";
-            //    });
 
             // register dbcontext
             services.AddDbContext<StoreDbContext>(options =>
@@ -54,6 +48,7 @@ namespace ECommerce
             services.AddIdentity<AppUsers, IdentityRole>()
                     .AddEntityFrameworkStores<UserDBContext>()
                     .AddDefaultTokenProviders();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Admin", policy => policy.RequireRole(AppRoles.Admin));
@@ -80,8 +75,7 @@ namespace ECommerce
             app.UseRouting();
             app.UseAuthentication();
             app.UseCookiePolicy();
-            // TODO: make authorized users only be able to access the admin page
-            //app.UseAuthorization();
+            app.UseAuthorization();
             app.UseStaticFiles();
 
             var userManager = serviceProvider.GetRequiredService<UserManager<AppUsers>>();

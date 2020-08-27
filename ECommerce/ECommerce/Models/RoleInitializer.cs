@@ -20,13 +20,13 @@ namespace ECommerce.Models
             new IdentityRole{Name = AppRoles.User, NormalizedName = AppRoles.User.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()},
         };
 
-        public static void SeedData(IServiceProvider serviceProvider, UserManager<AppUsers> userManager, IConfiguration _config)
+        public static async Task SeedData(IServiceProvider serviceProvider, UserManager<AppUsers> userManager, IConfiguration _config)
         {
             using (var dbContext = new UserDBContext(serviceProvider.GetRequiredService<DbContextOptions<UserDBContext>>()))
             {
                 dbContext.Database.EnsureCreated();
                 AddRoles(dbContext);
-                SeedUsers(userManager, _config);
+                await SeedUsers(userManager, _config);
             }
         }
 
@@ -40,7 +40,7 @@ namespace ECommerce.Models
             }
         }
 
-        public static async void SeedUsers(UserManager<AppUsers> userManager, IConfiguration _config)
+        public static async Task SeedUsers(UserManager<AppUsers> userManager, IConfiguration _config)
         {
             if (userManager.FindByNameAsync(_config["AdminEmail"]).Result == null)
             {
@@ -57,8 +57,8 @@ namespace ECommerce.Models
                 {
                     Claim claim = new Claim("Fullname", $"{user.FirstName} {user.LastName}");
                     Claim claim2 = new Claim("Email", user.Email);
-                    await userManager.AddClaimAsync(user, claim2);
-                    await userManager.AddClaimAsync(user, claim);
+                    var x = userManager.AddClaimAsync(user, claim2).Result;
+                    var y = userManager.AddClaimAsync(user, claim).Result;
                     await userManager.AddToRoleAsync(user, AppRoles.Admin);
                 }
             }

@@ -4,12 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerce.Pages.Dashboard
 {
+    [Authorize(Policy = "Admin")]
     public class DashboardModel : PageModel, ISearchTerm
     {
         public string Term { get; set; }
