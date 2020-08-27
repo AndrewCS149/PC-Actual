@@ -19,6 +19,11 @@
     width: 50px;
 }
 
+#bootstrap-override #shop-by-list {
+    width: 300px;
+    background-color: green;
+}
+
 #bootstrap-override form,
 #bootstrap-override #logout-button,
 #bootstrap-override #search-button {

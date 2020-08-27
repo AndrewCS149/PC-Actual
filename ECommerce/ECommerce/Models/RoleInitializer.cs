@@ -26,7 +26,7 @@ namespace ECommerce.Models
             {
                 dbContext.Database.EnsureCreated();
                 AddRoles(dbContext);
-                await SeedUsers(userManager, _config);
+                SeedUsers(userManager, _config);
             }
         }
 
@@ -40,7 +40,7 @@ namespace ECommerce.Models
             }
         }
 
-        public static async Task SeedUsers(UserManager<AppUsers> userManager, IConfiguration _config)
+        public static void SeedUsers(UserManager<AppUsers> userManager, IConfiguration _config)
         {
             if (userManager.FindByNameAsync(_config["AdminEmail"]).Result == null)
             {
@@ -59,7 +59,7 @@ namespace ECommerce.Models
                     Claim claim2 = new Claim("Email", user.Email);
                     var x = userManager.AddClaimAsync(user, claim2).Result;
                     var y = userManager.AddClaimAsync(user, claim).Result;
-                    await userManager.AddToRoleAsync(user, AppRoles.Admin);
+                    userManager.AddToRoleAsync(user, AppRoles.Admin).Wait();
                 }
             }
         }
