@@ -56,7 +56,9 @@ namespace ECommerce.Models
                 if (result.Succeeded)
                 {
                     Claim claim = new Claim("Fullname", $"{user.FirstName} {user.LastName}");
-                    var claimResult = userManager.AddClaimAsync(user, claim).Result;
+                    Claim claim2 = new Claim("Email", user.Email);
+                    await userManager.AddClaimAsync(user, claim2);
+                    await userManager.AddClaimAsync(user, claim);
                     await userManager.AddToRoleAsync(user, AppRoles.Admin);
                 }
             }
