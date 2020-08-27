@@ -60,10 +60,12 @@ namespace ECommerce.Pages.Account
                 if (result.Succeeded)
                 {
                     await _email.Email(input);
-                    Claim claim = new Claim("Fullname", $"{Input.FirstName} {Input.LastName}");
-                    Claim claim2 = new Claim("Email", Input.Email);
+                    Claim claim = new Claim("FirstName", Input.FirstName);
+                    Claim claim2 = new Claim("LastName", Input.LastName);
+                    Claim claim3 = new Claim("Email", Input.Email);
                     await _userManager.AddClaimAsync(user, claim);
                     await _userManager.AddClaimAsync(user, claim2);
+                    await _userManager.AddClaimAsync(user, claim3);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 

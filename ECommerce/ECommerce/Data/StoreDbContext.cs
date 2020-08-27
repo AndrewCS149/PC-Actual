@@ -38,7 +38,7 @@ namespace ECommerce.Data
                 new Products
                 {
                     Id = 2,
-                    Name = "Ryzen 5",
+                    Name = "AMD Ryzen 5",
                     Price = 650.00M,
                     Image = "https://ecom17.blob.core.windows.net/pictures/Ryzen5.jpg",
                     Description = "This product is a high end computer that specializes in heat management.",
@@ -48,7 +48,7 @@ namespace ECommerce.Data
                 new Products
                 {
                     Id = 3,
-                    Name = "Ryzen 7",
+                    Name = "AMD Ryzen 7",
                     Price = 330.00M,
                     Image = "https://ecom17.blob.core.windows.net/pictures/Ryzen7.jpg",
                     Description = "Last gen PC that still has fairly good processing power with decent heat management.",
@@ -78,7 +78,7 @@ namespace ECommerce.Data
                 new Products
                 {
                     Id = 6,
-                    Name = "Nvidia 1080",
+                    Name = "Nvidia GTX 1080",
                     Price = 240.00M,
                     Image = "https://ecom17.blob.core.windows.net/pictures/GTX1080.jpg",
                     Description = "High end graphics card that is fit for use in the newest generation pc's.",
@@ -108,7 +108,7 @@ namespace ECommerce.Data
                 new Products
                 {
                     Id = 9,
-                    Name = "RTX 2080",
+                    Name = "Nvidia RTX 2080",
                     Price = 250.00M,
                     Image = "https://ecom17.blob.core.windows.net/pictures/RTX2080.jpg",
                     Description = "A last generation Nvidia graphics card, it still possessess solid performance stats.",
@@ -118,7 +118,7 @@ namespace ECommerce.Data
                 new Products
                 {
                     Id = 10,
-                    Name = "ASUS 1060",
+                    Name = "ASUS GTX 1060",
                     Price = 300.00M,
                     Image = "https://ecom17.blob.core.windows.net/pictures/gpu.jpg",
                     Description = "The best bargain graphics card in the store!",
