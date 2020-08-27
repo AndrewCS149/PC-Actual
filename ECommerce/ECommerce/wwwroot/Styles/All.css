@@ -19,9 +19,18 @@
     width: 50px;
 }
 
-#bootstrap-override #shop-by-list {
-    width: 300px;
-    background-color: green;
+#bootstrap-override #shop-by-list button {
+    width: 100%;
+    color: #6A6A6A;
+}
+
+    #bootstrap-override #shop-by-list button:hover {
+        color: black;
+    }
+
+#bootstrap-override #carousel img {
+    height: 350px;
+    width: 900px;
 }
 
 #bootstrap-override form,

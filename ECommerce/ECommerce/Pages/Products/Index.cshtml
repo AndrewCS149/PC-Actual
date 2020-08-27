@@ -13,8 +13,8 @@
             margin-bottom: 150px;
         }
 
-        #shop-by-list button {
-            width: 100%;
+        @*#shop-by-list button {
+            width: 90%;
             color: #6A6A6A;
         }
 
@@ -25,7 +25,7 @@
         #carousel img {
             height: 350px;
             width: 900px;
-        }
+        }*@
     </style>
     <title>Products</title>
 </head>
@@ -82,12 +82,20 @@
                         <button class="list-group-item" asp-page="/Products/Index" type="submit">All</button>
                     </form>
                     <form method="post">
-                        <input hidden asp-for="@Model.Term" value="ryzen" />
-                        <button class="list-group-item" asp-page="/Products/Index" type="submit">Ryzen</button>
+                        <input hidden asp-for="@Model.Term" value="amd" />
+                        <button class="list-group-item" asp-page="/Products/Index" type="submit">AMD</button>
                     </form>
                     <form method="post">
                         <input hidden asp-for="@Model.Term" value="intel" />
                         <button class="list-group-item" asp-page="/Products/Index" type="submit">Intel</button>
+                    </form>
+                    <form method="post">
+                        <input hidden asp-for="@Model.Term" value="msi" />
+                        <button class="list-group-item" asp-page="/Products/Index" type="submit">MSI</button>
+                    </form>
+                    <form method="post">
+                        <input hidden asp-for="@Model.Term" value="nvidia" />
+                        <button class="list-group-item" asp-page="/Products/Index" type="submit">Nvidia</button>
                     </form>
                     <form method="post">
                         <input hidden asp-for="@Model.Term" value="asus" />
@@ -132,7 +140,7 @@
                         {
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src=@item.Image alt=""></a>
+                                    <a href="#"><img class="card-img-top" src=@item.Image alt="img"></a>
                                     <div class="card-body">
                                         <h4 class="card-title">
                                             <a href="#">@item.Name</a>
