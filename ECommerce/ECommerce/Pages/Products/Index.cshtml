@@ -12,61 +12,9 @@
         main {
             margin-bottom: 150px;
         }
-
-        @*#shop-by-list button {
-            width: 90%;
-            color: #6A6A6A;
-        }
-
-            #shop-by-list button:hover {
-                color: black;
-            }
-
-        #carousel img {
-            height: 350px;
-            width: 900px;
-        }*@
     </style>
     <title>Products</title>
 </head>
-@*<body>
-        <main id="products-main">
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{int count = 1; }
-                    @foreach (var item in Model.Products)
-                    {
-                        <tr>
-                            <td scope="row">@count</td>
-                            <td>
-                                @item.Name
-                            </td>
-                            <td>
-                                @string.Format("{0:C}", item.Price)
-                            </td>
-                            <td>
-                                <img width="200" height="150" src=@item.Image />
-                            </td>
-                            <td>
-                                <a asp-page="ProductDetails" asp-route-id="@item.Id">Details</a>
-                            </td>
-                        </tr>
-                        count++;
-                    }
-                </tbody>
-            </table>
-        </main>
-    </body>*@
-
 <body>
     <!-- Page Content -->
     <div class="container">

@@ -55,10 +55,13 @@ namespace ECommerce.Models
                 IdentityResult result = userManager.CreateAsync(user, _config["AdminPassword"]).Result;
                 if (result.Succeeded)
                 {
-                    Claim claim = new Claim("Fullname", $"{user.FirstName} {user.LastName}");
-                    Claim claim2 = new Claim("Email", user.Email);
-                    var x = userManager.AddClaimAsync(user, claim2).Result;
-                    var y = userManager.AddClaimAsync(user, claim).Result;
+                    Claim claim = new Claim("FirstName", user.FirstName);
+                    Claim claim2 = new Claim("LastName", user.LastName);
+                    Claim claim3 = new Claim("Email", user.Email);
+
+                    var x = userManager.AddClaimAsync(user, claim).Result;
+                    var y = userManager.AddClaimAsync(user, claim2).Result;
+                    var z = userManager.AddClaimAsync(user, claim3).Result;
                     userManager.AddToRoleAsync(user, AppRoles.Admin).Wait();
                 }
             }
