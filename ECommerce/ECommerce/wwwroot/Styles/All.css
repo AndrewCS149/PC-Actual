@@ -28,6 +28,11 @@
         color: black;
     }
 
+#bootstrap-override .products img {
+    height: 300px;
+}
+}
+
 #bootstrap-override #carousel img {
     height: 350px;
     width: 900px;

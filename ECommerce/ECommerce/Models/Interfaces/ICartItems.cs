@@ -50,7 +50,23 @@ namespace ECommerce.Models.Interfaces
         /// Delete a cart item
         /// </summary>
         /// <param name="cartItem">cartItem to be deleted</param>
-        /// <returns>Successful completion of method</returns>
+        /// <returns>Successful completion of task</returns>
         Task Delete(CartItem cartItem);
+
+        /// <summary>
+        /// Decrements the quantity by one of a specific cart item
+        /// </summary>
+        /// <param name="cartId">Specified cart to update</param>
+        /// <param name="productId">Specified product of the cart to update</param>
+        /// <returns>Successful completion of task</returns>
+        Task DecrementQty(int cartId, int productId);
+
+        /// <summary>
+        /// Increments the quantity by one of a specific cart item
+        /// </summary>
+        /// <param name="cartId">Specified cart to update</param>
+        /// <param name="productId">Specified product of the cart to update</param>
+        /// <returns>Successful completion of task</returns>
+        Task IncrementQty(int cartId, int productId);
     }
 }
