@@ -13,18 +13,36 @@ We are capturing several claims when a user registers and logs in. The user (or 
 and password are utilized to authenticate user identity. The user is also able to add items to a cart, update quantities and delete items within the cart,
 and purchase items via a checkout page. The user also recieves emails upon a successful checkout and when they register an account.
 
+To have full access to the site (including the Admin dashboard), one must be logged in as the administrator. But average users can
+have full accessibility to the site whether they have registered an account or not. The difference between these two users is that the cart
+information for registered accounts is persistent (exists after checkout) while anonymous user data is not accessible after checkout.
+User accounts are authenticated by their email while anonymous users are authenticated by a cookie the site provides after they enter the site.
+
 ---
 
 ### Getting Started
 
-*coming soon*
+Go to this link: https://ecom17.azurewebsites.net/
+Once there, you can either go to Products to view the products or to Register or Loging to create or utilize an existing account, respectively.
+If you find a product you want, press "Add to Cart"
+Once you add all items you want in a cart, press the cart shaped button to "Checkout"
+Fill in relevant billing data (all credit card information is defaulted to a test credit card hard-coded into the database)
+Once this is done, you will go to an order summary page, and a reciept will be sent to the email address entered in checkout.
+
+2/5 points for Readme & Documentation
+* Structure/Database Schema for your store DB (not identity) - INCOMPLETE
+* Explanation of your DB Schema (mostly interested in your basket/order tables) - INCOMPLETE
 
 ---
 
 ### Visuals
 
-Link to Application: https://ecom17.azurewebsites.net/
+Schema: We decided to create several models which work in concert with each other. We have Products (contains all properties of each individual product),
+CartItems (Products selected by the user to be put into a cart), Cart(All CartItems a user has selected), Orders(All information the site needs from the user 
+to process an order and purchase their cartitems), and AppUsers(deals with persistent identities of logged in users and the Admin). 
+We also have RoleInitializer which helps create the special roles of the Admin compared to other users.
 
+![ERD Image](./assets/ERD.png)
 ---
 
 ### Change Log
