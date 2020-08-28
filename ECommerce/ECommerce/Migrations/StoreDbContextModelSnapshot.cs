@@ -150,6 +150,16 @@ namespace ECommerce.Migrations
                         },
                         new
                         {
+                            Id = 9,
+                            Description = "A last generation Nvidia graphics card, it still possessess solid performance stats.",
+                            Image = "https://ecom17.blob.core.windows.net/pictures/RTX2080.jpg",
+                            Name = "Nvidia RTX 2080",
+                            Price = 250.00m,
+                            Recommendation = "Buy if you don't mind not playing on ultra graphics settings.",
+                            Stock = "11"
+                        },
+                        new
+                        {
                             Id = 2,
                             Description = "This product is a high end computer that specializes in heat management.",
                             Image = "https://ecom17.blob.core.windows.net/pictures/Ryzen5.jpg",
@@ -217,16 +227,6 @@ namespace ECommerce.Migrations
                             Price = 249.00m,
                             Recommendation = "If you want to maximize performance and don't mind system bugs, this is the product for you!",
                             Stock = "3"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "A last generation Nvidia graphics card, it still possessess solid performance stats.",
-                            Image = "https://ecom17.blob.core.windows.net/pictures/RTX2080.jpg",
-                            Name = "Nvidia RTX 2080",
-                            Price = 250.00m,
-                            Recommendation = "Buy if you don't mind not playing on ultra graphics settings.",
-                            Stock = "11"
                         },
                         new
                         {

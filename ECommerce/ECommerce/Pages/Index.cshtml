@@ -27,59 +27,31 @@
         <img src="~/Images/home-header.jpg" />
         <section class="pt-5 pb-5">
             <div class="container">
-                <h2 class="text-center font-weight-bold mb-5 mt-5">Related products</h2>
+                <h2 class="text-center font-weight-bold mb-5 mt-5">Featured Products</h2>
                 <div class="row d-flex equal">
-                    <div class="  col-md-4 mb-4">
-                        <div class="card h-100 border-0">
-                            <div class="card-img-top">
-                                <img src="http://via.placeholder.com/350/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
-                            </div>
-                            <div class="card-body text-center">
-                                <h4 class="card-title">
-                                    <a href="#" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
-                                </h4>
-                                <h5 class="card-price small text-warning">
-                                    <i>
-                                        <s>$599</s> $299
-                                    </i>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-4 mb-4">
-                        <div class="card h-100 border-0">
-                            <div class="card-img-top">
-                                <img src="http://via.placeholder.com/350/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
-                            </div>
-                            <div class="card-body text-center">
-                                <h4 class="card-title">
-                                    <a href="#" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
-                                </h4>
-                                <h5 class="card-price small text-warning">
-                                    <i>
-                                        <s>$599</s> $299
-                                    </i>
-                                </h5>
+                    @for (int i = 5; i < 8; i++)
+                    {
+                        <div class="  col-md-4 mb-4">
+                            <div class="card h-100 border-0">
+                                <div class="card-img-top">
+                                    <img src=@Model.Products[i].Image class="img-fluid mx-auto d-block" alt=@Model.Products[i].Name>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">
+                                        <a href="#" class=" font-weight-bold text-dark text-uppercase small">@Model.Products[i].Name</a>
+                                    </h4>
+                                    <h5 class="card-price small text-warning">
+                                        <i>
+                                            @string.Format("{0:C}", Model.Products[i].Price)
+                                        </i>
+                                    </h5>
+                                    <small class="card-price small">
+                                        <a asp-page="/Products/ProductDetails" asp-route-id="@Model.Products[i].Id">View</a>
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class=" col-md-4 mb-4">
-                        <div class="card h-100 border-0">
-                            <div class="card-img-top">
-                                <img src="http://via.placeholder.com/350/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
-                            </div>
-                            <div class="card-body text-center">
-                                <h4 class="card-title">
-                                    <a href="#" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
-                                </h4>
-                                <h5 class="card-price small text-warning">
-                                    <i>
-                                        <s>$599</s> $299
-                                    </i>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </section>
