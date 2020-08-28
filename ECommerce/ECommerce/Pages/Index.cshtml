@@ -24,15 +24,75 @@
 </head>
 <body>
     <main>
-        <div class="col-md-4 d-flex justify-content-center featureProducts">
-            @for (int i = 0; i < 2; i++)
-            {
-                <div class="img-thumbnail">
-                    <img width="200" height="100" src=@Model.Products[i].Image>
-                    <p>@Model.Products[i].Name</p>
+        <img src="~/Images/home-header.jpg" />
+        <section class="pt-5 pb-5">
+            <div class="container">
+                <h2 class="text-center font-weight-bold mb-5 mt-5">Related products</h2>
+                <div class="row d-flex equal">
+                    <div class="  col-md-4 mb-4">
+                        <div class="card h-100 border-0">
+                            <div class="card-img-top">
+                                <img src="http://via.placeholder.com/350/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <a href="#" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
+                                </h4>
+                                <h5 class="card-price small text-warning">
+                                    <i>
+                                        <s>$599</s> $299
+                                    </i>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-4 mb-4">
+                        <div class="card h-100 border-0">
+                            <div class="card-img-top">
+                                <img src="http://via.placeholder.com/350/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <a href="#" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
+                                </h4>
+                                <h5 class="card-price small text-warning">
+                                    <i>
+                                        <s>$599</s> $299
+                                    </i>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-4 mb-4">
+                        <div class="card h-100 border-0">
+                            <div class="card-img-top">
+                                <img src="http://via.placeholder.com/350/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <a href="#" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
+                                </h4>
+                                <h5 class="card-price small text-warning">
+                                    <i>
+                                        <s>$599</s> $299
+                                    </i>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            }
-        </div>
+            </div>
+        </section>
+
+        @*<div class="col-md-4 d-flex justify-content-center featureProducts">
+                @for (int i = 0; i < 2; i++)
+                {
+                    <div class="img-thumbnail">
+                        <img width="200" height="100" src=@Model.Products[i].Image>
+                        <p>@Model.Products[i].Name</p>
+                    </div>
+                }
+            </div>*@
     </main>
 </body>
 </html>
