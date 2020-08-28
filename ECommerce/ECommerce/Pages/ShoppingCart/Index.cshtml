@@ -14,6 +14,10 @@
         main {
             margin-bottom: 150px;
         }
+
+        .plus-minus {
+            display: inline-flex;
+        }
     </style>
     <title>Shopping Cart</title>
 </head>
@@ -100,31 +104,18 @@
                                         <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
                                             <h6><strong>@string.Format("{0:C}", item.Product.Price)<span class="text-muted">x</span></strong></h6>
                                         </div>
-                                        <form method="post" class="pull-right" style="border: 3px solid red">
+                                        <form method="post" class="pull-right">
                                             <div class="col-4 col-sm-4 col-md-4">
-                                                <div class="quantity">
+                                                <div class="plus-minus quantity">
 
                                                     <input hidden asp-for="CartId" value="@item.CartId" />
                                                     <input hidden asp-for="ProductId" value="@item.ProductId" />
-                                                    <button type="submit" asp-page="/ShoppingCart/IncrementQty" class="plus">+</button>
+                                                    <input type="submit" value="-" asp-page="/ShoppingCart/DecrementQty" class="minus">
                                                     <input type="number" step="1" max="99" min="1" asp-for="Count" value="@item.Quantity" title="Qty" class="qty"
                                                            size="4">
-                                                    <button type="submit" asp-page="/ShoppingCart/DecrementQty" class="minus">-</button>
-
-                                                    @*<input hidden asp-for="CartId" value="@item.CartId" />
-                                                        <input hidden asp-for="ProductId" value="@item.ProductId" />
-                                                        <input min="1" id="update-field" asp-for="Count" value="@item.Quantity" />
-                                                        <button class="btn btn-primary" asp-page="/ShoppingCart/Update" type="submit">
-                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-repeat" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z" />
-                                                                <path fill-rule="evenodd" d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z" />
-                                                            </svg>
-                                                        </button>*@
+                                                    <input type="submit" asp-page="/ShoppingCart/IncrementQty" value="+" class="plus">
                                                 </div>
                                             </div>
-                                            <div class="col-2 col-sm-2 col-md-2 text-right">
-                                            </div>
-
                                             <div class="col-2 col-sm-2 col-md-2 text-right">
                                                 <input hidden value="@item" name="item" />
                                                 <button asp-page="/ShoppingCart/Delete" type="submit" class="btn btn-outline-danger btn-xs">
