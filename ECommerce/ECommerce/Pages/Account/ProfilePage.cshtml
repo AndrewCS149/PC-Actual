@@ -58,8 +58,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">State</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input hidden asp-for="@Model.AppUsers.State" class="form-control">
-                                        <select class="form-control">
+                                        <select class="form-control" asp-for="@Model.AppUsers.State">
                                             <!-- #region States -->
                                             <option value="AL">Alabama</option>
                                             <option value="AK">Alaska</option>
