@@ -43,6 +43,9 @@
                             <li class="nav-item" id="welcome-user">
                                 <a class="nav-link disabled">Welcome @User.Claims.First(x => x.Type == "FirstName").Value </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Account/ProfilePage">Profile</a>
+                            </li>
                         }
                         if (User.Identity.Name == "Andrew149@gmail.com")
                         {
