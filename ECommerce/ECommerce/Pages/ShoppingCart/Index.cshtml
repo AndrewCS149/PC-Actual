@@ -9,64 +9,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        main {
-            margin-bottom: 150px;
-        }
-    </style>
+    <script src="https://use.fontawesome.com/c560c025cf.js"></script>
+    <link type="text/css" rel="stylesheet" href="~/Styles/ShoppingCart.css" />
     <title>Shopping Cart</title>
 </head>
 <body>
     <main id="products-main">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">
-                        <a asp-page="/Checkout/Checkout">Checkout</a>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Cart.CartItem != null)
-                {
-                    decimal total = 0.0M;
-                    @foreach (var item in Model.Cart.CartItem)
-                    {
-                        total += item.Product.Price * item.Quantity;
-                        <tr>
-                            <td>@item.Product.Name</td>
-                            <td>@string.Format("{0:C}", item.Product.Price)</td>
-                            <td>@item.Quantity</td>
-                            <td>@string.Format("{0:C}", total)</td>
-                            <td>
-                                <form method="post">
-                                    <input hidden asp-for="CartId" value="@item.CartId" />
-                                    <input hidden asp-for="ProductId" value="@item.ProductId" />
-                                    <input id="update-field" asp-for="Count" value="@item.Quantity" />
-                                    <button class="btn btn-primary" asp-page="/ShoppingCart/Update" type="submit">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-repeat" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z" />
-                                            <path fill-rule="evenodd" d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z" />
-                                        </svg>
-                                    </button>
-                                    <input hidden value="@item" name="item" />
-                                    <button class="btn btn-danger" asp-page="/ShoppingCart/Delete" type="submit">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                        </svg>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+        <div class="container">
+            <div class="card shopping-cart ">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    Your Cart
+                    <a href="/Products" class="btn btn-outline-info btn-sm pull-right">Continue shopping</a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="card-body">
+                    <!-- PRODUCT -->
+                    @{if (Model.Cart != null && Model.Cart.CartItem != null)
+                        {
+
+                            foreach (var item in Model.Cart.CartItem)
+                            {
+
+                                <div class="row">
+                                    <div class="img col-12 col-sm-12 col-md-2 text-center">
+                                        <img class="img-responsive" src=@item.Product.Image alt="preview" width="120" height="80">
+                                    </div>
+                                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                        <h4 class="product-name"><strong>@item.Product.Name</strong> (@item.Quantity)</h4>
+                                        <h4>
+                                            <small>@item.Product.Description</small>
+                                        </h4>
+                                    </div>
+                                    <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+
+                                        <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                            <h6><strong>@string.Format("{0:C}", item.Product.Price)<span class="text-muted">x</span></strong></h6>
+                                        </div>
+                                        <form method="post" class="update-field">
+
+                                            <div class="col-4 col-sm-4 col-md-4">
+                                                <div class="plus-minus quantity">
+
+                                                    <input hidden asp-for="CartId" value="@item.CartId" />
+                                                    <input hidden asp-for="ProductId" value="@item.ProductId" />
+                                                    <input type="submit" value="-" asp-page="/ShoppingCart/DecrementQty" class="minus">
+                                                    <input step="1" max="99" min="1" asp-for="Count" value="@item.Quantity" title="Qty" class="qty"
+                                                           size="4">
+                                                    <input type="submit" asp-page="/ShoppingCart/IncrementQty" value="+" class="plus">
+                                                </div>
+                                            </div>
+                                            <div class="delete-button col-2 col-sm-2 col-md-2 text-right">
+                                                <input hidden value="@item" name="item" />
+                                                <button asp-page="/ShoppingCart/Delete" type="submit" class="btn btn-outline-danger btn-xs">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <hr>
+                            }
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                    <!-- END PRODUCT -->
+                </div>
+                <div class="card-footer">
+                    <div class="pull-right" style="margin: 10px">
+                        <a asp-page="/Checkout/Checkout" class="btn btn-primary pull-right">Checkout</a>
+                        <div class="pull-right" style="margin: 5px">
+                            Total: <b>@string.Format("{0:C}", Model.Cart.Total)</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 </html>

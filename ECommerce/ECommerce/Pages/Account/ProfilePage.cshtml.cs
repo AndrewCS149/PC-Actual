@@ -15,16 +15,17 @@ namespace ECommerce.Pages.Account
     {
         public string Term { get; set; }
         private readonly UserManager<AppUsers> _userManager;
-        private readonly IAppUsers _appUsers;
         private readonly SignInManager<AppUsers> _signInManager;
+
         [BindProperty]
         public AppUsers AppUsers { get; set; }
-        public ProfilePageModel(IAppUsers appUsers, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+
+        public ProfilePageModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
-            _appUsers = appUsers;
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         public async Task<IActionResult> OnGet()
         {
             AppUsers = await _userManager.GetUserAsync(User);
@@ -33,14 +34,22 @@ namespace ECommerce.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
+            // remove user claims
             var user = await _userManager.GetUserAsync(User);
             var currentClaims = await _userManager.GetClaimsAsync(user);
             var removeResult = await _userManager.RemoveClaimsAsync(user, currentClaims);
-            if(removeResult.Succeeded)
+            if (removeResult.Succeeded)
             {
+                // update appuser info
                 user.FirstName = AppUsers.FirstName;
                 user.LastName = AppUsers.LastName;
                 user.Email = AppUsers.Email;
+                user.Address = AppUsers.Address;
+                user.City = AppUsers.City;
+                user.State = AppUsers.State;
+                user.Zip = AppUsers.Zip;
+
+                // update user claims
                 List<Claim> claims = new List<Claim>();
                 claims.Add(new Claim("Email", AppUsers.Email));
                 claims.Add(new Claim("FirstName", AppUsers.FirstName));
@@ -52,8 +61,9 @@ namespace ECommerce.Pages.Account
                     var updateResult = await _userManager.UpdateAsync(user);
                     if (updateResult.Succeeded)
                     {
+                        // refresh user (to update the claims)
                         await _signInManager.RefreshSignInAsync(user);
-                        return RedirectToPage("/Index");
+                        return RedirectToPage("/Account/ProfilePage");
                     }
                 }
             }

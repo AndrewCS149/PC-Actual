@@ -9,13 +9,24 @@
 <html>
 <head>
     <style>
-        .featureProducts {
-            margin: 20% auto;
-            text-align: center;
-        }
-
         .img-thumbnail {
             margin: 0px 15px;
+        }
+
+        #bootstrap-override .feature img {
+            padding-top: 30px;
+        }
+
+        #bootstrap-override .spotlight {
+            color: orangered;
+        }
+
+            #bootstrap-override .spotlight span {
+                color: darkorange;
+            }
+
+        #bootstrap-override .feature i {
+            color: black;
         }
     </style>
     <title>Home</title>
@@ -24,15 +35,37 @@
 </head>
 <body>
     <main>
-        <div class="col-md-4 d-flex justify-content-center featureProducts">
-            @for (int i = 0; i < 2; i++)
-            {
-                <div class="img-thumbnail">
-                    <img width="200" height="100" src=@Model.Products[i].Image>
-                    <p>@Model.Products[i].Name</p>
+        <img src="~/Images/header-2.jpg" />
+        <section id="featured-products" class="pt-5 pb-5">
+            <div class="container">
+                <h2 class="spotlight text-center font-weight-bold mb-5 mt-5">Spot <span>Light</span></h2>
+                <div class="row d-flex equal">
+                    @for (int i = 4; i < 7; i++)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="feature card h-100 border-0">
+                                <div class="card-img-top">
+                                    <img src=@Model.Products[i].Image class="img-fluid mx-auto d-block" alt=@Model.Products[i].Name>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">
+                                        <a href="#" class=" font-weight-bold text-dark text-uppercase small">@Model.Products[i].Name</a>
+                                    </h4>
+                                    <h5 class="card-price medium">
+                                        <i>
+                                            @string.Format("{0:C}", Model.Products[i].Price)
+                                        </i>
+                                    </h5>
+                                    <small class="card-price small">
+                                        <a asp-page="/Products/ProductDetails" asp-route-id="@Model.Products[i].Id">View</a>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
-            }
-        </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>

@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerce.Pages.ShoppingCart
 {
-    public class UpdateModel : PageModel
+    public class DecrementQtyModel : PageModel
     {
-        private readonly ICartItems _cartItems;
-        private readonly ICart _cart;
+        public ICartItems _cartItems { get; set; }
+        public ICart _cart { get; set; }
+        public string Term { get; set; }
+        public Cart Cart { get; set; }
 
         [BindProperty]
         public int ProductId { get; set; }
@@ -23,10 +25,10 @@ namespace ECommerce.Pages.ShoppingCart
         [BindProperty]
         public int Count { get; set; }
 
-        public UpdateModel(ICart cart, ICartItems cartItems)
+        public DecrementQtyModel(ICart cart, ICartItems cartItems)
         {
-            _cart = cart;
             _cartItems = cartItems;
+            _cart = cart;
         }
 
         public void OnGet()
@@ -35,6 +37,7 @@ namespace ECommerce.Pages.ShoppingCart
 
         public async Task<IActionResult> OnPost()
         {
+            // check to see if the user is authenticated or not
             string email;
             if (User.Identity.IsAuthenticated)
             {
@@ -46,10 +49,18 @@ namespace ECommerce.Pages.ShoppingCart
             }
 
             var cartItem = await _cartItems.GetCartItem(CartId, ProductId);
-            var oldCount = cartItem.Quantity;
 
-            await _cart.UpdateTotal(ProductId, CartId, Count, oldCount);
-            await _cartItems.UpdateCartQty(Count, CartId, ProductId);
+            // if the count is equal to zero, than delete the item
+            if (Count - 1 == 0)
+            {
+                await _cart.UpdateTotal(ProductId, CartId, 0, 1);
+                await _cartItems.Delete(cartItem);
+                return RedirectToPage("/ShoppingCart/Index");
+            }
+
+            var oldCount = cartItem.Quantity;
+            await _cartItems.DecrementQty(CartId, ProductId);
+            await _cart.UpdateTotal(ProductId, CartId, Count - 1, oldCount);
 
             return RedirectToPage("/ShoppingCart/Index");
         }

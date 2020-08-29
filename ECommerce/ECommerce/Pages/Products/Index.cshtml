@@ -23,7 +23,7 @@
 
             <div class="col-lg-3">
 
-                <h1 class="my-4">Shop Brand</h1>
+                <h5 class="my-4">Shop Brand</h5>
                 <div id="shop-by-list" class="list-group">
                     <form method="post">
                         <input hidden asp-for="@Model.Term" value="" />
@@ -86,23 +86,23 @@
                     @{
                         foreach (var item in Model.Products)
                         {
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src=@item.Image alt="img"></a>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="#">@item.Name</a>
-                                        </h4>
-                                        <h5>@string.Format("{0:C}", item.Price)</h5>
-                                        <p class="card-text">@item.Description</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">
-                                            <a asp-page="ProductDetails" asp-route-id="@item.Id">Details</a>
-                                        </small>
-                                    </div>
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="products card h-100">
+                                <a href="#"><img class="card-img-top" src=@item.Image alt="img"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">@item.Name</a>
+                                    </h4>
+                                    <h5>@string.Format("{0:C}", item.Price)</h5>
+                                    <p class="card-text">@item.Description</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">
+                                        <a asp-page="ProductDetails" asp-route-id="@item.Id">View</a>
+                                    </small>
                                 </div>
                             </div>
+                        </div>
                         }
                     }
                 </div>
