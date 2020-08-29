@@ -19,6 +19,7 @@
     width: 50px;
 }
 
+/*PRODUCTS PAGE*/
 #bootstrap-override #shop-by-list button {
     width: 100%;
     color: #6A6A6A;
@@ -29,8 +30,13 @@
     }
 
 #bootstrap-override .products img {
-    height: 300px;
+    height: 200px;
 }
+
+@media screen and (max-width: 600px) {
+    #bootstrap-override .products img {
+        height: 350px;
+    }
 }
 
 #bootstrap-override #carousel img {
@@ -38,6 +44,7 @@
     width: 900px;
 }
 
+/*LOGIN | LOGOUT*/
 #bootstrap-override form,
 #bootstrap-override #logout-button,
 #bootstrap-override #search-button {
@@ -45,6 +52,7 @@
     background-color: inherit;
 }
 
+/*SEARCH BAR*/
 #bootstrap-override #search-button {
     opacity: .5;
     border: none;
