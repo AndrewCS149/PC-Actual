@@ -19,6 +19,14 @@
             display: inline-flex;
         }
 
+        #bootstrap-override .delete-button {
+            @*float: right;*@
+        }
+
+        #bootstrap-override .update-field div {
+            @*display: inline-flex;*@
+        }
+
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
@@ -60,7 +68,7 @@
                                         <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
                                             <h6><strong>@string.Format("{0:C}", item.Product.Price)<span class="text-muted">x</span></strong></h6>
                                         </div>
-                                        <form method="post" class="pull-right">
+                                        <form method="post" class="update-field">
                                             <div class="col-4 col-sm-4 col-md-4">
                                                 <div class="plus-minus quantity">
 
@@ -72,7 +80,7 @@
                                                     <input type="submit" asp-page="/ShoppingCart/IncrementQty" value="+" class="plus">
                                                 </div>
                                             </div>
-                                            <div class="col-2 col-sm-2 col-md-2 text-right">
+                                            <div class="delete-button col-2 col-sm-2 col-md-2 text-right">
                                                 <input hidden value="@item" name="item" />
                                                 <button asp-page="/ShoppingCart/Delete" type="submit" class="btn btn-outline-danger btn-xs">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
