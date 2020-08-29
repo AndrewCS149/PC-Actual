@@ -1,16 +1,16 @@
-﻿/*HOME PAGE*/
+﻿#bootstrap-override {
+    background-color: #E9E9E9;
+}
+
+/*HOME PAGE*/
 #logo-prefix {
     color: #C15306;
 }
 
-#bootstrap-override #featured-products {
-    /*    border: 2px solid red;*/
+#bootstrap-override #featured-products img,
+#bootstrap-override .products img {
+    height: 175px;
 }
-
-    #bootstrap-override #featured-products img,
-    #bootstrap-override .products img {
-        height: 175px;
-    }
 
 .row {
     text-align: center;
