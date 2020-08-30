@@ -10,27 +10,25 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerce.Pages.Account
 {
-    public class OrderHistoryModel : PageModel, ISearchTerm
+    public class OrderDetailsModel : PageModel, ISearchTerm
     {
-        public string Term { get; set; }
-
-        [BindProperty]
-        public List<Order> Orders { get; set; }
-
         private readonly IOrder _order;
         private readonly UserManager<AppUsers> _userManager;
 
-        public OrderHistoryModel(UserManager<AppUsers> userManager, IOrder order)
+        [BindProperty]
+        public Order Order { get; set; }
 
+        public string Term { get; set; }
+
+        public OrderDetailsModel(IOrder order, UserManager<AppUsers> userManager)
         {
             _userManager = userManager;
-
             _order = order;
         }
 
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(int id)
         {
-            Orders = await _order.GetOrders(_userManager.GetUserId(User));
+            Order = await _order.GetOrder(_userManager.GetUserId(User), id);
             return Page();
         }
     }

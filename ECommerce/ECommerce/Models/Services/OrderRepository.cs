@@ -47,5 +47,33 @@ namespace ECommerce.Models.Services
 
             return result;
         }
+
+        /// <summary>
+        /// Gets all orders of a specified user
+        /// </summary>
+        /// <param name="userId">The GUID of the appUsers orders to retrieve</param>
+        /// <returns>List of all users orders</returns>
+        public async Task<List<Order>> GetOrders(string userId)
+        {
+            var result = await _context.Order.Where(x => x.AppUserId == userId)
+                .Include(x => x.Cart)
+                .ThenInclude(x => x.CartItem)
+                .ThenInclude(x => x.Product)
+                .OrderByDescending(x => x.OrderDate)
+                .ToListAsync();
+
+            return result;
+        }
+
+        public async Task<Order> GetOrder(string userId, int orderId)
+        {
+            var result = await _context.Order.Where(x => x.AppUserId == userId && x.Id == orderId)
+                .Include(x => x.Cart)
+                .ThenInclude(x => x.CartItem)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync();
+
+            return result;
+        }
     }
 }

@@ -5,4 +5,53 @@
     Layout = "_Layout";
 }
 
-<h1>OrderHistory</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+
+            <div id="order-history-link">
+                <a asp-page="/Account/ProfilePage" class="nav-link">Profile</a>
+                <a class="nav-link">Orders</a>
+            </div>
+            <h3 class="fieldset-title">Order History</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Order #</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Items</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model.Orders != null)
+                        {
+                            foreach (var order in Model.Orders)
+                            {
+                                int items = 0;
+                                foreach (var item in order.Cart.CartItem) items += item.Quantity;
+
+                                <tr>
+                                    <th scope="row">@order.Id</th>
+                                    <td>@order.City, @order.State</td>
+                                    <td>@string.Format("{0:C}", order.Cart.Total)</td>
+                                    <td>@items</td>
+                                    <td>@order.OrderDate.ToShortDateString()</td>
+                                    <td scope="col"><a asp-page="/Account/OrderDetails" asp-route-id="@order.Id">Details</a></td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
