@@ -20,5 +20,14 @@ namespace ECommerce.Models.Interfaces
         /// <param name="userId">The GUID of the order to retrieve</param>
         /// <returns>An order object</returns>
         Task<Order> GetOrder(string userId);
+
+        /// <summary>
+        /// Gets all orders of a specified user
+        /// </summary>
+        /// <param name="userId">The GUID of the appUsers orders to retrieve</param>
+        /// <returns>List of all users orders</returns>
+        Task<List<Order>> GetOrders(string userId);
+
+        Task<Order> GetOrder(string userId, int orderId);
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ECommerce.Migrations
+namespace ECommerce.Migrations.UserDB
 {
-    public partial class ityelledatme1 : Migration
+    public partial class restartUserDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

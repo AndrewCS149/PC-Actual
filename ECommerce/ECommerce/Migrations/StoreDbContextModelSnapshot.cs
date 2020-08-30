@@ -74,6 +74,9 @@ namespace ECommerce.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CardType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
@@ -147,10 +150,20 @@ namespace ECommerce.Migrations
                         },
                         new
                         {
+                            Id = 9,
+                            Description = "A last generation Nvidia graphics card, it still possessess solid performance stats.",
+                            Image = "https://ecom17.blob.core.windows.net/pictures/RTX2080.jpg",
+                            Name = "Nvidia RTX 2080",
+                            Price = 250.00m,
+                            Recommendation = "Buy if you don't mind not playing on ultra graphics settings.",
+                            Stock = "11"
+                        },
+                        new
+                        {
                             Id = 2,
                             Description = "This product is a high end computer that specializes in heat management.",
                             Image = "https://ecom17.blob.core.windows.net/pictures/Ryzen5.jpg",
-                            Name = "Ryzen 5",
+                            Name = "AMD Ryzen 5",
                             Price = 650.00m,
                             Recommendation = "Use this with two 1080p monitors for optimal performance.",
                             Stock = "15"
@@ -160,7 +173,7 @@ namespace ECommerce.Migrations
                             Id = 3,
                             Description = "Last gen PC that still has fairly good processing power with decent heat management.",
                             Image = "https://ecom17.blob.core.windows.net/pictures/Ryzen7.jpg",
-                            Name = "Ryzen 7",
+                            Name = "AMD Ryzen 7",
                             Price = 330.00m,
                             Recommendation = "While not as powerful as the Ryzen 9, it is still a solid investment for a personal computer.",
                             Stock = "21"
@@ -190,7 +203,7 @@ namespace ECommerce.Migrations
                             Id = 6,
                             Description = "High end graphics card that is fit for use in the newest generation pc's.",
                             Image = "https://ecom17.blob.core.windows.net/pictures/GTX1080.jpg",
-                            Name = "Nvidia 1080",
+                            Name = "Nvidia GTX 1080",
                             Price = 240.00m,
                             Recommendation = "Expensive, but a great asset for any high end gaming computer.",
                             Stock = "9"
@@ -217,20 +230,10 @@ namespace ECommerce.Migrations
                         },
                         new
                         {
-                            Id = 9,
-                            Description = "A last generation Nvidia graphics card, it still possessess solid performance stats.",
-                            Image = "https://ecom17.blob.core.windows.net/pictures/RTX2080.jpg",
-                            Name = "RTX 2080",
-                            Price = 250.00m,
-                            Recommendation = "Buy if you don't mind not playing on ultra graphics settings.",
-                            Stock = "11"
-                        },
-                        new
-                        {
                             Id = 10,
                             Description = "The best bargain graphics card in the store!",
                             Image = "https://ecom17.blob.core.windows.net/pictures/gpu.jpg",
-                            Name = "ASUS 1060",
+                            Name = "ASUS GTX 1060",
                             Price = 300.00m,
                             Recommendation = "Buy if you plan on spending your money on other computer parts. We recommend buying more RAM to offset card shortcomings.",
                             Stock = "18"

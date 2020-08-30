@@ -10,12 +10,17 @@ namespace ECommerce.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
     }
+
     public static class AppRoles
     {
         // Define the application's role names
         public const string Admin = "Admin";
+
         public const string User = "User";
     }
-    
 }

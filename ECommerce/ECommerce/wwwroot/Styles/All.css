@@ -1,5 +1,15 @@
-﻿#logo-prefix {
+﻿#bootstrap-override {
+    background-color: #E9E9E9;
+}
+
+/*HOME PAGE*/
+#logo-prefix {
     color: #C15306;
+}
+
+#bootstrap-override #featured-products img,
+#bootstrap-override .products img {
+    height: 175px;
 }
 
 .row {
@@ -19,6 +29,29 @@
     width: 50px;
 }
 
+/*PRODUCTS PAGE*/
+#bootstrap-override #shop-by-list button {
+    width: 100%;
+    color: #6A6A6A;
+}
+
+    #bootstrap-override #shop-by-list button:hover {
+        color: black;
+    }
+
+@media screen and (max-width: 750px) {
+    #bootstrap-override .products img,
+    #bootstrap-override #featured-products img {
+        height: 350px;
+    }
+}
+
+#bootstrap-override #carousel img {
+    height: 350px;
+    width: 900px;
+}
+
+/*LOGIN | LOGOUT*/
 #bootstrap-override form,
 #bootstrap-override #logout-button,
 #bootstrap-override #search-button {
@@ -26,6 +59,7 @@
     background-color: inherit;
 }
 
+/*SEARCH BAR*/
 #bootstrap-override #search-button {
     opacity: .5;
     border: none;
@@ -34,3 +68,22 @@
     #bootstrap-override #search-button:hover {
         opacity: 1;
     }
+
+/*Order history | profile*/
+#bootstrap-override #order-history-link > * {
+    display: inline-flex;
+}
+
+#bootstrap-override #order-history-link a {
+    text-decoration: none;
+    color: #787777;
+}
+
+    #bootstrap-override #order-history-link a:hover {
+        color: #000000;
+    }
+
+/*FOOTER*/
+#bootstrap-override {
+    margin-bottom: 250px;
+}
