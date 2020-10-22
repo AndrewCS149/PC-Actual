@@ -1,7 +1,9 @@
 ﻿using ECommerce.Models.Interfaces;
 using ECommerce.Pages.Account;
 using ECommerce.Pages.Checkout;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -14,10 +16,12 @@ namespace ECommerce.Models.Services
     public class EmailRepository : IEmail
     {
         private readonly IConfiguration _config;
+        public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public EmailRepository(IConfiguration config)
+        public EmailRepository(IConfiguration config, IWebHostEnvironment webHostEnvironment)
         {
             _config = config;
+            WebHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -27,7 +31,9 @@ namespace ECommerce.Models.Services
         /// <returns>Successful completion of task</returns>
         public async Task Email(RegisterModel.RegisterViewModel input)
         {
-            var apiKey = _config.GetSection("SENDGRID_APIKEY").Value;
+            var apiKey = WebHostEnvironment.IsDevelopment()
+                ? _config["SENDGRID_APIKEY"]
+                : Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
