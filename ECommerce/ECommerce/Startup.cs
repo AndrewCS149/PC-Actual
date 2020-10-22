@@ -74,7 +74,6 @@ namespace ECommerce
                 options.AddPolicy("Users", policy => policy.RequireRole(AppRoles.Admin, AppRoles.User));
             });
 
-            services.AddScoped<IImage, ImageRepository>();
             services.AddTransient<IProducts, InventoryManagement>();
             services.AddTransient<IEmail, EmailRepository>();
             services.AddTransient<ICart, CartRepository>();
