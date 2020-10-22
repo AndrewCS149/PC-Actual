@@ -21,10 +21,29 @@ namespace ECommerce
     public class Startup
     {
         public IConfiguration Configuration { get; set; }
+        public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
         {
+            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+            builder.AddUserSecrets<Startup>();
+            Configuration = builder.Build();
+            WebHostEnvironment = webHostEnvironment;
             Configuration = configuration;
+        }
+
+        private string GetHerokuConnectionString(string connectionString)
+        {
+            string connectionUrl = WebHostEnvironment.IsDevelopment()
+                ? Configuration["ConnectionStrings:" + connectionString]
+                : Environment.GetEnvironmentVariable(connectionString);
+
+            var databaseUri = new Uri(connectionUrl);
+
+            string db = databaseUri.LocalPath.TrimStart('/');
+            string[] userInfo = databaseUri.UserInfo.Split(':', StringSplitOptions.RemoveEmptyEntries);
+
+            return $"User ID={userInfo[0]};Password={userInfo[1]};Host={databaseUri.Host};Port={databaseUri.Port};Database={db};Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -37,12 +56,12 @@ namespace ECommerce
             // register dbcontext
             services.AddDbContext<StoreDbContext>(options =>
            {
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+               options.UseNpgsql(GetHerokuConnectionString("STOREDBURL"));
            });
 
             services.AddDbContext<UserDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
+                options.UseNpgsql(GetHerokuConnectionString("USERDBURL"));
             });
 
             services.AddIdentity<AppUsers, IdentityRole>()
