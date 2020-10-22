@@ -1,0 +1,27 @@
+# Source: https://dev.to/heroku/deploying-to-heroku-from-github-actions-29ej
+# Source: https://codeburst.io/deploy-a-containerized-asp-net-core-app-to-heroku-using-github-actions-9e54c72db943
+
+name: deploy
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Login to Heroku Container registry
+      env: 
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:login
+    - name: Build and push
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        cd ./ECommerce/ECommerce
+        heroku container:push web -a ${{ secrets.HEROKU_APP_NAME }} --arg ADMINEMAIL_ARG=${{ secrets.ADMINEMAIL_ARG }},ADMINPASSWORD_ARG=${{ secrets.ADMINPASSWORD_ARG }},APILOGINID_ARG=${{ secrets.APILOGINID_ARG }},AUTHORIZELOGINID_ARG=${{ secrets.AUTHORIZELOGINID_ARG }},AUTHORIZETRANSACTIONKEY_ARG=${{ secrets.AUTHORIZETRANSACTIONKEY_ARG }},DISCOVER_ARG=${{ secrets.DISCOVER_ARG }},MASTERCARD_ARG=${{ secrets.MASTERCARD_ARG }},SENDGRIDACCOUNTNAME_ARG=${{ secrets.SENDGRIDACCOUNTNAME_ARG }},SENDGRID_APIKEY_ARG=${{ secrets.SENDGRID_APIKEY_ARG }},STOREDBURL_ARG=${{ secrets.STOREDBURL_ARG }},TESTCVV_ARG=${{ secrets.TESTCVV_ARG }},TESTEXPIRATIONDATE_ARG=${{ secrets.TESTEXPIRATIONDATE_ARG }},USERDBURL_ARG=${{ secrets.USERDBURL_ARG }},VISA_ARG=${{ secrets.VISA_ARG }}
+    - name: Release
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:release web -a ${{ secrets.HEROKU_APP_NAME }}
