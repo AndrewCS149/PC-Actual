@@ -53,24 +53,24 @@
                             </thead>
                             <tbody>
                                 @{
-                            int counter = 0;
-                            decimal total = 0.0M;
-                            foreach (var item in Model.Order.Cart.CartItem)
-                            {
-                                total += item.Product.Price * item.Quantity;
-                                counter++;
-                                    <tr>
-                                        <td class="center">@counter</td>
-                                        <td class="left">@item.Product.Name</td>
-                                        <td class="left">@item.Product.Description</td>
+                                    int counter = 0;
+                                    decimal total = 0.0M;
+                                    foreach (var item in Model.Order.Cart.CartItem)
+                                    {
+                                        total += item.Product.Price * item.Quantity;
+                                        counter++;
+                                        <tr>
+                                            <td class="center">@counter</td>
+                                            <td class="left">@item.Product.Name</td>
+                                            <td class="left">@item.Product.Description</td>
 
-                                        <td class="right">
-                                            @string.Format("{0:C}", item.Product.Price)
-                                        </td>
-                                        <td class="right">@item.Quantity</td>
-                                        <td>@string.Format("{0:C}", total)</td>
-                                    </tr>
-                            }
+                                            <td class="right">
+                                                @string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", item.Product.Price)
+                                            </td>
+                                            <td class="right">@item.Quantity</td>
+                                            <td>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", total)</td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>
@@ -88,7 +88,7 @@
                                         </td>
                                         <td class="right">
                                             <strong>
-                                                @string.Format("{0:C}", Model.Order.Cart.Total)
+                                                @string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", Model.Order.Cart.Total)
                                             </strong>
                                         </td>
                                     </tr>

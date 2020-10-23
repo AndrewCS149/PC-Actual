@@ -32,13 +32,13 @@
                                 <small class="text-muted">(@item.Quantity)</small>
                             </h6>
                         </div>
-                        <span class="text-muted">@string.Format("{0:C}", itemTotal)</span>
+                        <span class="text-muted">@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", itemTotal)</span>
                     </li>
 
                 }
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total</span>
-                    <strong>@string.Format("{0:C}", Model.Total)</strong>
+                    <strong>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", Model.Total)</strong>
                 </li>
             }
         }

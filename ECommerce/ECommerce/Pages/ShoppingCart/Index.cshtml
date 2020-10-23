@@ -33,7 +33,7 @@
 
                                 <div class="row">
                                     <div class="img col-12 col-sm-12 col-md-2 text-center">
-                                        <img class="img-responsive" src=@item.Product.Image alt="preview" width="120" height="80">
+                                        <img class="img-responsive" src="~/Images/@item.Product.Image" alt="preview" width="120" height="80">
                                     </div>
                                     <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                                         <h4 class="product-name"><strong>@item.Product.Name</strong> (@item.Quantity)</h4>
@@ -44,7 +44,7 @@
                                     <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
 
                                         <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                                            <h6><strong>@string.Format("{0:C}", item.Product.Price)<span class="text-muted">x</span></strong></h6>
+                                            <h6><strong>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", item.Product.Price)<span class="text-muted">x</span></strong></h6>
                                         </div>
                                         <form method="post" class="update-field">
 
@@ -78,7 +78,7 @@
                     <div class="pull-right" style="margin: 10px">
                         <a asp-page="/Checkout/Checkout" class="btn btn-primary pull-right">Checkout</a>
                         <div class="pull-right" style="margin: 5px">
-                            Total: <b>@string.Format("{0:C}", Model.Cart.Total)</b>
+                            Total: <b>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", Model.Cart.Total)</b>
                         </div>
                     </div>
                 </div>

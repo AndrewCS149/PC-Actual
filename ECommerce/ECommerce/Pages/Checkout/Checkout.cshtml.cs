@@ -25,19 +25,17 @@ namespace ECommerce.Pages
         public CartItem CartItem { get; set; }
 
         public string Term { get; set; }
-        private readonly IEmail _email;
         private readonly UserManager<AppUsers> _userManager;
         private readonly IPayment _payment;
         private readonly IOrder _order;
         private readonly ICart _cart;
 
-        public CheckoutModel(ICart cart, IOrder order, IPayment payment, UserManager<AppUsers> userManager, IEmail email)
+        public CheckoutModel(ICart cart, IOrder order, IPayment payment, UserManager<AppUsers> userManager)
         {
             _cart = cart;
             _order = order;
             _payment = payment;
             _userManager = userManager;
-            _email = email;
         }
 
         public async Task<IActionResult> OnGet()
@@ -74,8 +72,6 @@ namespace ECommerce.Pages
             await _cart.Update(cart);
 
             _payment.Run(Order);
-
-            await _email.SummaryEmail(Order);
 
             return RedirectToPage("OrderSummary");
         }
