@@ -27,14 +27,12 @@ namespace ECommerce.Pages.Account
 
         private readonly SignInManager<AppUsers> _signInManager;
         private readonly UserManager<AppUsers> _userManager;
-        private readonly IEmail _email;
         public string Term { get; set; }
 
-        public RegisterModel(IEmail email, UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
+        public RegisterModel(UserManager<AppUsers> userManager, SignInManager<AppUsers> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            _email = email;
         }
 
         // reserved method name for the loading of this page
@@ -59,7 +57,6 @@ namespace ECommerce.Pages.Account
                 var result = await _userManager.CreateAsync(user, input.Password);
                 if (result.Succeeded)
                 {
-                    await _email.Email(input);
                     Claim claim = new Claim("FirstName", Input.FirstName);
                     Claim claim2 = new Claim("LastName", Input.LastName);
                     Claim claim3 = new Claim("Email", Input.Email);

@@ -75,7 +75,6 @@ namespace ECommerce
             });
 
             services.AddTransient<IProducts, InventoryManagement>();
-            services.AddTransient<IEmail, EmailRepository>();
             services.AddTransient<ICart, CartRepository>();
             services.AddTransient<ICartItems, CartItemRepository>();
             services.AddTransient<IPayment, PaymentRepository>();
