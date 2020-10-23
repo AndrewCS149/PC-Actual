@@ -93,7 +93,7 @@
                                         <h4 class="card-title">
                                             <a href="#">@item.Name</a>
                                         </h4>
-                                        <h5>@string.Format("{0:C}", item.Price)</h5>
+                                        <h5>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", item.Price)</h5>
                                         <p class="card-text">@item.Description</p>
                                     </div>
                                     <div class="card-footer">

@@ -36,7 +36,7 @@
                         <p class="badge mr-1">Stock: @Model.Product.Stock</p>
 
                         <p class="lead">
-                            <span>@string.Format("{0:C}", Model.Product.Price)</span>
+                            <span>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", Model.Product.Price)</span>
                         </p>
 
                         <p class="lead font-weight-bold">Description</p>
