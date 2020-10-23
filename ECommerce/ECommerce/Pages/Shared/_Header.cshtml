@@ -47,12 +47,6 @@
                                 <a class="nav-link" asp-page="/Account/ProfilePage">Profile</a>
                             </li>
                         }
-                        if (User.Identity.Name == "Andrew149@gmail.com")
-                        {
-                            <li class="nav-item">
-                                <a asp-page="/dashboard/Index" class="nav-link">Dashboard</a>
-                            </li>
-                        }
                         <li class="nav-item">
                             <form asp-page="/Account/Logout" method="post">
                                 <button id="logout-button" class="nav-link" type="submit">Logout</button>

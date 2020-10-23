@@ -67,10 +67,10 @@
                                             <td class="left">@item.Product.Description</td>
 
                                             <td class="right">
-                                                @string.Format("{0:C}", item.Product.Price)
+                                                @string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", item.Product.Price)
                                             </td>
                                             <td class="right">@item.Quantity</td>
-                                            <td>@string.Format("{0:C}", total)</td>
+                                            <td>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", total)</td>
                                         </tr>
                                     }
                                 }
@@ -90,7 +90,7 @@
                                         </td>
                                         <td class="right">
                                             <strong>
-                                                @string.Format("{0:C}", Model.Order.Cart.Total)
+                                                @string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", Model.Order.Cart.Total)
                                             </strong>
                                         </td>
                                     </tr>
