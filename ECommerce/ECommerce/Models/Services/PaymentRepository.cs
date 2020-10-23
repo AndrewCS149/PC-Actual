@@ -2,8 +2,10 @@
 using AuthorizeNet.Api.Controllers;
 using AuthorizeNet.Api.Controllers.Bases;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,11 @@ namespace ECommerce.Models.Services
     public class PaymentRepository : IPayment
     {
         private readonly IConfiguration _config;
+        public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public PaymentRepository(IConfiguration config)
+        public PaymentRepository(IConfiguration config, IWebHostEnvironment webHostEnvironment)
         {
+            WebHostEnvironment = webHostEnvironment;
             _config = config;
         }
 
@@ -24,26 +28,42 @@ namespace ECommerce.Models.Services
         /// Runs the credit card transaction request
         /// </summary>
         /// <returns>Empty string</returns>
-        public string Run(Order input)
+        public bool Run(Order input)
         {
             // type of environment
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
 
+            string authNetId = WebHostEnvironment.IsDevelopment()
+                ? _config["AUTHORIZELOGINID"]
+                : Environment.GetEnvironmentVariable("AUTHORIZELOGINID");
+
+            string authNetKey = WebHostEnvironment.IsDevelopment()
+                ? _config["AUTHORIZETRANSACTIONKEY"]
+                : Environment.GetEnvironmentVariable("AUTHORIZETRANSACTIONKEY");
+
             // setup merchant account credentials
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
             {
-                name = _config["ApiLoginId"],
+                name = authNetId,
                 ItemElementName = ItemChoiceType.transactionKey,
-                Item = _config["AuthorizeTransactionKey"]
+                Item = authNetKey
             };
+
+            string cardExpDate = WebHostEnvironment.IsDevelopment()
+                ? _config["TESTEXPIRATIONDATE"]
+                : Environment.GetEnvironmentVariable("TESTEXPIRATIONDATE");
+
+            string cardSecCode = WebHostEnvironment.IsDevelopment()
+                ? _config["TESTCVV"]
+                : Environment.GetEnvironmentVariable("TESTCVV");
 
             // create card we want on file
             // visa
             var creditCard = new creditCardType
             {
                 cardNumber = _config[input.CardType],
-                expirationDate = _config["TestExpirationDate"],
-                cardCode = _config["TestCvv"]
+                expirationDate = cardExpDate,
+                cardCode = cardSecCode
             };
 
             customerAddressType billingAddress = GetBillingAddress(input);
@@ -65,7 +85,15 @@ namespace ECommerce.Models.Services
 
             var response = controller.GetApiResponse();
 
-            return response.messages.message[0].text;
+            if (response != null)
+            {
+                if (response.messages.resultCode == messageTypeEnum.Ok) return true;
+            }
+            else
+            {
+                if (response.transactionResponse.errors != null) return false;
+            }
+            return false;
         }
 
         /// <summary>
