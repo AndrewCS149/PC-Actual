@@ -11,6 +11,6 @@ namespace ECommerce.Models.Interfaces
         /// Runs the credit card transaction request
         /// </summary>
         /// <returns>Empty string</returns>
-        string Run(Order input);
+        bool Run(Order input);
     }
 }

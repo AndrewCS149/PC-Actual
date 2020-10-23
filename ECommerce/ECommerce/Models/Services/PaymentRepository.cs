@@ -91,7 +91,7 @@ namespace ECommerce.Models.Services
             }
             else
             {
-                if (response.transactionResponse.errors != null) return false;
+                return false;
             }
             return false;
         }

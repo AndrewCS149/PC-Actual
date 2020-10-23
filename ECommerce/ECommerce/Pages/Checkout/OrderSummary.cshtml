@@ -68,7 +68,7 @@
                                                 @string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", item.Product.Price)
                                             </td>
                                             <td class="right">@item.Quantity</td>
-                                            <td>@string.Format("{0:C}", total)</td>
+                                            <td>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c}", total)</td>
                                         </tr>
                                     }
                                 }
